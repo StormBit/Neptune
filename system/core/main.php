@@ -43,7 +43,7 @@
 		function hook_function($action,$moduleid,$modulefunction) {
 			global $Neptune;
 
-			var_set("hooks",$action,"mod_" . $moduleid . "_" . $modulefunction);
+			$this->var_set("hooks",$action,"mod_" . $moduleid . "_" . $modulefunction);
 		}
 
 		// Hooked function run: This function runs a hooked function.
