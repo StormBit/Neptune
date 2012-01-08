@@ -12,24 +12,22 @@
 		die('NO U');
 	}
 	
-	// if the cache expiry variable is not set, obviously no expiry is needed
-	if(NeptuneCore::var_get('cache', 'expire')) {
-		$expire = NeptuneCore::var_get('cache', 'expire');
-	} else {
-		$expire = false;
+	// No need to overdeclare NeptuneCore if it's already set
+	if(!isset($NeptuneCore)) {
+		$NeptuneCore = new NeptuneCore();
 	}
 	
 	// time to determine which cache has been selected
 	// (atm supporting several at once will complicate things)
 	// APC will be preferred for simplicity
-	switch(NeptuneCore::var_get('cache', 'type')) {
+	switch($NeptuneCore->var_get('cache', 'type')) {
 		case 'apc':
 			$cache = new apc_neptune();
 			define('cache_available', true, true);
 		break;
 		
 		case 'memcached':
-			if(!(NeptuneCore::var_get('cache', 'memcached'))) {
+			if(!($NeptuneCore->var_get('cache', 'memcached'))) {
 				$cache = new memcached_neptune();
 				define('cache_available', true, true);
 			}
@@ -52,13 +50,12 @@
 	//  Cannot be used in conjunction with Xcache.
 	class apc_neptune {
 		// the set function
-		function set($var, $val) {
-			global $expire;
+		function set($var, $val, $expire=0) {
 			apc_store($var, $val, $expire);
 		}
 		// the get function
 		function get($var) {
-			return apc_get($var);
+			return apc_fetch($var);
 		}
 		// the delete function
 		function delete($var) {
@@ -69,38 +66,81 @@
 			return apc_clear_cache('user');
 		}
 	}
-/*	
-	// currently broken - DO NOT USE
-	class memcached_neptune {
+	
+	// XCache Class, interfaces with XCache which 
+	//  is also a rather nice cache.
+	class xcache_neptune {
 		private static $memcached;
-		private static $memcache;
-		$memcached = new Memcached();
-		$memcached->addServers(NeptuneCore::var_get('cache', 'memcached'));
-		function set($var) {
-			global $memcached, $memcache;
+		function set($var, $val, $expire=0) {
+			xcache_set($var, $val, $expire);
 		}
 		function get($var) {
-			global $memcached, $memcache;
+			return xcache_get($var);
 		}
 		function delete($var) {
-			global $memcached, $memcache;
+			xcache_unset($var);
 		}
 		function flush($var) {
-			global $memcached, $memcache;
+			// seems like there's no workaround -- for now
 		}
 	}
 	
-	// currently broken - DO NOT USE
-	class xcache_neptune {
-		private static $memcached;
-		function set($var) {
+	// eAccelerator Cache Class.
+	//  nobody really uses eA, but it's included
+	//  just-in-case.
+	class eaccelerator_neptune {
+		function set($var, $val, $expire=0) {
+			eaccelerator_put($var, $val, $expire);
 		}
 		function get($var) {
+			return eaccelerator_get($var);
 		}
 		function delete($var) {
+			eaccelerator_rm($var);
 		}
 		function flush($var) {
+			foreach(eaccelerator_list_keys() as $var => $val) {
+				eaccelerator_rm($variable['name']);
+			}
 		}
 	}
-*/
+
+	// memcached class -- potentially usable WITH a PHP accelerator.
+	class memcached_neptune {
+		// memcached uses a pseudo-class, so we must use that
+		//   additionally it stores variables within each instance
+		//   so ensuring there is only one is more important than
+		//   before.
+		private static $memcached;
+		private static function init() {
+			global $NeptuneCore;
+			self::$memcached = new Memcached();
+			self::$memcached->addServers($NeptuneCore->var_get('cache', 'memcached'));
+		}
+		function set($var, $val, $expire) {
+			if(!self::$memcached) {
+				self::init();
+			}
+			self::$memcached->set($var, $val, $expire);
+		}
+		function get($var) {
+			if(!self::$memcached) {
+				self::init();
+			}
+			return self::$memcached->get($var);
+		}
+		function delete($var) {
+			if(!self::$memcached) {
+				self::init();
+			}
+			self::$memcached->delete($var);
+		}
+		function flush($var) {
+			if(!self::$memcached) {
+				self::init();
+			}
+			self::$memcached->flush();
+		}
+	}
+
 ?>
