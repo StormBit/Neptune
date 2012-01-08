@@ -16,4 +16,6 @@
 	$conf['cache']['enabled'] = True;
 #	$conf['cache']['expire'] = 10;
 	$conf['cache']['type'] = 'apc';
+	
+	$conf['database']['type'] = 'mysql';
 ?>
