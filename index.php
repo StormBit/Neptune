@@ -45,6 +45,17 @@
 		$NeptuneCore->var_set("system","query",$NeptuneCore->var_get("config","defaultact"));
 	}
 
+	
+	// Enumerate modules. 
+	if ($handle = opendir('modules')) { 
+		while (false !== ($dir = readdir($handle))) { 
+			if ($dir != "." && $dir != ".." && is_dir($dir)) { 
+				include("modules/$dir/module.php"); 
+			} 
+		} 
+		closedir($handle); 
+	}
+	
 	// Run whatever function is hooked to the current request.
 	$NeptuneCore->hook_run($NeptuneCore->var_get("system","query"));
 ?>
