@@ -26,6 +26,7 @@
 	require_once("system/core/init.php");
 
 	// Making the core object accessable
+	global $NeptuneCore;
 	if(!isset($NeptuneCore)) {
 		$NeptuneCore = new NeptuneCore();
 	}
