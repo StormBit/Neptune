@@ -13,5 +13,7 @@
 	$conf['config']['root'] = '/home/antoligy/neptune';
 //	$conf['config']['defaultact'] = 'test';
 	
-	$conf['cache']['apc'] = True;
+	$conf['cache']['enabled'] = True;
+#	$conf['cache']['expire'] = 10;
+	$conf['cache']['type'] = 'apc';
 ?>
