@@ -19,7 +19,6 @@
 		// of custom global variables.
 		function var_set($group,$variable,$data) {
 			global $Neptune;
-
 			$Neptune["stack"][$group][$variable] = $data;
 
 			return 0;

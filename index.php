@@ -19,12 +19,16 @@
 	global $Neptune;
 	
 	// Load the files containing all of the functions required to bootstrap the
-	// rest of the Neptune CMS.
-	require_once("system/core/main.php");
-	require_once("system/core/parseconf.php");
+	// rest of the Neptune CMS.]
+	require_once('system/core/main.php');
+	require_once('system/core/parseconf.php');
+	parseconf('system/config/core.php');
+	require_once("system/core/init.php");
 
 	// Making the core object accessable
-	$NeptuneCore = new NeptuneCore();
+	if(!isset($NeptuneCore)) {
+		$NeptuneCore = new NeptuneCore();
+	}
 
 	// After this, we will take the query string and extract all of the data
 	// from it. This is intentionally done in a way that makes $_GET impossible

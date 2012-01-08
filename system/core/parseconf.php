@@ -12,18 +12,16 @@
 		die('NO U');
 	}
 	
-	$NeptuneCore = new NeptuneCore();
-	
-	if(!isset($conffile)) {
-		$conffile = ('../config/core.php');
+	// No need to overdeclare NeptuneCore if it's already set
+	if(!isset($NeptuneCore)) {
+		$NeptuneCore = new NeptuneCore();
 	}
-	
-	function config_parse($conffile) {
+
+	function parseconf($config) {
 		global $NeptuneCore;
 		
-		require_once($conffile);
-	
-		foreach($conf as $group => $variable) {
+		include($config);
+			foreach($conf as $group => $variable) {
 			foreach($variable as $variable => $data) {
 				// Calling var_set
 				$NeptuneCore->var_set($group,$variable,$data);
@@ -33,6 +31,7 @@
 			unset($group);
 			unset($variable);
 		}
+		unset($conf);
 	}
 	
 ?>
