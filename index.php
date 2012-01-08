@@ -9,14 +9,15 @@
 		or functions required to satisfy the request, then passes the output
 		to the templating engine.
 	*/
-
+	
 	// Defining NEPNEP for security purposes
 	define('NEPNEP', true, true);
-	
 	
 	// Create the global array that will be used in many system functions to
 	// store state data.
 	global $Neptune;
+	
+	$Neptune["time"] = microtime(true);
 	
 	// Load the files containing all of the functions required to bootstrap the
 	// rest of the Neptune CMS.]
@@ -49,7 +50,7 @@
 	// Enumerate modules. 
 	if ($handle = opendir('modules')) { 
 		while (false !== ($dir = readdir($handle))) { 
-			if ($dir != "." && $dir != ".." && is_dir($dir)) { 
+			if ($dir != "." && $dir != ".." && is_dir("modules/" . $dir)) { 
 				include("modules/$dir/module.php"); 
 			} 
 		} 
