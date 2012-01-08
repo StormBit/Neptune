@@ -28,10 +28,15 @@
 		// that were set by neptune_var_set().
 		function var_get($group,$variable) {
 			global $Neptune;
-
-			if (isset($Neptune["stack"][$group][$variable])) {
-				return $Neptune["stack"][$group][$variable];
-			} else {
+			
+			if (isset($group) && isset($variable)) {
+				if (isset($Neptune["stack"][$group][$variable])) {
+					return $Neptune["stack"][$group][$variable];
+				} else {
+					return NULL;
+				}
+			}
+			else {
 				return NULL;
 			}
 		}
