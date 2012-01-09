@@ -24,6 +24,14 @@
 			return 0;
 		}
 
+		// Variable append: Does the same as the above, but appends.
+		function var_append($group,$variable,$data) {
+			global $Neptune;
+			$Neptune["stack"][$group][$variable] = $Neptune["stack"][$group][$variable] . $data;
+
+			return 0;
+		}
+		
 		// Variable retrieval function: This allows functions to fetch variables
 		// that were set by neptune_var_set().
 		function var_get($group,$variable) {
