@@ -12,16 +12,37 @@
 		<link href="resources/css/bbcode.css" rel="stylesheet">
 
 		<script type="text/javascript" src="resources/js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="resources/js/bootstrap-dropdown.js"></script>
+
+		<script type="text/javascript">
+			function hideLoginForms() {
+				$('#mobile-login').hide();
+				$('#mobile-register').hide();
+				$('#mobile-register-button').removeClass('active');
+				$('#mobile-login-button').removeClass('active');
+				$('#content-area').show();
+			}
+		</script>
 	</head>
-	<body>
+	<body onload="$('#mobile-menu').dropdown();">
 		<div class="topbar">
 			<div class="fill">
 				<div class="container">
-					<a class="brand" href="#" onclick="$('#mobile-login').hide();$('#mobile-register').hide();$('#mobile-register-button').removeClass('active');$('#mobile-login-button').removeClass('active');$('#content-area').show();">Neptune</a>
 					<ul class="nav" id="menu">
+						<li><a class="brand" href="#" onclick="hideLoginForms();">Neptune</a></li>
 						<li class="active"><a href="#">Home</a></li>
 						<li><a href="#about">About</a></li>
 						<li><a href="#contact">Contact</a></li>
+					</ul>
+					<ul class="nav mobile" id="mobile-menu">
+						<li id="menu">
+							<a class="menu brand" href="#">Neptune</a>
+							<ul class="menu-dropdown">
+								<li class="active"><a href="#" onclick="hideLoginForms();">Home</a></li>
+								<li><a href="#about">About</a></li>
+								<li><a href="#contact">Contact</a></li>
+							</ul>
+						</li>
 					</ul>
 					<div class="pull-right mobile">
 						<ul class="nav">
