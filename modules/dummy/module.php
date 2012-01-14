@@ -7,7 +7,9 @@
 	*/
 
 	function mod_dummy_page() {
-		echo "Dummy module ran.";
+		global $NeptuneCore;
+		$NeptuneCore->neptune_echo_bbcode("Dummy module ran.");
+		$NeptuneCore->neptune_title("Dummy Module");
 	}
 	$NeptuneCore->hook_function("page","dummy","page");
 ?>

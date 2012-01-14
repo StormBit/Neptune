@@ -27,6 +27,14 @@
 		// Variable append: Does the same as the above, but appends.
 		function var_append($group,$variable,$data) {
 			global $Neptune;
+			
+			if (!isset($Neptune["stack"][$group])) {
+				$Neptune["stack"][$group] = array();
+			}
+			if (!isset($Neptune["stack"][$group][$variable])) {
+				$Neptune["stack"][$group][$variable] = "";
+			}
+			
 			$Neptune["stack"][$group][$variable] = $Neptune["stack"][$group][$variable] . $data;
 
 			return 0;
@@ -49,6 +57,19 @@
 			}
 		}
 
+		
+		function neptune_echo($text) {
+			$this->var_append("output","body",$text);
+		}
+		
+		function neptune_echo_bbcode($text) {
+			$this->var_append("output","body",neptune_bbcode($text));
+		}
+		
+		function neptune_title($text) {
+			$this->var_set("output","title",$text);
+		}
+		
 
 		// Function Hooker: This function is what allows other modules to bind to
 		// certain query strings. For example, it allows a blog module to bind to
