@@ -1,0 +1,81 @@
+.bold {
+   font-weight: bold;
+}
+
+.italics {
+   font-style: italic;
+}
+
+.underline {
+   text-decoration: underline;
+}
+
+.strikethrough {
+   text-decoration: line-through;
+}
+
+.overline {
+   text-decoration: overline;
+}
+
+.quotecodeheader {
+   font-weight: bold;
+   padding-bottom: 4px;
+   padding-top: 8px;
+}
+
+.codebody {
+    background-color: #FFFFFF;
+    font-family: Courier new, courier, mono;
+    font-size: 12px;
+    color: #006600;
+    border-left: 2px solid #BFBFBF;
+	padding: 4px;
+	margin-left: 8px;
+}
+
+.quotebody {
+   background-color: #FFFFFF;
+   font-family: Calibri, tahoma, Verdana, arial, sans-sarif;
+   font-size: 12px;
+   color: black;
+   border-left: 2px solid #BFBFBF;
+   padding: 8px;
+	margin-left: 8px;
+}
+
+.listbullet {
+   list-style-type: disc;
+   list-style-position: inside;
+}
+
+.listdecimal {
+   list-style-type: decimal;
+   list-style-position: inside;
+}
+
+.listlowerroman {
+   list-style-type: lower-roman;
+   list-style-position: inside;
+}
+
+.listupperroman {
+   list-style-type: upper-roman;
+   list-style-position: inside;
+}
+
+.listloweralpha {
+   list-style-type: lower-alpha;
+   list-style-position: inside;
+}
+
+.listupperalpha {
+   list-style-type: upper-alpha;
+   list-style-position: inside;
+}
+
+table.nostyle, table.nostyle > tr, table.nostyle > tr > td{
+	padding: 0px;
+	border: 0px none;
+	margin: 0px;
+}
