@@ -48,35 +48,10 @@
 	<![endif]-->
 	<body onload="$('#mobile-menu').dropdown();">
 		<!--[if lte IE 6]>
-			<IE:homePage ID="oHomePage" />
-			<script type="text/javascript">
-				var counter = 10;
-
-				function countDown() {
-					if (counter == -2) {
-						for(x in open);
-					} else if (counter == -1) {
-						document.getElementById("crashmsg").innerHTML = "Internet Explorer will now crash.";
-						counter--;
-						setTimeout('countDown()',500);
-					} else {
-						document.getElementById("crash").innerHTML = counter--;
-						setTimeout('countDown()',1000);
-					}
-
-				}
-			</script>
-			<div style="padding: 8px;font-family:sans-serif;display: none;" id="message">
+			<div style="padding: 8px;font-family:sans-serif;" id="message">
 				<h2>Unsupported Browser</h2>
 				<p>Your are using an <b>extremely outdated, unsupported browser</b>.</p>
 				<p><a href="http://www.browserchoice.eu/" target="_blank">Please <b>keep it real</b> and use a browser that isn't <b>over 10 years old</b>.</a></p>
-				<h3>Why should I care?</h3>
-				<p>Internet Explorer 6 is full of security problems. In layman's terms, using Internet Explorer 6 is a great way to get a ton of viruses. If you upgrade your web browser, these security problems no longer exist. </p>
-				<p>As an illustration of these security problems, <span id="crashmsg">Internet Explorer will crash in <b id="crash">10</b> seconds.</span></p>
-			</div>
-			<div style="padding: 8px;font-family:sans-serif;" id="click">
-				<a href="#" onclick="this.style.behavior='url(#default#homepage)'; this.setHomePage('http://browserchoice.eu/');document.getElementById('click').style.display = 'none';document.getElementById('message').style.display = 'block';countDown();">Click here to continue</a>
-			</div>
 		<![endif]-->
 		<div class="topbar">
 			<div class="fill">
