@@ -33,12 +33,12 @@ html, body {
 }
 	  
 @media (max-width: 960px) {
-	html, body {
+	html, body, hr {
 		width: 100%;
 		background-color: white;
 	}
 	  
-	.container  {
+	.container {
 		width: 100%; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
 	}
 		  
@@ -50,12 +50,12 @@ html, body {
 		display: block;
 	}
 		  
-	.topbar > .fill, .content > .row > .span14 {
-		padding-left: 16px;
-	}
-		  
 	.span14 {
 		width: auto;
+	}
+	
+	.topbar > .fill, .content > .row > .span14 {
+		padding-left: 16px;
 	}
 		  
 	body {
@@ -64,6 +64,10 @@ html, body {
 		  
 	form.desktop {
 		display: none;
+	}
+
+	.codebody, .quotebody {	
+		margin-right: 16px;
 	}
 }
 

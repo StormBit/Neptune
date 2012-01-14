@@ -11,7 +11,7 @@
 		$text = str_replace(">", "&gt;", $text); 
 			
 		// Convert newlines to HTML newlines.
-		$text = nl2br($text);
+		$text = "<p>" . str_replace("\n", "</p><p>", $text) . "</p>";
 			
 		$urlsearchstring = " a-zA-Z0-9\:\/\-\?\&\.\=\_\~\#\'";
 			
@@ -41,19 +41,19 @@
 
 		$text = preg_replace("(\[font=(.+?)\](.+?)\[\/font\])","<span style=\"font-family: $1;\">$2</span>",$text);
 
-		$codelayout = '<table class="bbcode-block nostyle"><tr><td class="quotecodeheader"> Code:</td></tr><tr><td class="codebody">$1</td></tr></table>';
+		$codelayout = '<div class="bbcode"><div class="quotecodeheader">Code:</div><div class="codebody">$1</div></div>';
 		$text = preg_replace("/\[code\](.+?)\[\/code\]/is","$codelayout", $text);
 			
-		$phplayout = '<table class="bbcode-block nostyle"><tr><td class="quotecodeheader"> Code:</td></tr><tr><td class="codebody">$1</td></tr></table>';
+		$phplayout = '<div class="bbcode"><div class="quotecodeheader">Code:</div><div class="codebody">$1</div></div>';
 		$text = preg_replace("/\[php\](.+?)\[\/php\]/is",$phplayout, $text);
 
-		$QuoteLayout = '<table class="bbcode-block nostyle"><tr><td class="quotecodeheader"> Quote:</td></tr><tr><td class="quotebody">$1</td></tr></table>';
-		$QuoteLayout2 = '<table class="bbcode-block nostyle"><tr><td class="quotecodeheader">$1 wrote:</td></tr><tr><td class="quotebody">$2</td></tr></table>';
+		$quotelayout = '<div class="bbcode"><div class="quotecodeheader">Quote:</div><div class="quotebody">$1</div></div>';
+		$quotelayout2 = '<div class="bbcode"><div class="quotecodeheader">$1 wrote:</div><div class="quotebody">$2</div></div>';
 		while(preg_match("/\[quote=(.+?)\](.+?)\[\/quote\]/is", $text)) {
-			$text = preg_replace("/\[quote=(.+?)\](.+?)\[\/quote\]/is","$QuoteLayout2", $text);
+			$text = preg_replace("/\[quote=(.+?)\](.+?)\[\/quote\]/is","$quotelayout2", $text);
 		}
 		while(preg_match("/\[quote\](.+?)\[\/quote\]/is", $text)) {
-			$text = preg_replace("/\[quote\](.+?)\[\/quote\]/is","$QuoteLayout", $text);
+			$text = preg_replace("/\[quote\](.+?)\[\/quote\]/is","$quotelayout", $text);
 				}
 	 
 		$text = preg_replace("/\[img\](.+?)\[\/img\]/", '<img src="$1">', $text);

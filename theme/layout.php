@@ -8,9 +8,10 @@
 		<meta name="viewport" content="width=device-width, user-scalable=true, initial-scale=1, maximum-scale=1">
 
 		<link href="resources/css/bootstrap.min.css" rel="stylesheet">
-		<script type="text/javascript" src="resources/js/jquery-1.7.1.min.js"></script>
-
 		<link href="resources/css/main.css" rel="stylesheet">
+		<link href="resources/css/bbcode.css" rel="stylesheet">
+
+		<script type="text/javascript" src="resources/js/jquery-1.7.1.min.js"></script>
 	</head>
 	<body>
 		<div class="topbar">
