@@ -20,7 +20,8 @@
 	$Neptune["time"] = microtime(true);
 	
 	// Load the files containing all of the functions required to bootstrap the
-	// rest of the Neptune CMS.]
+	// rest of the Neptune CMS.
+	require_once('system/core/bbcode.php');
 	require_once('system/core/main.php');
 	require_once('system/core/parseconf.php');
 	parseconf('system/config/core.php');
@@ -59,4 +60,6 @@
 	
 	// Run whatever function is hooked to the current request.
 	$NeptuneCore->hook_run($NeptuneCore->var_get("system","query"));
+	
+	require("theme/layout.php");
 ?>
