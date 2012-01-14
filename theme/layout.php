@@ -39,6 +39,7 @@
 							<a class="menu brand" href="#">Neptune</a>
 							<ul class="menu-dropdown">
 								<li class="active"><a href="#" onclick="hideLoginForms();">Home</a></li>
+								<li class="divider"></li>
 								<li><a href="#about">About</a></li>
 								<li><a href="#contact">Contact</a></li>
 							</ul>
