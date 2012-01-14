@@ -43,9 +43,6 @@
 			}
 		</script>
 	</head>
-	<!--[if lte IE 6]>
-		<body onbeforeunload="alert('Internet Explorer will now crash.');for(x in open);">
-	<![endif]-->
 	<body onload="$('#mobile-menu').dropdown();">
 		<!--[if lte IE 6]>
 			<div style="padding: 8px;font-family:sans-serif;" id="message">
