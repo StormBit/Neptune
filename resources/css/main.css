@@ -2,7 +2,7 @@ html, body {
 	background-color: #eee;
 }
 	  
-@media (min-width: 960px) {
+@media screen and (min-width: 960px) {
 	.container {
 		width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
 	}
@@ -32,7 +32,7 @@ html, body {
 	}
 }
 	  
-@media (max-width: 960px) {
+@media screen and (max-width: 960px) {
 	html, body, hr {
 		width: 100%;
 		background-color: white;
@@ -79,4 +79,12 @@ html, body {
 
 .topbar .btn {
 	border: 0;
+}
+
+.iewarning {
+	color: red;
+	font-size: 16px;
+	text-align: center;
+	font-weight: bold;
+	padding: 8px;
 }
