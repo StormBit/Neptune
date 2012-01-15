@@ -38,7 +38,7 @@
 	// to use. We want to keep all URLs clean.
 
 	// Prevent PHP from displaying a warning if there is no query string.
-	if (isset($_SERVER["QUERY_STRING"])) {
+	if (isset($_SERVER["QUERY_STRING"]) && !empty($_SERVER["QUERY_STRING"])) {
 		// Take each part of the query string, and split it into an array. The
 		// first value (0) is how functions hook themselves to requests.
 		$NeptuneCore->var_set("system","query",explode("/",$_SERVER["QUERY_STRING"]));
