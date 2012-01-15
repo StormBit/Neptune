@@ -44,7 +44,7 @@
 		$NeptuneCore->var_set("system","query",explode("/",$_SERVER["QUERY_STRING"]));
 	} else {
 		// If there is no query string, use the default function hook instead.
-		$NeptuneCore->var_set("system","query",$NeptuneCore->var_get("config","defaultact"));
+		$NeptuneCore->var_set("system","query",array($NeptuneCore->var_get("config","defaultact")));
 	}
 
 	

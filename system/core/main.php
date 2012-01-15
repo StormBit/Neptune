@@ -19,6 +19,7 @@
 		// of custom global variables.
 		function var_set($group,$variable,$data) {
 			global $Neptune;
+						
 			$Neptune["stack"][$group][$variable] = $data;
 
 			return 0;
@@ -84,7 +85,7 @@
 		function hook_run($action) {
 			global $Neptune;
 
-			$Function = $this->var_get("hooks",$action);
+			$Function = $this->var_get("hooks",$action[0]);
 
 			if ($Function != "") {
 				$Function();
