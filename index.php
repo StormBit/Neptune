@@ -20,20 +20,23 @@
 	// store state data.
 	global $Neptune;
 	
-	// Load the files containing all of the functions required to bootstrap the
-	// rest of the Neptune CMS.
-	require_once('system/core/bbcode.php');
+	// Load the core class file
 	require_once('system/core/main.php');
-	require_once("system/core/tidy.php");
-	require_once('system/core/parseconf.php');
-	parseconf('system/config/core.php');
-	require_once("system/core/init.php");
-
 	// Making the core object accessable
 	global $NeptuneCore;
 	if(!isset($NeptuneCore)) {
 		$NeptuneCore = new NeptuneCore();
 	}
+	
+	// Loading the rest of the core files. 
+	require_once('system/core/bbcode.php');
+	require_once("system/core/tidy.php");
+	require_once('system/core/parseconf.php');
+	parseconf('system/config/core.php');
+	parseconf('system/config/' . $NeptuneCore->var_get("database","type") . '.php');
+
+	require_once("system/core/init.php");
+
 
 	// After this, we will take the query string and extract all of the data
 	// from it. This is intentionally done in a way that makes $_GET impossible
