@@ -11,6 +11,7 @@ html, body {
 		background-color: #fff;
 		padding: 20px;
 		margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+		margin-bottom: 24px;
 		-webkit-border-radius: 0 0 6px 6px;
 		   -moz-border-radius: 0 0 6px 6px;
 				border-radius: 0 0 6px 6px;
@@ -20,7 +21,7 @@ html, body {
 	}
 		  
 	.content .span14 {
-		min-height: 500px;
+		min-height: 480px;
 	}
 		  
 	body {
@@ -68,6 +69,10 @@ html, body {
 
 	.codebody, .quotebody {	
 		margin-right: 16px;
+	}
+	
+	footer {
+		padding: 8px;
 	}
 }
 

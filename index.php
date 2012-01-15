@@ -10,6 +10,9 @@
 		to the templating engine.
 	*/
 	
+	$time=microtime();
+	$starttime=substr($time,11).substr($time,1,9);
+	
 	// Defining NEPNEP for security purposes
 	define('NEPNEP', true, true);
 	
@@ -17,12 +20,11 @@
 	// store state data.
 	global $Neptune;
 	
-	$Neptune["time"] = microtime(true);
-	
 	// Load the files containing all of the functions required to bootstrap the
 	// rest of the Neptune CMS.
 	require_once('system/core/bbcode.php');
 	require_once('system/core/main.php');
+	require_once("system/core/tidy.php");
 	require_once('system/core/parseconf.php');
 	parseconf('system/config/core.php');
 	require_once("system/core/init.php");
@@ -60,6 +62,8 @@
 	
 	// Run whatever function is hooked to the current request.
 	$NeptuneCore->hook_run($NeptuneCore->var_get("system","query"));
+	
+	$NeptuneCore->var_set("output","body", clean_html_code($NeptuneCore->var_get("output","body")));
 	
 	require("theme/layout.php");
 ?>
