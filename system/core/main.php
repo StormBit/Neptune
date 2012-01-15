@@ -93,6 +93,5 @@
 				die("Invalid function");
 			}
 		}
-		
 	}
 ?>

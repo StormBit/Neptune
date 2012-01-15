@@ -22,8 +22,9 @@
 	
 	// Load the core class file
 	require_once('system/core/main.php');
-	// Making the core object accessable
+	// Making the core objects accessable
 	global $NeptuneCore;
+	global $NeptuneSQL;
 	if(!isset($NeptuneCore)) {
 		$NeptuneCore = new NeptuneCore();
 	}
@@ -33,7 +34,8 @@
 	require_once("system/core/tidy.php");
 	require_once('system/core/parseconf.php');
 	parseconf('system/config/core.php');
-	parseconf('system/config/' . $NeptuneCore->var_get("database","type") . '.php');
+
+	require_once("system/core/useraccounts.php");
 
 	require_once("system/core/init.php");
 
@@ -62,11 +64,15 @@
 		} 
 		closedir($handle); 
 	}
-	
+		
 	// Run whatever function is hooked to the current request.
 	$NeptuneCore->hook_run($NeptuneCore->var_get("system","query"));
 	
-	$NeptuneCore->var_set("output","body", clean_html_code($NeptuneCore->var_get("output","body")));
+	if ($NeptuneCore->var_get("output","body") != "") {
+		$NeptuneCore->var_set("output","body", clean_html_code($NeptuneCore->var_get("output","body")));
+	} else {
+		$NeptuneCore->var_set("output","body","");
+	}
 	
 	require("theme/layout.php");
 ?>
