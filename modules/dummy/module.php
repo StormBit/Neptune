@@ -20,4 +20,3 @@
 	}
 	$NeptuneCore->hook_function("page","dummy","page");
 ?>
-

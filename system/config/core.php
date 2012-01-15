@@ -8,12 +8,9 @@
 		have been loaded.
 	*/
 
-//	neptune_var_set("config","defaultact","page");
 	$conf['config']['defaultact'] = 'page';
-	$conf['config']['root'] = '/home/antoligy/neptune';
-//	$conf['config']['defaultact'] = 'test';
 	
-	$conf['cache']['enabled'] = True;
+	$conf['cache']['enabled'] = False;
 #	$conf['cache']['expire'] = 10;
 	$conf['cache']['type'] = 'apc';
 	
