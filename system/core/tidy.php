@@ -22,7 +22,7 @@
 
 	function clean_html_code($uncleanhtml)
 	{
-		$indent = "\t";
+		$indent = "    ";
 
 		$fixed_uncleanhtml = fix_newlines_for_clean_html($uncleanhtml);
 		$uncleanhtml_array = explode("\n", $fixed_uncleanhtml);
