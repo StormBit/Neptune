@@ -9,7 +9,19 @@
 	function neptune_bbcode($text) {	
 		$text = str_replace("<", "&lt;", $text);
 		$text = str_replace(">", "&gt;", $text); 
-			
+		
+		// HTML Whitelist
+		$text = str_replace("<b>", "[b]", $text); 
+		$text = str_replace("</b>", "[/b]", $text); 
+		$text = str_replace("<i>", "[i]", $text); 
+		$text = str_replace("</i>", "[/i]", $text); 
+		$text = str_replace("<u>", "[u]", $text); 
+		$text = str_replace("</u>", "[/u]", $text); 
+		$text = str_replace("<o>", "&[o]", $text); 
+		$text = str_replace("</o>", "[/o]", $text); 
+		$text = str_replace("<s>", "[s]", $text); 
+		$text = str_replace("</s>", "[/s]", $text); 
+		
 		// Convert newlines to HTML newlines.
 		$text = str_replace("\r\n","\n",$text);
 		$text = str_replace("\n", "<br>\n\t\t\t\t\t\t\t", $text);
