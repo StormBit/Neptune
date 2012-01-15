@@ -49,4 +49,8 @@
 		
 		return mysql_real_escape_string($string);
 	}
+	
+	
+	// Connect to the database
+	$NeptuneCore->neptune_connect($NeptuneCore->var_get("database","host"),$NeptuneCore->var_get("database","user"),$NeptuneCore->var_get("database","pass"),$NeptuneCore->var_get("database","db"));
 ?>
