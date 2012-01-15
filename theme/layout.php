@@ -2,18 +2,29 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<!--[if lte IE 6]><title>Unsupported Browser</title><![endif]-->
 		<title><?php echo $NeptuneCore->var_get("output","title"); ?> :: Neptune</title>
 	
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="viewport" content="width=device-width, user-scalable=true, initial-scale=1, maximum-scale=1">
-
+		
+		<!--[if !(lte IE 6)]>-->
 		<link href="resources/css/bootstrap.min.css" rel="stylesheet">
 		<link href="resources/css/main.css" rel="stylesheet">
+		<!--<![endif]-->
 		<link href="resources/css/bbcode.css" rel="stylesheet">
 
 		<script type="text/javascript" src="resources/js/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="resources/js/bootstrap-dropdown.js"></script>
+		
+		<style type="text/css">
+			.iewarning {
+				color: red;
+				font-size: 16px;
+				text-align: center;
+				font-weight: bold;
+				padding: 8px;
+			}
+		</style>
 		
 		<!-- IE hacks. I'm not even going to attempt fixing IE 6. -->
 		<!--[if (IE 7)|(IE 8)]>
@@ -22,16 +33,18 @@
 		<![endif]-->
 		<!--[if lte IE 6]>
 			<style type="text/css">
-				.topbar, .container {
-					display: none;
+				body, .container, .topbar, p, a, .quotecodeheader, .quotebody, .codebody {
+					background-color: #0707ec;
+					font-family: Comic Sans MS, monospace;
+					font-size: 36px;
+					font-weight: bold;
+					color: red;
 				}
-				@media all {
-					IE\:homePage {behavior:url(#default#homepage)}
-				}   
+				.iewarning {
+					font-size: 48px;
+				}
 			</style>
-
 		<![endif]-->
-
 		
 		<script type="text/javascript">
 			function hideLoginForms() {
@@ -44,11 +57,14 @@
 		</script>
 	</head>
 	<body onload="$('#mobile-menu').dropdown();">
-		<!--[if lte IE 6]>
-			<div style="padding: 8px;font-family:sans-serif;" id="message">
-				<h2>Unsupported Browser</h2>
-				<p>Your are using an <b>extremely outdated, unsupported browser</b>.</p>
-				<p><a href="http://www.browserchoice.eu/" target="_blank">Please <b>keep it real</b> and use a browser that isn't <b>over 10 years old</b>.</a></p>
+		<!--[if lte IE 7]>
+			<p>This site uses lots of fancy new web technologies, but you're using Internet Explorer 6, so get this version!</p>
+			<embed src="resources/img/ie6/youwon.swf" width="640" height="80"></embed><br>
+			<embed src="resources/img/ie6/youwon.swf" width="640" height="80"></embed><br>
+			<embed src="resources/img/ie6/youwon.swf" width="640" height="80"></embed><br>
+			<embed src="resources/img/ie6/youwon.swf" width="640" height="80"></embed><br>
+			<embed src="resources/img/ie6/youwon.swf" width="640" height="80"></embed><br>
+			<embed src="resources/img/ie6/youwon.swf" width="640" height="80"></embed><br>
 		<![endif]-->
 		<div class="topbar">
 			<div class="fill">

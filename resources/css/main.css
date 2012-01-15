@@ -80,11 +80,3 @@ html, body {
 .topbar .btn {
 	border: 0;
 }
-
-.iewarning {
-	color: red;
-	font-size: 16px;
-	text-align: center;
-	font-weight: bold;
-	padding: 8px;
-}
