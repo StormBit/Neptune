@@ -58,7 +58,7 @@
                     </ul>
                     <ul class="nav mobile" id="mobile-menu">
                         <li id="mobile-menu-dropdown">
-                            <a class="menu brand" href="#">Neptune</a>
+                            <a class="menu brand" href="#" onclick="hideLoginForms();">Neptune</a>
                             <ul class="menu-dropdown">
                                 <li class="active"><a href="#" onclick="hideLoginForms();">Home</a></li>
                                 <li class="divider"></li>
@@ -67,18 +67,12 @@
                             </ul>
                         </li>
                     </ul>
-                    <div class="pull-right mobile">
+                    <div class="pull-right">
                         <ul class="nav">
-                        <li id="mobile-login-button"><a href="#" onclick="$('#mobile-login').show();$('#mobile-register').hide();$('#mobile-register-button').removeClass('active');$('#content-area').hide();$('#mobile-login-button').addClass('active');">Login</a></li>
-                        <li id="mobile-register-button"><a href="#" onclick="$('#mobile-register').show();$('#mobile-login').hide();$('#mobile-login-button').removeClass('active');$('#content-area').hide();$('#mobile-register-button').addClass('active');">Register</a></li>
+                        <li id="mobile-login-button"><a href="#" onclick="hideLoginForms();$('#content-area').hide();$('#mobile-login').show();$('#mobile-login-button').addClass('active');">Login</a></li>
+                        <li id="mobile-register-button"><a href="#" onclick="hideLoginForms();$('#content-area').hide();$('#mobile-register').show();$('#mobile-register-button').addClass('active');">Register</a></li>
                         </ul>
                     </div>
-                    
-                    <form action="?" class="pull-right desktop">
-                        <input class="input-small" type="text" placeholder="Username" required>
-                        <input class="input-small" type="password" placeholder="Password" required>
-                        <button class="btn primary" type="submit">Login</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -89,7 +83,7 @@
                     <div class="span14">
                         <div class="hide" id="mobile-login">
                             <h2>Login to Neptune</h2>
-                            <form action="?">
+                            <form action="?login">
                                 <div class="clearfix">
                                     <input class="large" type="text" placeholder="Username">
                                 </div>
@@ -98,13 +92,13 @@
                                 </div>
                                 <div class="clearfix">
                                     <button class="btn primary" type="submit">Login</button>
-                                    <button class="btn" onclick="$('#mobile-login').hide();$('#content-area').show();$('#mobile-login-button').removeClass('active');">Cancel</button>
+                                    <button class="btn" onclick="hideLoginForms();return false;">Cancel</button>
                                 </div>
                                 </form>
                         </div>
                         <div class="hide" id="mobile-register">
                             <h2>Create Account</h2>
-                            <form action="?">
+                            <form action="?register">
                             <div class="clearfix">
                                 <input class="large" type="text" placeholder="Username">
                             </div>
@@ -119,7 +113,7 @@
                             </div>
                             <div class="clearfix">
                                 <button class="btn primary" type="submit">Register</button>
-                                <button class="btn" onclick="$('#mobile-register').hide();$('#content-area').show();$('#mobile-register-button').removeClass('active');">Cancel</button>
+                                <button class="btn" onclick="hideLoginForms();return false;">Cancel</button>
                             </div>
                             </form>
                         </div>
