@@ -39,7 +39,7 @@
             }
         </script>
     </head>
-    <body onload="$('#mobile-menu').dropdown();">
+    <body onload="$('#mobile-menu').dropdown();$('#user-menu').dropdown();">
         <!--[if lte IE 6]>
             <div style="padding: 8px;font-family:sans-serif;position: absolute;top:0;left:0;" id="message">
                 <h2>Unsupported Browser</h2>
@@ -68,9 +68,18 @@
                         </li>
                     </ul>
                     <div class="pull-right">
-                        <ul class="nav">
-                        <li id="mobile-login-button"><a href="#" onclick="hideLoginForms();$('#content-area').hide();$('#mobile-login').show();$('#mobile-login-button').addClass('active');">Login</a></li>
-                        <li id="mobile-register-button"><a href="#" onclick="hideLoginForms();$('#content-area').hide();$('#mobile-register').show();$('#mobile-register-button').addClass('active');">Register</a></li>
+                        <ul class="nav secondary-nav" id="user-menu">
+                            <?php
+                                if (neptune_get_permissions() == 0) {
+                                    echo '<li id="mobile-login-button"><a href="#" onclick="hideLoginForms();$(\'#content-area\').hide();$(\'#mobile-login\').show();$(\'#mobile-login-button\').addClass(\'active\');">Login</a></li>' . "\n" . '                            <li id="mobile-register-button"><a href="#" onclick="hideLoginForms();$(\'#content-area\').hide();$(\'#mobile-register\').show();$(\'#mobile-register-button\').addClass(\'active\');">Register</a></li>' . "\n";
+                                } else if (neptune_get_permissions() >= 1) {
+									echo '<li id="user-menu-dropdown">' . "\n                                " . '<a class="menu" href="#">' . neptune_get_username() . '</a>' . "\n                                " . '<ul class="menu-dropdown">' . "\n                                    " . '<li><a href="?logout/' . implode("/",$NeptuneCore->var_get("system","query")) . '">Logout</a></li>' . "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?profile">Edit Profile</a></li>' . "\n                                    " . '<li><a href="?ucp">User Control Panel</a></li>';
+									if (neptune_get_permissions() >= 3) {
+										echo "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?acp">Admin Control Panel</a></li>';
+									}
+									echo "\n                                " . '</ul>' . "\n                            " . '</li>' . "\n";
+								}
+                            ?>
                         </ul>
                     </div>
                 </div>
@@ -83,12 +92,12 @@
                     <div class="span14">
                         <div class="hide" id="mobile-login">
                             <h2>Login to Neptune</h2>
-                            <form action="?login">
+                            <form action="?login/<?php echo implode("/",$NeptuneCore->var_get("system","query")); ?>" method="POST">
                                 <div class="clearfix">
-                                    <input class="large" type="text" placeholder="Username">
+                                    <input class="large" type="text" placeholder="Username" name="user">
                                 </div>
                                 <div class="clearfix">
-                                    <input class="large" type="password" placeholder="Password">
+                                    <input class="large" type="password" placeholder="Password" name="pass">
                                 </div>
                                 <div class="clearfix">
                                     <button class="btn primary" type="submit">Login</button>
@@ -98,18 +107,18 @@
                         </div>
                         <div class="hide" id="mobile-register">
                             <h2>Create Account</h2>
-                            <form action="?register">
+                            <form action="?register/<?php echo implode("/",$NeptuneCore->var_get("system","query")); ?>" method="POST">
                             <div class="clearfix">
-                                <input class="large" type="text" placeholder="Username">
+                                <input class="large" type="text" placeholder="Username" name="user">
                             </div>
                             <div class="clearfix">
-                                <input class="large" type="password" placeholder="Password">
+                                <input class="large" type="password" placeholder="Password" name="pass1">
                             </div>
                             <div class="clearfix">
-                                <input class="large" type="password" placeholder="Password (confirm)">
+                                <input class="large" type="password" placeholder="Password (confirm)" name="pass2">
                             </div>
                             <div class="clearfix">
-                                <input class="large" type="password" placeholder="Email (optional)">
+                                <input class="large" type="text" placeholder="Email (optional)" name="email">
                             </div>
                             <div class="clearfix">
                                 <button class="btn primary" type="submit">Register</button>

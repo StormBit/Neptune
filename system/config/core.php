@@ -15,4 +15,5 @@
 	$conf['cache']['type'] = 'apc';
 	
 	$conf['database']['type'] = 'mysql';
+	include("system/drivers/mysql.php");
 ?>
