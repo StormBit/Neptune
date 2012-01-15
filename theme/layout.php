@@ -2,10 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<!--[if gte IE 7]>-->
 		<title><?php echo $NeptuneCore->var_get("output","title"); ?> :: Neptune</title>
-		<!--<![endif]-->
-		<!--[if lte IE 6]><title>Unsupported Browser</title><![endif]-->
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="viewport" content="width=device-width, user-scalable=true, initial-scale=1, maximum-scale=1">
@@ -17,21 +14,18 @@
 		<script type="text/javascript" src="resources/js/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="resources/js/bootstrap-dropdown.js"></script>
 		
-		<!-- IE hacks. I'm not even going to attempt fixing IE 6. -->
-		<!--[if (IE 7)|(IE 8)]>
-			<script src="resources/js/html5.js"></script>
-			<script type="text/javascript" src="resources/js/respond.min.js"></script>
-		<![endif]-->
+		<!-- Hacks to get this to work in IE 7 and IE 8. IE 6 is hopeless, so we just make it show an Unsupported Browser page. -->
+		<script src="resources/js/html5.js"></script>
+		<script type="text/javascript" src="resources/js/respond.min.js"></script>
 		<!--[if lte IE 6]>
 			<style type="text/css">
 				.topbar, .container {
 					display: none;
 				}
-				@media all {
-					IE\:homePage {behavior:url(#default#homepage)}
-				}   
 			</style>
-
+			<script type="text/javascript">
+				document.title = "Unsupported Browser";
+			</script>
 		<![endif]-->
 
 		
@@ -47,7 +41,7 @@
 	</head>
 	<body onload="$('#mobile-menu').dropdown();">
 		<!--[if lte IE 6]>
-			<div style="padding: 8px;font-family:sans-serif;" id="message">
+			<div style="padding: 8px;font-family:sans-serif;position: absolute;top:0;left:0;" id="message">
 				<h2>Unsupported Browser</h2>
 				<p>Your are using an <b>extremely outdated, unsupported browser</b>.</p>
 				<p><a href="http://www.browserchoice.eu/" target="_blank">Please <b>keep it real</b> and use a browser that isn't <b>over 10 years old</b>.</a></p>
@@ -129,7 +123,7 @@
 							</form>
 						</div>
 						<div id="content-area">
-							<!--[if lte IE 7]>
+							<!--[if IE 7]>
 								<br><br>
 								<div class="iewarning">Warning: Please upgrade your browser to something compatible with the internet.<br><a href="http://www.browserchoice.eu/" target="_blank">There are many browsers to choose from, any except the one you are using is good.</a></div>
 								<br><br>
