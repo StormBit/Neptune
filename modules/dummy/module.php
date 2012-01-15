@@ -13,7 +13,7 @@
 [quote]Quote Test
 [quote=Someone]Nested Quote Test[/quote]
 [/quote]
-[b]Bold[/b] and [b]Bold[/b] and [b]Bold[/b]
+[b]Bold[/b] and <b>Bold</b> and [b]Bold[/b] 
 ');
 
 		$NeptuneCore->neptune_title("Test Module");
