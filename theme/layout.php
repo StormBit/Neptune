@@ -2,9 +2,11 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<!--[if lte IE 6]><title>Unsupported Browser</title><![endif]-->
+		<!--[if gte IE 7]>-->
 		<title><?php echo $NeptuneCore->var_get("output","title"); ?> :: Neptune</title>
-	
+		<!--<![endif]-->
+		<!--[if lte IE 6]><title>Unsupported Browser</title><![endif]-->
+
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="viewport" content="width=device-width, user-scalable=true, initial-scale=1, maximum-scale=1">
 
