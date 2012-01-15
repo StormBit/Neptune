@@ -45,6 +45,7 @@
 				<h2>Unsupported Browser</h2>
 				<p>Your are using an <b>extremely outdated, unsupported browser</b>.</p>
 				<p><a href="http://www.browserchoice.eu/" target="_blank">Please <b>keep it real</b> and use a browser that isn't <b>over 10 years old</b>.</a></p>
+			</div>
 		<![endif]-->
 		<div class="topbar">
 			<div class="fill">
@@ -56,7 +57,7 @@
 						<li><a href="#contact">Contact</a></li>
 					</ul>
 					<ul class="nav mobile" id="mobile-menu">
-						<li id="menu">
+						<li id="mobile-menu-dropdown">
 							<a class="menu brand" href="#">Neptune</a>
 							<ul class="menu-dropdown">
 								<li class="active"><a href="#" onclick="hideLoginForms();">Home</a></li>
@@ -73,7 +74,7 @@
 						</ul>
 					</div>
 					
-					<form action="" class="pull-right desktop">
+					<form action="?" class="pull-right desktop">
 						<input class="input-small" type="text" placeholder="Username" required>
 						<input class="input-small" type="password" placeholder="Password" required>
 						<button class="btn primary" type="submit">Login</button>
@@ -88,7 +89,7 @@
 					<div class="span14">
 						<div class="hide" id="mobile-login">
 							<h2>Login to Neptune</h2>
-							<form action="">
+							<form action="?">
 								<div class="clearfix">
 									<input class="large" type="text" placeholder="Username">
 								</div>
@@ -103,7 +104,7 @@
 						</div>
 						<div class="hide" id="mobile-register">
 							<h2>Create Account</h2>
-							<form action="">
+							<form action="?">
 							<div class="clearfix">
 								<input class="large" type="text" placeholder="Username">
 							</div>
@@ -128,11 +129,13 @@
 								<div class="iewarning">Warning: Please upgrade your browser to something compatible with the internet.<br><a href="http://www.browserchoice.eu/" target="_blank">There are many browsers to choose from, any except the one you are using is good.</a></div>
 								<br><br>
 							<![endif]-->
-							<h2><?php echo $NeptuneCore->var_get("output","title"); ?></h2>
-							<?php echo $NeptuneCore->var_get("output","body"); ?>
+							<h2><?php echo $NeptuneCore->var_get("output","title"); ?></h2><?php echo "\n" . $NeptuneCore->var_get("output","body") . "\n"; ?>
 						</div>
 					</div>
 				</div>
+				<footer>
+					<p>Powered by the Neptune CMS, SaaS Edition</p><p><small>Copyright © 2012 StormDEV, All Rights Reserved<br>Generated in <?php $time = microtime(); $endtime=substr($time,11).substr($time,1,9); echo round($endtime - $starttime,3); ?> seconds using <?php $RAM["raw"] = memory_get_peak_usage(true);$unit=array('bytes','KiB','MiB','GiB','TiB','PiB');$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; echo $RAM["converted"]; ?> of memory</small></p>
+				</footer>
 			</div>
 		</div>
 	</body>

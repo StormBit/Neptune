@@ -10,7 +10,10 @@
 		global $NeptuneCore;
 		$NeptuneCore->neptune_echo_bbcode('Module ran!
 [code]Code test[/code]
-[quote]Quote Test[quote=Someone]Nested Quote Test[/quote][/quote]
+[quote]Quote Test
+[quote=Someone]Nested Quote Test[/quote]
+[/quote]
+[b]Bold[/b] and [b]Bold[/b] and [b]Bold[/b]
 ');
 
 		$NeptuneCore->neptune_title("Test Module");
