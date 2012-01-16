@@ -14,5 +14,5 @@
 #	$conf['cache']['expire'] = 10;
 	$conf['cache']['type'] = 'apc';
 	
-	$conf['database']['type'] = 'mysql';
+	$conf['database']['type'] = 'sqlite3';
 ?>

@@ -13,12 +13,16 @@
 	
 	$NeptuneCore->parseconf('system/config/mysql.php');
 	
-	class NeptuneSQL extends NeptuneCore {
+	class NeptuneSQL {
 		public function __construct() {
 			global $NeptuneCore;
 			global $NeptuneSQL;
 			
 			$this->connect($NeptuneCore->var_get("database","host"),$NeptuneCore->var_get("database","user"),$NeptuneCore->var_get("database","pass"),$NeptuneCore->var_get("database","db"));
+		}
+		
+		static function type() {
+			return "MySQL";
 		}
 		
 		// MySQL Connect
