@@ -9,9 +9,11 @@
 		or functions required to satisfy the request, then passes the output
 		to the templating engine.
 	*/
-	
+
 	$time=microtime();
 	$starttime=substr($time,11).substr($time,1,9);
+	
+	date_default_timezone_set('America/Los_Angeles');
 	
 	// Defining NEPNEP for security purposes
 	define('NEPNEP', true, true);
@@ -30,7 +32,14 @@
 		$NeptuneCore = new NeptuneCore();
 	}
 
-	include("system/drivers/mysql.php");
+	include("system/drivers/" . $NeptuneCore->var_get("database","type") . ".php");
+	
+	// Include the code for the Admin Control Panel. 
+	require_once('system/core/acpcore.php');
+	
+	if (!isset($NeptuneAdmin)) {
+			$NeptuneAdmin = new NeptuneAdmin();
+	}
 	
 	// Run whatever function is hooked to the current request.
 	$NeptuneCore->hook_run($NeptuneCore->var_get("system","query"));

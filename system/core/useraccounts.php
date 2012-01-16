@@ -27,7 +27,7 @@
 			if ($NeptuneSQL->fetch_array($sql)) {
 				die("Username already taken.");
 			} else {
-				$sql = $NeptuneSQL->query("INSERT INTO `neptune_users`(`username`,`displayname`,`password`,`email`) VALUES('$Username','$Displayname','$Password','$Email')");
+				$sql = $NeptuneSQL->query("INSERT INTO `neptune_users` VALUES('$Username','$Displayname','$Password','$Email','0','1','" . date ("Y-m-d H:i:s") . "','" . date ("Y-m-d H:i:s") . "','0','0','','')");
 				setcookie("NeptuneUser", $Username, 2147483647, "/");
 				setcookie("NeptunePass", $Password, 2147483647, "/");
 
@@ -86,18 +86,18 @@
 		global $NeptuneCore;
 		global $NeptuneSQL;
 		
-		// Create new SQL class if it doesn't already exist. 
-		if(!isset($NeptuneSQL)) {
-			$NeptuneSQL = new NeptuneSQL();
-		}
-		
 		if (isset($_COOKIE["NeptuneUser"]) && isset($_COOKIE["NeptunePass"])) {
+			// Create new SQL class if it doesn't already exist. 
+			if(!isset($NeptuneSQL)) {
+				$NeptuneSQL = new NeptuneSQL();
+			}
+			
 			$Username = $NeptuneSQL->escape_string($_COOKIE["NeptuneUser"]);
 			$Password = $NeptuneSQL->escape_string($_COOKIE["NeptunePass"]);
-			
+
 			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username' AND `password` = '$Password'");
 			$result = $NeptuneSQL->fetch_array($sql);
-			
+
 			return $result["permissions"];
 		} else {
 			return 0;
@@ -108,12 +108,12 @@
 		global $NeptuneCore;
 		global $NeptuneSQL;
 		
-		// Create new SQL class if it doesn't already exist. 
-		if(!isset($NeptuneSQL)) {
-			$NeptuneSQL = new NeptuneSQL();
-		}
-		
 		if (neptune_get_permissions()) {
+			// Create new SQL class if it doesn't already exist. 
+			if(!isset($NeptuneSQL)) {
+				$NeptuneSQL = new NeptuneSQL();
+			}
+			
 			$Username = $NeptuneSQL->escape_string($_COOKIE["NeptuneUser"]);
 			$Password = $NeptuneSQL->escape_string($_COOKIE["NeptunePass"]);
 			
@@ -124,5 +124,20 @@
 		} else {
 			return "Guest";
 		}
+	}
+	
+	function neptune_get_username_from_id($Username) {
+		global $NeptuneCore;
+		global $NeptuneSQL;
+		
+		// Create new SQL class if it doesn't already exist. 
+		if(!isset($NeptuneSQL)) {
+			$NeptuneSQL = new NeptuneSQL();
+		}
+						
+		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username'");
+		$result = $NeptuneSQL->fetch_array($sql);
+		
+		return $result["displayname"];
 	}
 ?>

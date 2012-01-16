@@ -15,6 +15,9 @@
 	
 	class NeptuneCore {
 		function __construct() {
+			global $NeptuneAdmin;
+			global $NeptuneSQL;
+			
 			$this->var_set("system","querycount",0);
 			
 			// Loading the rest of the core files. 
