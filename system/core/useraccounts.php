@@ -39,7 +39,7 @@
 			die("Passwords do not match.");
 		}
 	}
-	$NeptuneCore->hook_function("register","core","register");
+	$this->hook_function("register","core","register");
 	
 	function mod_core_login() {
 		global $NeptuneCore;
@@ -67,7 +67,7 @@
 			die("Invalid credentials");
 		}
 	}
-	$NeptuneCore->hook_function("login","core","login");
+	$this->hook_function("login","core","login");
 	
 	function mod_core_logout() {
 		global $NeptuneCore;
@@ -80,7 +80,7 @@
 		header("Location: ?" . implode("/",$QueryString));
 
 	}
-	$NeptuneCore->hook_function("logout","core","logout");
+	$this->hook_function("logout","core","logout");
 	
 	function neptune_get_permissions() {
 		global $NeptuneCore;

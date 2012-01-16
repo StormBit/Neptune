@@ -18,5 +18,5 @@
 
 		$NeptuneCore->neptune_title("Test Module");
 	}
-	$NeptuneCore->hook_function("page","dummy","page");
+	$this->hook_function("page","dummy","page");
 ?>
