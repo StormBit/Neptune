@@ -22,49 +22,16 @@
 	
 	// Load the core class file
 	require_once('system/core/main.php');
+	
 	// Making the core objects accessable
 	global $NeptuneCore;
 	global $NeptuneSQL;
 	if(!isset($NeptuneCore)) {
 		$NeptuneCore = new NeptuneCore();
 	}
+
+	include("system/drivers/mysql.php");
 	
-	// Loading the rest of the core files. 
-	require_once('system/core/bbcode.php');
-	require_once("system/core/tidy.php");
-	require_once('system/core/parseconf.php');
-	parseconf('system/config/core.php');
-
-	require_once("system/core/useraccounts.php");
-
-	require_once("system/core/init.php");
-
-
-	// After this, we will take the query string and extract all of the data
-	// from it. This is intentionally done in a way that makes $_GET impossible
-	// to use. We want to keep all URLs clean.
-
-	// Prevent PHP from displaying a warning if there is no query string.
-	if (isset($_SERVER["QUERY_STRING"]) && !empty($_SERVER["QUERY_STRING"])) {
-		// Take each part of the query string, and split it into an array. The
-		// first value (0) is how functions hook themselves to requests.
-		$NeptuneCore->var_set("system","query",explode("/",$_SERVER["QUERY_STRING"]));
-	} else {
-		// If there is no query string, use the default function hook instead.
-		$NeptuneCore->var_set("system","query",array($NeptuneCore->var_get("config","defaultact")));
-	}
-
-	
-	// Enumerate modules. 
-	if ($handle = opendir('modules')) { 
-		while (false !== ($dir = readdir($handle))) { 
-			if ($dir != "." && $dir != ".." && is_dir("modules/" . $dir)) { 
-				include("modules/$dir/module.php"); 
-			} 
-		} 
-		closedir($handle); 
-	}
-		
 	// Run whatever function is hooked to the current request.
 	$NeptuneCore->hook_run($NeptuneCore->var_get("system","query"));
 	

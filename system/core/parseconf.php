@@ -17,21 +17,6 @@
 		$NeptuneCore = new NeptuneCore();
 	}
 
-	function parseconf($config) {
-		global $NeptuneCore;
-		
-		include($config);
-			foreach($conf as $group => $variable) {
-			foreach($variable as $variable => $data) {
-				// Calling var_set
-				$NeptuneCore->var_set($group,$variable,$data);
-				unset($variable);
-				unset($data);
-			}
-			unset($group);
-			unset($variable);
-		}
-		unset($conf);
-	}
+
 	
 ?>

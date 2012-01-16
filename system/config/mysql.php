@@ -8,6 +8,6 @@
 	
 	$conf['database']['host'] = 'localhost';
 	$conf['database']['user'] = 'root';
-	$conf['database']['pass'] = '<redacted>';
+	$conf['database']['pass'] = 'password';
 	$conf['database']['db'] = 'stormdev_neptune';	
 ?>

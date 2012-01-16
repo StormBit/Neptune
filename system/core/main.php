@@ -14,6 +14,45 @@
 	}
 	
 	class NeptuneCore {
+		function __construct() {
+			$this->var_set("system","querycount",0);
+			
+			// Loading the rest of the core files. 
+			require_once('system/core/bbcode.php');
+			require_once("system/core/tidy.php");
+			$this->parseconf('system/config/core.php');
+
+			require_once("system/core/useraccounts.php");
+
+			if($this->var_get('cache', 'enabled')) {
+				require_once('cache.php');
+			}
+			
+			// After this, we will take the query string and extract all of the data
+			// from it. This is intentionally done in a way that makes $_GET impossible
+			// to use. We want to keep all URLs clean.
+
+			// Prevent PHP from displaying a warning if there is no query string.
+			if (isset($_SERVER["QUERY_STRING"]) && !empty($_SERVER["QUERY_STRING"])) {
+				// Take each part of the query string, and split it into an array. The
+				// first value (0) is how functions hook themselves to requests.
+				$this->var_set("system","query",explode("/",$_SERVER["QUERY_STRING"]));
+			} else {
+				// If there is no query string, use the default function hook instead.
+				$this->var_set("system","query",array($this->var_get("config","defaultact")));
+			}
+				
+			// Enumerate modules. 
+			if ($handle = opendir('modules')) { 
+				while (false !== ($dir = readdir($handle))) { 
+					if ($dir != "." && $dir != ".." && is_dir("modules/" . $dir)) { 
+						include("modules/$dir/module.php"); 
+					} 
+				} 
+				closedir($handle); 
+			}
+		}
+		
 		// Variable setting function: This allows functions to store variables that
 		// will be required by later functions. It is prefered to use this instead
 		// of custom global variables.
@@ -92,6 +131,21 @@
 			} else {
 				die("Invalid function");
 			}
+		}
+		
+		function parseconf($config) {
+			include($config);
+				foreach($conf as $group => $variable) {
+				foreach($variable as $variable => $data) {
+					// Calling var_set
+					$this->var_set($group,$variable,$data);
+					unset($variable);
+					unset($data);
+				}
+				unset($group);
+				unset($variable);
+			}
+			unset($conf);
 		}
 	}
 ?>

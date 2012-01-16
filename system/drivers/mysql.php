@@ -11,7 +11,7 @@
 		die('NO U');
 	}
 	
-	parseconf('system/config/mysql.php');
+	$NeptuneCore->parseconf('system/config/mysql.php');
 	
 	class NeptuneSQL extends NeptuneCore {
 		public function __construct() {
