@@ -21,25 +21,36 @@
 	// Create the global array that will be used in many system functions to
 	// store state data.
 	global $Neptune;
+	global $NeptuneCore;
+	global $NeptuneSQL;
+	global $NeptuneAdmin;
 	
 	// Load the core class file
 	require_once('system/core/main.php');
-	
-	// Making the core objects accessable
-	global $NeptuneCore;
-	global $NeptuneSQL;
 	if(!isset($NeptuneCore)) {
 		$NeptuneCore = new NeptuneCore();
 	}
-
-	include("system/drivers/" . $NeptuneCore->var_get("database","type") . ".php");
-	
 	// Include the code for the Admin Control Panel. 
+	require_once("system/drivers/" . $NeptuneCore->var_get("database","type") . ".php");
+	if(!isset($NeptuneSQL)) {
+		$NeptuneSQL = new NeptuneSQL();
+	}
 	require_once('system/core/acpcore.php');
-	
 	if (!isset($NeptuneAdmin)) {
 			$NeptuneAdmin = new NeptuneAdmin();
 	}
+
+	
+	// Enumerate modules. 
+	if ($handle = opendir('modules')) { 
+		while (false !== ($dir = readdir($handle))) { 
+			if ($dir != "." && $dir != ".." && is_dir("modules/" . $dir)) { 
+				include_once("modules/$dir/module.php"); 
+			} 
+		} 
+		closedir($handle); 
+	}	
+
 	
 	// Run whatever function is hooked to the current request.
 	$NeptuneCore->hook_run($NeptuneCore->var_get("system","query"));

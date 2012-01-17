@@ -44,16 +44,6 @@
 				// If there is no query string, use the default function hook instead.
 				$this->var_set("system","query",array($this->var_get("config","defaultact")));
 			}
-				
-			// Enumerate modules. 
-			if ($handle = opendir('modules')) { 
-				while (false !== ($dir = readdir($handle))) { 
-					if ($dir != "." && $dir != ".." && is_dir("modules/" . $dir)) { 
-						include("modules/$dir/module.php"); 
-					} 
-				} 
-				closedir($handle); 
-			}
 		}
 		
 		// Variable setting function: This allows functions to store variables that
