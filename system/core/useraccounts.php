@@ -134,6 +134,8 @@
 		if(!isset($NeptuneSQL)) {
 			$NeptuneSQL = new NeptuneSQL();
 		}
+		
+		$Username = strtolower($Username);
 						
 		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username'");
 		$result = $NeptuneSQL->fetch_array($sql);

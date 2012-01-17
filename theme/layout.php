@@ -37,7 +37,30 @@
                 $('#mobile-login-button').removeClass('active');
                 $('#content-area').show();
             }
-        </script>
+		</script>
+		<!--[if lte IE 9]>
+			<script type="text/javascript">
+				$(function() {
+					if(!$.support.placeholder) { 
+						var active = document.activeElement;
+						$(':text').focus(function () {
+							if ($(this).attr('placeholder') != '' && $(this).val() == $(this).attr('placeholder')) {
+								$(this).val('').removeClass('hasPlaceholder');
+							}
+						}).blur(function () {
+							if ($(this).attr('placeholder') != '' && ($(this).val() == '' || $(this).val() == $(this).attr('placeholder'))) {
+								$(this).val($(this).attr('placeholder')).addClass('hasPlaceholder');
+							}
+						});
+						$(':text').blur();
+						$(active).focus();
+						$('form').submit(function () {
+							$(this).find('.hasPlaceHolder').each(function() { $(this).val(''); });
+						});
+					}
+				});
+			</script>
+        <![endif]-->
     </head>
     <body onload="$('#mobile-menu').dropdown();$('#user-menu').dropdown();">
         <!--[if lte IE 6]>

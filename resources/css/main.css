@@ -7,6 +7,12 @@ html, body {
 		width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
 	}
 
+	.center {
+		margin-left: auto;
+		margin-right: auto;
+		width: 100%;
+	}
+	
 	.container > .content {
 		background-color: #fff;
 		padding: 20px;
@@ -30,6 +36,15 @@ html, body {
 		  
 	.mobile, .mobile > li, #mobile-menu {
 		display: none;
+	}
+	
+	textarea {
+		width: 480px;
+		height: 320px;
+	}
+	
+	form.acp > div.clearfix > input {
+		width: 480px;
 	}
 }
 	  
@@ -74,6 +89,12 @@ html, body {
 	footer {
 		padding: 8px;
 	}
+	
+	
+	
+	form.acp, form.acp > div.clearfix, form.acp > div.clearfix > input {
+		width: 100%;
+	}
 }
 
 .page-header {
@@ -84,4 +105,8 @@ html, body {
 
 .topbar .btn {
 	border: 0;
+}
+
+.hasPlaceholder {
+	color: #777;
 }
