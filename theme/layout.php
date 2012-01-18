@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title><?php echo $NeptuneCore->var_get("output","title"); ?> :: Neptune</title>
+        <title><?php echo $NeptuneCore->var_get("output","title"); ?> :: <?php echo $NeptuneCore->var_get("config","sitename"); ?></title>
 
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="viewport" content="width=device-width, user-scalable=true, initial-scale=1, maximum-scale=1">
@@ -14,9 +14,16 @@
         <script type="text/javascript" src="resources/js/jquery-1.7.1.min.js"></script>
         <script type="text/javascript" src="resources/js/bootstrap-dropdown.js"></script>
         
+        <?php
+            if ($NeptuneCore->var_get("output","menu_active") != "") {
+                echo '<style type="text/css">#' . $NeptuneCore->var_get("output","menu_active") . '{background-color:#222;background-color:rgba(0, 0, 0, 0.5);}</style>' . "\n";
+            }
+        ?>
+                    
         <!-- Hacks to get this to work in IE 7 and IE 8. IE 6 is hopeless, so we just make it show an Unsupported Browser page. -->
         <script src="resources/js/html5.js"></script>
         <script type="text/javascript" src="resources/js/respond.min.js"></script>
+		<?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
         <!--[if lte IE 6]>
             <style type="text/css">
                 .topbar, .container {
@@ -27,63 +34,55 @@
                 document.title = "Unsupported Browser";
             </script>
         <![endif]-->
-
-        
-        <script type="text/javascript">
-            function hideLoginForms() {
-                $('#mobile-login').hide();
-                $('#mobile-register').hide();
-                $('#mobile-register-button').removeClass('active');
-                $('#mobile-login-button').removeClass('active');
-                $('#content-area').show();
-            }
-		</script>
-		<!--[if lte IE 9]>
-			<script type="text/javascript">
-				$(function() {
-					if(!$.support.placeholder) { 
-						var active = document.activeElement;
-						$(':text').focus(function () {
-							if ($(this).attr('placeholder') != '' && $(this).val() == $(this).attr('placeholder')) {
-								$(this).val('').removeClass('hasPlaceholder');
-							}
-						}).blur(function () {
-							if ($(this).attr('placeholder') != '' && ($(this).val() == '' || $(this).val() == $(this).attr('placeholder'))) {
-								$(this).val($(this).attr('placeholder')).addClass('hasPlaceholder');
-							}
-						});
-						$(':text').blur();
-						$(active).focus();
-						$('form').submit(function () {
-							$(this).find('.hasPlaceHolder').each(function() { $(this).val(''); });
-						});
-					}
-				});
-			</script>
-        <![endif]-->
+        <!--[if lte IE 9]>
+            <script type="text/javascript">
+                $(function() {
+                    if(!$.support.placeholder) { 
+                        var active = document.activeElement;
+                        $(":text").focus(function () {
+                            if ($(this).attr("placeholder") != "" && $(this).val() == $(this).attr("placeholder")) {
+                                $(this).val("").removeClass("hasPlaceholder");
+                            }
+                        }).blur(function () {
+                            if ($(this).attr("placeholder") != "" && ($(this).val() == "" || $(this).val() == $(this).attr("placeholder"))) {
+                                $(this).val($(this).attr("placeholder")).addClass("hasPlaceholder");
+                            }
+                        });
+                        $(":text").blur();
+                        $(active).focus();
+                        $("form").submit(function () {
+                            $(this).find(".hasPlaceHolder").each(function() { $(this).val(""); });
+                        });
+                    }
+                });
+            </script>
+        <![endif]-->';}?>
+		
     </head>
     <body onload="$('#mobile-menu').dropdown();$('#user-menu').dropdown();">
+        <?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
         <!--[if lte IE 6]>
             <div style="padding: 8px;font-family:sans-serif;position: absolute;top:0;left:0;" id="message">
                 <h2>Unsupported Browser</h2>
                 <p>Your are using an <b>extremely outdated, unsupported browser</b>.</p>
-                <p><a href="http://www.browserchoice.eu/" target="_blank">Please <b>keep it real</b> and use a browser that isn't <b>over 10 years old</b>.</a></p>
+                <p><a href="http://www.browserchoice.eu/" target="_blank">Please <b>keep it real</b> and use a browser that isn\'t <b>over 10 years old</b>.</a></p>
             </div>
-        <![endif]-->
+        <![endif]-->';}?>
+		
         <div class="topbar">
             <div class="fill">
                 <div class="container">
                     <ul class="nav" id="menu">
-                        <li><a class="brand" href="#" onclick="hideLoginForms();">Neptune</a></li>
+                        <li><a class="brand" href="?"><?php echo $NeptuneCore->var_get("config","sitename"); ?></a></li>
                         <li class="active"><a href="#">Home</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                     <ul class="nav mobile" id="mobile-menu">
                         <li id="mobile-menu-dropdown">
-                            <a class="menu brand" href="#" onclick="hideLoginForms();">Neptune</a>
+                            <a class="menu brand" href="#"><?php echo $NeptuneCore->var_get("config","sitename"); ?></a>
                             <ul class="menu-dropdown">
-                                <li class="active"><a href="#" onclick="hideLoginForms();">Home</a></li>
+                                <li class="active"><a href="?" onclick="hideLoginForms();">Home</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#about">About</a></li>
                                 <li><a href="#contact">Contact</a></li>
@@ -94,14 +93,14 @@
                         <ul class="nav secondary-nav" id="user-menu">
                             <?php
                                 if (neptune_get_permissions() == 0) {
-                                    echo '<li id="mobile-login-button"><a href="#" onclick="hideLoginForms();$(\'#content-area\').hide();$(\'#mobile-login\').show();$(\'#mobile-login-button\').addClass(\'active\');">Login</a></li>' . "\n" . '                            <li id="mobile-register-button"><a href="#" onclick="hideLoginForms();$(\'#content-area\').hide();$(\'#mobile-register\').show();$(\'#mobile-register-button\').addClass(\'active\');">Register</a></li>' . "\n";
+                                    echo '<li id="login-button"><a href="?login/' . implode("/",$NeptuneCore->var_get("system","query")) . '" >Login</a></li>' . "\n" . '                            <li id="register-button"><a href="?register/' . implode("/",$NeptuneCore->var_get("system","query")) . '">Register</a></li>' . "\n";
                                 } else if (neptune_get_permissions() >= 1) {
-									echo '<li id="user-menu-dropdown">' . "\n                                " . '<a class="menu" href="#">' . neptune_get_username() . '</a>' . "\n                                " . '<ul class="menu-dropdown">' . "\n                                    " . '<li><a href="?logout/' . implode("/",$NeptuneCore->var_get("system","query")) . '">Logout</a></li>' . "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?profile">Edit Profile</a></li>' . "\n                                    " . '<li><a href="?ucp">User Control Panel</a></li>';
-									if (neptune_get_permissions() >= 3) {
-										echo "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?acp">Admin Control Panel</a></li>';
-									}
-									echo "\n                                " . '</ul>' . "\n                            " . '</li>' . "\n";
-								}
+                                    echo '<li id="user-menu-dropdown">' . "\n                                " . '<a class="menu" href="#">' . neptune_get_username() . '</a>' . "\n                                " . '<ul class="menu-dropdown">' . "\n                                    " . '<li><a href="?logout/' . implode("/",$NeptuneCore->var_get("system","query")) . '">Logout</a></li>' . "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?profile">Edit Profile</a></li>' . "\n                                    " . '<li><a href="?ucp">User Control Panel</a></li>';
+                                    if (neptune_get_permissions() >= 3) {
+                                        echo "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?acp">Admin Control Panel</a></li>';
+                                    }
+                                    echo "\n                                " . '</ul>' . "\n                            " . '</li>' . "\n";
+                                }
                             ?>
                         </ul>
                     </div>
@@ -111,52 +110,20 @@
 
         <div class="container">
             <div class="content">
-                <div class="row">
-                    <div class="span14">
-                        <div class="hide" id="mobile-login">
-                            <h2>Login to Neptune</h2>
-                            <form action="?login/<?php echo implode("/",$NeptuneCore->var_get("system","query")); ?>" method="POST">
-                                <div class="clearfix">
-                                    <input class="large" type="text" placeholder="Username" name="user">
-                                </div>
-                                <div class="clearfix">
-                                    <input class="large" type="password" placeholder="Password" name="pass">
-                                </div>
-                                <div class="clearfix">
-                                    <button class="btn primary" type="submit">Login</button>
-                                    <button class="btn" onclick="hideLoginForms();return false;">Cancel</button>
-                                </div>
-                                </form>
-                        </div>
-                        <div class="hide" id="mobile-register">
-                            <h2>Create Account</h2>
-                            <form action="?register/<?php echo implode("/",$NeptuneCore->var_get("system","query")); ?>" method="POST">
-                            <div class="clearfix">
-                                <input class="large" type="text" placeholder="Username" name="user">
-                            </div>
-                            <div class="clearfix">
-                                <input class="large" type="password" placeholder="Password" name="pass1">
-                            </div>
-                            <div class="clearfix">
-                                <input class="large" type="password" placeholder="Password (confirm)" name="pass2">
-                            </div>
-                            <div class="clearfix">
-                                <input class="large" type="text" placeholder="Email (optional)" name="email">
-                            </div>
-                            <div class="clearfix">
-                                <button class="btn primary" type="submit">Register</button>
-                                <button class="btn" onclick="hideLoginForms();return false;">Cancel</button>
-                            </div>
-                            </form>
-                        </div>
-                        <div id="content-area">
-                            <!--[if IE 7]>
-                                <br><br>
-                                <div class="iewarning">Warning: Please upgrade your browser to something compatible with the internet.<br><a href="http://www.browserchoice.eu/" target="_blank">There are many browsers to choose from, any except the one you are using is good.</a></div>
-                                <br><br>
-                            <![endif]-->
-                            <h2><?php echo $NeptuneCore->var_get("output","title"); ?></h2><?php echo "\n" . $NeptuneCore->var_get("output","body") . "\n"; ?>
-                        </div>
+                <div class="fill">        
+                    <!--<ul class="breadcrumb"></ul>-->
+
+                    <div id="content-area">
+                        <?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '<!--[if IE 7]>
+                            <br><br>
+                            <div class="iewarning">Warning: Please upgrade your browser to something compatible with the internet.<br><a href="http://www.browserchoice.eu/" target="_blank">There are many browsers to choose from, any except the one you are using is good.</a></div>
+                            <br><br>
+                        <![endif]-->';}?><h2><?php echo $NeptuneCore->var_get("output","title"); ?></h2>
+                        <?php
+                            if ($NeptuneCore->var_get("output","subtitle") != "") {
+                                echo "<p><small>" . $NeptuneCore->var_get("output","subtitle") . "</small></p>\n";
+                            }
+                        ?><hr><?php echo "\n" . $NeptuneCore->var_get("output","body") . "\n"; ?>
                     </div>
                 </div>
                 <footer>
