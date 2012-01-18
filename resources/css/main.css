@@ -66,8 +66,8 @@ html, body {
 		display: block;
 	}
 		  
-	.span14 {
-		width: auto;
+	.content > .fill {
+		padding: 8px;
 	}
 	
 	.topbar > .fill, .content > .row > .span14 {

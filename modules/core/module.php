@@ -26,7 +26,7 @@
 		if ($result = $NeptuneSQL->fetch_array($sql)) {
 			$NeptuneCore->neptune_title($result["name"]);
 
-			$NeptuneCore->neptune_echo("<p><small>Page created by " . neptune_get_username_from_id($result["author"]) . " on" . date(" F jS, Y ", strtotime($result['created'])) . "at" . date(" g:i A", strtotime($result['created'])) . "</small></p><br>");
+			$NeptuneCore->neptune_subtitle("Page created by " . neptune_get_username_from_id($result["author"]) . " on" . date(" F jS, Y ", strtotime($result['created'])) . "at" . date(" g:i A", strtotime($result['created'])));
 			
 			if ($result["bbcode"] == 1) {
 				$NeptuneCore->neptune_echo_bbcode($result["content"]);

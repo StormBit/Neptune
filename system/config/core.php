@@ -8,6 +8,8 @@
 		have been loaded.
 	*/
 
+	$conf['config']['sitename'] = 'nCMS';
+	
 	$conf['config']['defaultact'] = 'page';
 	
 	$conf['cache']['enabled'] = False;
@@ -15,4 +17,6 @@
 	$conf['cache']['type'] = 'apc';
 	
 	$conf['database']['type'] = 'sqlite3';
+	
+	
 ?>

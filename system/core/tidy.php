@@ -27,7 +27,7 @@
 		$fixed_uncleanhtml = fix_newlines_for_clean_html($uncleanhtml);
 		$uncleanhtml_array = explode("\n", $fixed_uncleanhtml);
 
-		$indentlevel = 7;
+		$indentlevel = 6;
 		foreach ($uncleanhtml_array as $uncleanhtml_key => $currentuncleanhtml)
 		{
 			$currentuncleanhtml = preg_replace("/\t+/", "", $currentuncleanhtml);

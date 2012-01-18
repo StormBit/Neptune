@@ -103,6 +103,13 @@
 			$this->var_set("output","title",$text);
 		}
 		
+		function neptune_subtitle($text) {
+			$this->var_set("output","subtitle",$text);
+		}
+		
+		function neptune_active($id) {
+			$this->var_set("output","menu_active",$id);
+		}
 
 		// Function Hooker: This function is what allows other modules to bind to
 		// certain query strings. For example, it allows a blog module to bind to
