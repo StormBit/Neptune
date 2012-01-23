@@ -6,34 +6,24 @@
 
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="viewport" content="width=device-width, user-scalable=true, initial-scale=1, maximum-scale=1">
-
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">		
+		
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
         <link href="resources/css/main.css" rel="stylesheet">
         <link href="resources/css/bbcode.css" rel="stylesheet">
 
         <script type="text/javascript" src="resources/js/jquery-1.7.1.min.js"></script>
         <script type="text/javascript" src="resources/js/bootstrap-dropdown.js"></script>
-        
+		
         <?php
             if ($NeptuneCore->var_get("output","menu_active") != "") {
                 echo '<style type="text/css">#' . $NeptuneCore->var_get("output","menu_active") . '{background-color:#222;background-color:rgba(0, 0, 0, 0.5);}</style>' . "\n";
             }
         ?>
                     
-        <!-- Hacks to get this to work in IE 7 and IE 8. IE 6 is hopeless, so we just make it show an Unsupported Browser page. -->
-        <script src="resources/js/html5.js"></script>
-        <script type="text/javascript" src="resources/js/respond.min.js"></script>
+        <!-- Hacks to get this to work in IE 6-IE 8 -->
+        <script type="text/javascript" src="resources/js/html5.js"></script>
 		<?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
-        <!--[if lte IE 6]>
-            <style type="text/css">
-                .topbar, .container {
-                    display: none;
-                }
-            </style>
-            <script type="text/javascript">
-                document.title = "Unsupported Browser";
-            </script>
-        <![endif]-->
         <!--[if lte IE 9]>
             <script type="text/javascript">
                 $(function() {
@@ -56,19 +46,19 @@
                     }
                 });
             </script>
+        <![endif]-->
+		<!--[if lte IE 6]>
+			<script type="text/javascript" src="resources/ie/IE7.js">var IE7_PNG_SUFFIX=".png";</script>
+			<style type="text/css">
+				#mobile-menu { display: none; }
+				ul, li { zoom: 1; }
+				li.divider { display: inline; height: 0px; }
+				body { background-color: white; }
+			</style>
         <![endif]-->';}?>
-		
+		<script type="text/javascript" src="resources/js/respond.min.js"></script>
     </head>
-    <body onload="$('#mobile-menu').dropdown();$('#user-menu').dropdown();">
-        <?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
-        <!--[if lte IE 6]>
-            <div style="padding: 8px;font-family:sans-serif;position: absolute;top:0;left:0;" id="message">
-                <h2>Unsupported Browser</h2>
-                <p>Your are using an <b>extremely outdated, unsupported browser</b>.</p>
-                <p><a href="http://www.browserchoice.eu/" target="_blank">Please <b>keep it real</b> and use a browser that isn\'t <b>over 10 years old</b>.</a></p>
-            </div>
-        <![endif]-->';}?>
-		
+    <body onload="$('#mobile-menu').dropdown();$('#user-menu').dropdown();">		
         <div class="topbar">
             <div class="fill">
                 <div class="container">
@@ -89,7 +79,6 @@
                             </ul>
                         </li>
                     </ul>
-                    <div class="pull-right">
                         <ul class="nav secondary-nav" id="user-menu">
                             <?php
                                 if (neptune_get_permissions() == 0) {
@@ -103,7 +92,6 @@
                                 }
                             ?>
                         </ul>
-                    </div>
                 </div>
             </div>
         </div>
@@ -118,7 +106,14 @@
                             <br><br>
                             <div class="iewarning">Warning: Please upgrade your browser to something compatible with the internet.<br><a href="http://www.browserchoice.eu/" target="_blank">There are many browsers to choose from, any except the one you are using is good.</a></div>
                             <br><br>
-                        <![endif]-->';}?><h2><?php echo $NeptuneCore->var_get("output","title"); ?></h2>
+                        <![endif]-->
+						<!--[if lte IE 6]>
+							<div class="iewarning">
+								<h2>Unsupported Browser</h2>
+								<p>You are using an <b>extremely outdated, unsupported browser</b>.</p>
+								<p><a href="http://www.browserchoice.eu/" target="_blank">Please <b>keep it real</b> and use a browser that isn\'t <b>over 10 years old</b>.</a></p>
+							</div>
+						<![endif]-->';}?><h2><?php echo $NeptuneCore->var_get("output","title"); ?></h2>
                         <?php
                             if ($NeptuneCore->var_get("output","subtitle") != "") {
                                 echo "<p><small>" . $NeptuneCore->var_get("output","subtitle") . "</small></p>\n";
