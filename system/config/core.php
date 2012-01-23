@@ -8,7 +8,7 @@
 		have been loaded.
 	*/
 
-	$conf['config']['sitename'] = 'nCMS';
+	$conf['config']['sitename'] = 'Neptune';
 	
 	$conf['config']['defaultact'] = 'page';
 	
