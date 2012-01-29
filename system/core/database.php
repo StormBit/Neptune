@@ -14,6 +14,6 @@
 	if ($NeptuneCore->var_get("database","type") == "mysql") {
 		require_once("system/drivers/mysql.php");
 	} else {
-		die("Unknown database type");
+		$NeptuneCore->fatal_error("Unknown database type");
 	}
 ?>

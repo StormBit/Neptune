@@ -129,7 +129,7 @@
 			if ($Function != "") {
 				$Function();
 			} else {
-				die("Invalid function");
+				$this->fatal_error("Invalid function");
 			}
 		}
 		
@@ -146,6 +146,10 @@
 				unset($variable);
 			}
 			unset($conf);
+		}
+		
+		function fatal_error($error) {
+			die($error);
 		}
 	}
 ?>

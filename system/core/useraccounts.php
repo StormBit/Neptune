@@ -6,6 +6,11 @@
 		Manages user accouts
 	*/
 
+	if(!defined('NepNep')) {
+		die('NO U');
+	}
+
+
 	function mod_core_register() {
 		global $NeptuneCore;
 		global $NeptuneSQL;
@@ -26,7 +31,7 @@
 			if($_POST["pass1"] == $_POST["pass2"]) {
 				$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username'");
 				if ($NeptuneSQL->fetch_array($sql)) {
-					die("Username already taken.");
+					$NeptuneCore->fatal_error("Username already taken.");
 				} else {
 					$sql = $NeptuneSQL->query("INSERT INTO `neptune_users` VALUES('$Username','$Displayname','$Password','$Email','0','1','" . date ("Y-m-d H:i:s") . "','" . date ("Y-m-d H:i:s") . "','0','0','','')");
 					setcookie("NeptuneUser", $Username, 2147483647, "/");
@@ -37,7 +42,7 @@
 					header("Location: ?" . implode("/",$QueryString));
 				}
 			} else {
-				die("Passwords do not match.");
+				$NeptuneCore->fatal_error("Passwords do not match.");
 			}
 		} else {
 			$QueryString = $NeptuneCore->var_get("system","query");
