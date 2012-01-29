@@ -22,10 +22,10 @@
 	// APC will be preferred for simplicity
 	switch($NeptuneCore->var_get('cache', 'type')) {
 
-/*		case 'none':
-			$cache = new stack_neptune();
+		case 'none':
+			$cache = new nonecache_neptune();
 			define('cache_available', true, true);
-		break; */
+		break;
 
 		case 'apc':
 			$cache = new apc_neptune();
@@ -72,11 +72,10 @@
 			return apc_clear_cache('user');
 		}
 	}
-	
-	// XCache Class, interfaces with XCache which 
+
+	// XCache Class, interfaces with XCache which
 	//  is also a rather nice cache.
 	class xcache_neptune {
-		private static $memcached;
 		function set($var, $val, $expire=0) {
 			xcache_set($var, $val, $expire);
 		}
@@ -90,7 +89,7 @@
 			// seems like there's no workaround -- for now
 		}
 	}
-	
+
 	// eAccelerator Cache Class.
 	//  nobody really uses eA, but it's included
 	//  just-in-case.
@@ -123,7 +122,7 @@
 			self::$memcached = new Memcached();
 			self::$memcached->addServers($NeptuneCore->var_get('cache', 'memcached'));
 		}
-		function set($var, $val, $expire) {
+		function set($var, $val, $expire=0) {
 			if(!self::$memcached) {
 				self::init();
 			}
@@ -149,4 +148,42 @@
 		}
 	}
 
+	class nonecache_neptune {
+	// Neptune Ordered Numeric Enclosure
+	// AKA DOING IT THE REGULAR WAY
+
+	private static $none;
+	private static function init() {
+		global $NeptuneCore;
+		self::$none = array();
+	}
+
+	function set($var, $val, $expire=0) {
+		if(!self::$none) {
+			self::init();
+		}
+		self::$none['stack'][$var] = $val;
+	}
+
+	function get($var) {
+		if(!self::$none) {
+			self::init();
+		}
+		return self::$none['stack'][$var];
+	}
+
+	function delete($var) {
+		if(!self::$none) {
+			self::init();
+		}
+		unset(self::$none['stack'][$var];
+	}
+
+	function flush($var) {
+		if(!self::$none) {
+			self::init();
+		}
+		unset(self::$none);
+		self::init();
+	}
 ?>
