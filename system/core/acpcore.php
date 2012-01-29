@@ -5,6 +5,11 @@
 
 		Core of the Admin Control Panel
 	*/
+
+	if(!defined('NepNep')) {
+		die('NO U');
+	}
+
 	
 	function mod_core_admin() {
 		global $NeptuneCore;
