@@ -9,14 +9,14 @@
 	*/
 
 	$conf['config']['sitename'] = 'Neptune';
-	
+
 	$conf['config']['defaultact'] = 'page';
-	
-	$conf['cache']['enabled'] = False;
-#	$conf['cache']['expire'] = 10;
-	$conf['cache']['type'] = 'apc';
-	
+
+//	$conf['cache']['type'] = 'apc';
+	$conf['cache']['type'] = 'none';
+	$conf['cache']['expire'] = 10;
+
 	$conf['database']['type'] = 'sqlite3';
-	
-	
+
+
 ?>
