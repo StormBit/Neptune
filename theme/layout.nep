@@ -107,7 +107,7 @@
                                 <p>You are using an <b>extremely outdated, unsupported browser</b>.</p>
                                 <p><a href="http://www.browserchoice.eu/" target="_blank">Please <b>keep it real</b> and use a browser that isn\'t <b>over 10 years old</b>.</a></p>
                             </div>
-                        <![endif]-->';}?><h2><?php echo $NeptuneCore->var_get("output","title_prepend") . $NeptuneCore->var_get("output","title"); ?></h2>
+                        <![endif]-->';}?><h2><?php echo $NeptuneCore->var_get("output","title"); ?></h2>
                         <?php
                             if ($NeptuneCore->var_get("output","subtitle") != "") {
                                 echo "<p><small>" . $NeptuneCore->var_get("output","subtitle") . "</small></p>\n";
