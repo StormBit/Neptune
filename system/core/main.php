@@ -44,9 +44,6 @@
 				// If there is no query string, use the default function hook instead.
 				$this->var_set("system","query",array($this->var_get("config","defaultact")));
 			}
-			
-			// Include the RainTPL Templating Engine
-			require_once("system/thirdparty/raintpl.php");
 		}
 		
 		// Variable setting function: This allows functions to store variables that
