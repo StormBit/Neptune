@@ -63,8 +63,5 @@
 		$NeptuneCore->var_set("output","body","");
 	}
 	
-	$RainTPL = new raintpl();
-	
-	$RainTPL->draw("layout");
-	// require("theme/layout.php");
+	require("theme/layout.php");
 ?>

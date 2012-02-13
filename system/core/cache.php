@@ -176,7 +176,7 @@
 		if(!self::$none) {
 			self::init();
 		}
-		unset(self::$none['stack'][$var];
+		unset(self::$none['stack'][$var]);
 	}
 
 	function flush($var) {
