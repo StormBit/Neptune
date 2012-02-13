@@ -54,7 +54,7 @@ class RainTPL{
 		 *
 		 * @var unknown_type
 		 */
-		static $path_replace = true;
+		static $path_replace = false;
 
 
 		/**
@@ -200,7 +200,7 @@ class RainTPL{
             unset( $this->tpl );
 
             // return or print the template
-            if( $return_string ) return $raintpl_contents; else echo $raintpl_contents;
+            if( $return_string ) return $raintpl_contents; else echo clean_html_code($raintpl_contents);
 
         }
 
@@ -307,7 +307,7 @@ class RainTPL{
 		$template_code = preg_replace_callback ( "/##XML(.*?)XML##/s", array($this, 'xml_reSubstitution'), $template_code ); 
 
 		//compile template
-		$template_compiled = "<?php if(!class_exists('raintpl')){exit;}?>" . $this->compileTemplate( $template_code, $tpl_basedir );
+		$template_compiled = '<?php global $NeptuneCore; if(!class_exists("raintpl")){exit;}?>' . $this->compileTemplate( $template_code, $tpl_basedir );
 		
 
 		// fix the php-eating-newline-after-closing-tag-problem
