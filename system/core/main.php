@@ -44,6 +44,9 @@
 				// If there is no query string, use the default function hook instead.
 				$this->var_set("system","query",array($this->var_get("config","defaultact")));
 			}
+			
+			// Include the RainTPL Templating Engine
+			require_once("system/thirdparty/raintpl.php");
 		}
 		
 		// Variable setting function: This allows functions to store variables that
@@ -150,6 +153,19 @@
 		
 		function fatal_error($error) {
 			die($error);
+		}
+		
+		function footer_timer() {
+			global $starttime;
+			
+			$time = microtime();
+			$endtime=substr($time,11).substr($time,1,9);
+			
+			$RAM["raw"] = memory_get_peak_usage(true);
+			$unit=array('bytes','KiB','MiB','GiB','TiB','PiB');
+			$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; 
+			
+			return "Page generated in " . round($endtime - $starttime,3) * 1000 . " ms with " . $this->var_get("system","querycount") . " queries and " . $RAM["converted"] . " of RAM";
 		}
 	}
 ?>

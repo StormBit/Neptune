@@ -10,6 +10,8 @@
 		to the templating engine.
 	*/
 
+	global $starttime;
+	
 	$time=microtime();
 	$starttime=substr($time,11).substr($time,1,9);
 	
@@ -61,5 +63,8 @@
 		$NeptuneCore->var_set("output","body","");
 	}
 	
-	require("theme/layout.php");
+	$RainTPL = new raintpl();
+	
+	$RainTPL->draw("layout");
+	// require("theme/layout.php");
 ?>
