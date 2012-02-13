@@ -75,7 +75,7 @@
 				$count2 = 1;
 				$NeptuneCore->neptune_echo("<div class='row center'>");
 				foreach ($Section as $Item) {
-					$NeptuneCore->neptune_echo("<span class='span4'><b><a href='?acp/" . $Item["path"] . "'>" . $Item["title"] . "</a></b><br>" . $Item["description"] . "\n</span>");
+					$NeptuneCore->neptune_echo("<div class='span4 acprow'><b><a href='?acp/" . $Item["path"] . "'>" . $Item["title"] . "</a></b><br>" . $Item["description"] . "\n</div>");
 					
 					$count2++;
 				}
