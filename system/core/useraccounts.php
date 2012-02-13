@@ -48,7 +48,7 @@
 			$QueryString = $NeptuneCore->var_get("system","query");
 			unset($QueryString[0]);
 			
-			$NeptuneCore->neptune_title("Create Account");
+			$NeptuneCore->title("Create Account");
 			$NeptuneCore->neptune_echo('<form action="?register/' . implode("/",$QueryString) . '" method="POST"><div class="clearfix"><input class="large" type="text" placeholder="Username" name="user" /></div><div class="clearfix"><input class="large" type="password" placeholder="Password" name="pass1" /></div><div class="clearfix"><input class="large" type="password" placeholder="Password (confirm)" name="pass2" /></div><div class="clearfix"><input class="large" type="text" placeholder="Email (optional)" name="email" /></div><div class="clearfix"><button class="btn primary" type="submit" name="submit">Register</button></div></form>');
 			$NeptuneCore->neptune_active("register-button");			
 		}
@@ -79,14 +79,14 @@
 				unset($QueryString[0]);
 				header("Location: ?" . implode("/",$QueryString));
 			} else {
-				$NeptuneCore->neptune_title("Login Failed");
+				$NeptuneCore->title("Login Failed");
 				$NeptuneCore->neptune_echo("<p>Incorrect username and/or password.</p>");
 			}
 		} else {
 			$QueryString = $NeptuneCore->var_get("system","query");
 			unset($QueryString[0]);
 			
-			$NeptuneCore->neptune_title("Login");
+			$NeptuneCore->title("Login");
 			$NeptuneCore->neptune_echo('<form action="?login/' . implode("/",$QueryString) . '" method="POST"><div class="clearfix"><input class="large" type="text" placeholder="Username" name="user" /></div><div class="clearfix"><input class="large" type="password" placeholder="Password" name="pass" /></div><div class="clearfix"><button class="btn primary" type="submit" name="submit">Login</button></div></form>');
 			$NeptuneCore->neptune_active("login-button");
 		}

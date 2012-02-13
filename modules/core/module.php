@@ -24,9 +24,13 @@
 		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_pages` WHERE `pid` = '" . $NeptuneSQL->escape_string($query[1]) . "'");
 
 		if ($result = $NeptuneSQL->fetch_array($sql)) {
-			$NeptuneCore->neptune_title($result["name"]);
-
-			$NeptuneCore->neptune_subtitle("Page created by " . neptune_get_username_from_id($result["author"]) . " on" . date(" F jS, Y ", strtotime($result['created'])) . "at" . date(" g:i A", strtotime($result['created'])));
+			$NeptuneCore->title($result["name"]);
+			
+			if (neptune_get_permissions() >= 3) {
+				$NeptuneCore->var_set("output","title_prepend","<img src='resources/img/edit.png' class='editButton'>");
+			}
+			
+			$NeptuneCore->subtitle("Page created by " . neptune_get_username_from_id($result["author"]) . " on" . date(" F jS, Y ", strtotime($result['created'])) . "at" . date(" g:i A", strtotime($result['created'])));
 
 			if ($result["bbcode"] == 1) {
 				$NeptuneCore->neptune_echo_bbcode($result["content"]);
@@ -59,7 +63,7 @@
 
 			header("Location: ?page/$PageID");
 		} else {
-			$NeptuneCore->neptune_title("New Page");
+			$NeptuneCore->title("New Page");
 			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/new' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' /></div>\n<div class='clearfix'><textarea name='pagecontent'></textarea></div><div class='clearfix'><span><input type='submit' class='btn primary' value='Create'/></span></div></form>");
 		}
 	}
@@ -69,4 +73,10 @@
 
 	}
 	$NeptuneAdmin->add_hook("Core","page/list","Page List","View and edit a list of pages");
+	
+	function acp_page_edit() {
+		global $NeptuneCore, $NeptuneSQL, $NeptuneAdmin;
+		
+		$NeptuneCore->neptune_echo("EDIT");
+	}
 ?>

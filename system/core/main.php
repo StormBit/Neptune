@@ -99,11 +99,11 @@
 			$this->var_append("output","body",neptune_bbcode($text));
 		}
 		
-		function neptune_title($text) {
+		function title($text) {
 			$this->var_set("output","title",$text);
 		}
 		
-		function neptune_subtitle($text) {
+		function subtitle($text) {
 			$this->var_set("output","subtitle",$text);
 		}
 		

@@ -108,3 +108,9 @@ html, body {
 .hasPlaceholder {
 	color: #777;
 }
+
+.editButton {
+	position: relative;
+	top:4px;
+	padding-right:4px;
+}
