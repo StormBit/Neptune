@@ -76,8 +76,9 @@
                             <li id="login-button"><a href="?login/{function="implode('/',$NeptuneCore->var_get('system','query'))"}">Login</a></li><li id="register-button"><a href="?register/{function="implode('/',$NeptuneCore->var_get('system','query'))"}">Register</a></li>
                             {elseif condition="neptune_get_permissions() >= 1"}
 							<li id="user-menu-dropdown"><a class="menu" href="#">{function="neptune_get_username()"}</a><ul class="menu-dropdown"><li><a href="?logout/{function="implode('/',$NeptuneCore->var_get('system','query'))"}">Logout</a></li><li class="divider"></li><li><a href="?profile">Edit Profile</a></li><li><a href="?ucp">User Control Panel</a></li>
-							{elseif condition="neptune_get_permissions() >= 3"}                                
+							{if condition="neptune_get_permissions() >= 3"}                                
                             <li class="divider"></li><li><a href="?acp">Admin Control Panel</a></li>
+							{/if}
 							{/if}
                         </ul>
                 </div>
