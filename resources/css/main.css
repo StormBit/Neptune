@@ -90,9 +90,22 @@ html, body {
 		padding: 8px;
 	}
 	
-	form.acp, form.acp > div.clearfix, form.acp > div.clearfix > input {
+	form.acp {
 		width: 100%;
 	}
+	
+	form.acp > div.clearfix {
+		margin-right: 10px;
+	}
+	
+	form.acp > div.clearfix > input {
+		width: 100%;
+	}
+	
+	form.acp > div.clearfix > textarea {
+		width: 100%;
+		height: 160px;
+	}	
 }
 
 .page-header {
