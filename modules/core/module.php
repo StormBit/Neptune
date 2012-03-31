@@ -30,7 +30,13 @@
 				$NeptuneCore->var_set("output","title_prepend","<a href='?acp/page/edit/" . $query[1] . "'><img src='resources/img/edit.png' class='editButton'></a>");
 			}
 			
-			$NeptuneCore->subtitle("Page created by " . neptune_get_username_from_id($result["author"]) . " on" . date(" F jS, Y ", strtotime($result['created'])) . "at" . date(" g:i A", strtotime($result['created'])));
+			if ($result["editor"]) {
+				$EditedString = ", and last edited by " . neptune_get_username_from_id($result["editor"]) . " on " . date(" F jS, Y ", strtotime($result['edited'])) . "at" . date(" g:i A", strtotime($result['edited']));
+			} else {
+				$EditedString = "";
+			}
+			
+			$NeptuneCore->subtitle("Page created by " . neptune_get_username_from_id($result["author"]) . " on" . date(" F jS, Y ", strtotime($result['created'])) . "at" . date(" g:i A", strtotime($result['created'])) . $EditedString);
 
 			if ($result["bbcode"] == 1) {
 				$NeptuneCore->neptune_echo_bbcode($result["content"]);
@@ -87,12 +93,29 @@
 			$query[4] = "index";
 		}
 
-		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_pages` WHERE `pid` = '" . $NeptuneSQL->escape_string($query[4]) . "'");
+		if ($_SERVER['REQUEST_METHOD'] == "POST") {
+			if(!isset($NeptuneSQL)) {
+				$NeptuneSQL = new NeptuneSQL();
+			}
 
-		$result = $NeptuneSQL->fetch_array($sql);
-				
-		$NeptuneCore->title("Editing " . $result["name"]);
-		$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/edit/" . $query[4] . "' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' value='" . $query[4] . "' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' value='" . $result["name"] . "' /></div>\n<div class='clearfix'><textarea name='pagecontent'>" . $result["content"] . "</textarea></div><div class='clearfix'><span><input type='submit' class='btn primary' value='Save'/></span></div></form>");
-		$NeptuneCore->var_set("output","notidy", true);
+			$PageID = $NeptuneSQL->escape_string($_POST["pageid"]);
+			$PageTitle = $NeptuneSQL->escape_string($_POST["pagetitle"]);
+			$PageContent = $NeptuneSQL->escape_string($_POST["pagecontent"]);
+			$Username = $NeptuneSQL->escape_string(strtolower(neptune_get_username()));
+
+			$Time = date ("Y-m-d H:i:s",time());
+
+			$NeptuneSQL->query("UPDATE `neptune_pages` SET `pid` = '$PageID', `name` = '$PageTitle', `content` = '$PageContent', `editor` = '$Username', `edited` = '$Time' WHERE `pid` = '" . $NeptuneSQL->escape_string($query[4]) . "'");
+
+			header("Location: ?page/$PageID");
+		} else { 
+			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_pages` WHERE `pid` = '" . $NeptuneSQL->escape_string($query[4]) . "'");
+
+			$result = $NeptuneSQL->fetch_array($sql);
+					
+			$NeptuneCore->title("Editing " . $result["name"]);
+			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/edit/" . $query[4] . "' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' value='" . $query[4] . "' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' value='" . $result["name"] . "' /></div>\n<div class='clearfix'><textarea name='pagecontent'>" . $result["content"] . "</textarea></div><div class='clearfix'><span><input type='submit' class='btn primary' value='Save'/></span></div></form>");
+			$NeptuneCore->var_set("output","notidy", true);
+		}
 	}
 ?>

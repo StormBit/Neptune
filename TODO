@@ -1,5 +1,3 @@
-* Add page editing support
-* Fix the forms in the admin control panel in mobile mode
 * Update to Bootstrap 2
 * Add breadcrumbs
 * Add support for a blog-style mode
