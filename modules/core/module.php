@@ -27,7 +27,7 @@
 			$NeptuneCore->title($result["name"]);
 			
 			if (neptune_get_permissions() >= 3) {
-				$NeptuneCore->var_set("output","title_prepend","<img src='resources/img/edit.png' class='editButton'>");
+				$NeptuneCore->var_set("output","title_prepend","<a href='?acp/page/edit/" . $query[1] . "'><img src='resources/img/edit.png' class='editButton'></a>");
 			}
 			
 			$NeptuneCore->subtitle("Page created by " . neptune_get_username_from_id($result["author"]) . " on" . date(" F jS, Y ", strtotime($result['created'])) . "at" . date(" g:i A", strtotime($result['created'])));
@@ -77,6 +77,22 @@
 	function acp_page_edit() {
 		global $NeptuneCore, $NeptuneSQL, $NeptuneAdmin;
 		
-		$NeptuneCore->neptune_echo("EDIT");
+		// Create new SQL class if it doesn't already exist. 
+		if( !isset($NeptuneSQL)) {
+			$NeptuneSQL = new NeptuneSQL();
+		}
+
+		$query = $NeptuneCore->var_get("system","query");		
+		if (!array_key_exists(4,$query)) {
+			$query[4] = "index";
+		}
+
+		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_pages` WHERE `pid` = '" . $NeptuneSQL->escape_string($query[4]) . "'");
+
+		$result = $NeptuneSQL->fetch_array($sql);
+				
+		$NeptuneCore->title("Editing " . $result["name"]);
+		$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/edit/" . $query[4] . "' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' value='" . $query[4] . "' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' value='" . $result["name"] . "' /></div>\n<div class='clearfix'><textarea name='pagecontent'>" . $result["content"] . "</textarea></div><div class='clearfix'><span><input type='submit' class='btn primary' value='Save'/></span></div></form>");
+		$NeptuneCore->var_set("output","notidy", true);
 	}
 ?>

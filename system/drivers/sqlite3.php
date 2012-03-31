@@ -33,7 +33,8 @@
 			$NeptuneCore->var_set("system","querycount",$NeptuneCore->var_get("system","querycount") + 1);
 			
 			$query = str_replace("`","",$query);
-					
+			$query = str_replace("\cx","`",$query);
+				
 			$result = $database->query($query);
 			return $result;
 			
@@ -57,7 +58,8 @@
 			global $NeptuneCore;
 			global $Neptune;
 			global $database;
-			
+
+			$string = str_replace("`","\cx",$string);
 			return $database->escapeString($string);
 		}
 	}
