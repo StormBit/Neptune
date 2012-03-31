@@ -44,7 +44,8 @@
 				$NeptuneCore->neptune_echo($result["content"]);
 			}
 		} else {
-			die("<h1>404 - Page Not Found</h1>");
+			$NeptuneCore->title("404 Page Not Found");
+			$NeptuneCore->neptune_echo("Your request could not be processed, because the specified page does not exist.");
 		}
 	}
 	$NeptuneCore->hook_function("page","core","page");
