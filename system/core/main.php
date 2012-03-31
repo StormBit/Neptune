@@ -129,7 +129,9 @@
 			if ($Function != "") {
 				$Function();
 			} else {
-				$this->fatal_error("Invalid function");
+				//$this->fatal_error("Invalid function");
+				$this->title("404 Module Not Found");
+				$this->neptune_echo("Your request could not be processed, because the specified module does not exist.");
 			}
 		}
 		
