@@ -1,5 +1,6 @@
 html, body {
 	background-color: #eee;
+	text-rendering: optimizeLegibility; 
 }
 	  
 @media screen and (min-width: 960px) {
@@ -45,6 +46,16 @@ html, body {
 	
 	form.acp > div.clearfix > input {
 		width: 480px;
+	}
+	
+	#StormDEVLogo {
+		float: right;
+		position: relative;
+		top: 12px;
+		width: 188px;
+		height: 64px;
+
+		background-image: url('../img/stormdev.png');
 	}
 }
 	  
@@ -110,6 +121,26 @@ html, body {
 	.acprow {
 		margin-bottom: 8px;
 	}
+	
+	#StormDEVLogo {
+		margin-left: auto; 
+		margin-right: auto;
+		margin-top: 16px;
+		margin-bottom: 16px;
+		
+		width: 188px;
+		height: 64px;
+
+		background-image: url('../img/stormdev.png');
+	}
+}
+
+@media only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+	#StormDEVLogo {
+		background-image: url('../img/stormdev-2x.png');
+		background-size: 100%;
+		background-repeat: no-repeat;
+	}
 }
 
 .page-header {
@@ -130,4 +161,6 @@ html, body {
 	position: relative;
 	top:4px;
 	padding-right:4px;
+	width: 24px;
+	height: 24px;
 }
