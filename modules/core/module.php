@@ -27,7 +27,7 @@
 			$NeptuneCore->title($result["name"]);
 			
 			if (neptune_get_permissions() >= 3) {
-				$NeptuneCore->var_set("output","title_prepend","<a href='?acp/page/edit/" . $query[1] . "'><img src='resources/img/edit.png' class='editButton'></a>");
+				$NeptuneCore->var_set("output","title_prepend","<a href='?acp/page/edit/" . $query[1] . "'><img src='resources/img/edit.svg' class='editButton'></a>");
 			}
 			
 			if ($result["editor"]) {
@@ -77,7 +77,17 @@
 	$NeptuneAdmin->add_hook("Core","page/new","New Page","Create a new page");
 
 	function acp_page_list() {
-
+		global $NeptuneCore, $NeptuneSQL, $NeptuneAdmin;
+		
+		// Create new SQL class if it doesn't already exist. 
+		if( !isset($NeptuneSQL)) {
+			$NeptuneSQL = new NeptuneSQL();
+		}
+		
+		$NeptuneCore->title("Page List");
+		$NeptuneCore->subtitle("This is a listing of all of the pages in the database.");
+		
+		$NeptuneCore->neptune_echo("Not yet implimented");
 	}
 	$NeptuneAdmin->add_hook("Core","page/list","Page List","View and edit a list of pages");
 	
