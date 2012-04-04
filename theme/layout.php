@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $NeptuneCore->var_get("config","locale"); ?>">
     <head>
         <meta charset="utf-8">
         <title><?php echo $NeptuneCore->var_get("output","title"); ?> :: <?php echo $NeptuneCore->var_get("config","sitename"); ?></title>
@@ -16,9 +16,16 @@
         <script type="text/javascript" src="resources/js/bootstrap-dropdown.js"></script>
         
         <?php
-            if ($NeptuneCore->var_get("output","menu_active") != "") {
-                echo '<style type="text/css">#' . $NeptuneCore->var_get("output","menu_active") . '{background-color:#222;background-color:rgba(0, 0, 0, 0.5);}</style>' . "\n";
-            }
+			$query = "";
+			
+			if (isset($_SERVER["QUERY_STRING"])) {
+				$query = $_SERVER["QUERY_STRING"];
+			}
+			if ($query == "") { $query = "page/index"; }
+			
+			$cssid = "menu_" . preg_replace('/[^a-zA-Z0-9\s]/', "_", $query);
+
+            echo '<style type="text/css">#' . $cssid . '{background-color:#222;background-color:rgba(0, 0, 0, 0.5);}</style>' . "\n";
         ?>
                     
         <!-- Hacks to get this to work in IE 7 and IE 8
@@ -57,10 +64,20 @@
             <div class="fill">
                 <div class="container">
                     <ul class="nav" id="menu">
-                        <li><a class="brand" href="?"><?php echo $NeptuneCore->var_get("config","sitename"); ?></a></li>
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a class="brand" href="?"><?php echo $NeptuneCore->var_get("config","sitename"); ?></a></li><?php echo "\n";
+							$Menu = $NeptuneCore->generate_menu();
+							
+							foreach ($Menu as $key => $value) {
+								$path = $key;
+								
+								$key = ltrim($key,"?");
+								
+								$key = preg_replace('/[^a-zA-Z0-9\s]/', "_", $key );
+								$key = "menu_" . $key;
+								
+								echo "                        <li id=\"$key\"><a href=\"$path\">$value</a></li>\n";
+							}
+						?>
                     </ul>
                     <ul class="nav mobile" id="mobile-menu">
                         <li id="mobile-menu-dropdown">
@@ -76,11 +93,11 @@
                         <ul class="nav secondary-nav" id="user-menu">
                             <?php
                                 if (neptune_get_permissions() == 0) {
-                                    echo '<li id="login-button"><a href="?login/' . implode("/",$NeptuneCore->var_get("system","query")) . '" >Login</a></li>' . "\n" . '                            <li id="register-button"><a href="?register/' . implode("/",$NeptuneCore->var_get("system","query")) . '">Register</a></li>' . "\n";
+                                    echo '<li id="login-button"><a href="?login/' . implode("/",$NeptuneCore->var_get("system","query")) . '" >' . $NeptuneCore->var_get("locale","login") . '</a></li>' . "\n" . '                            <li id="register-button"><a href="?register/' . implode("/",$NeptuneCore->var_get("system","query")) . '">' . $NeptuneCore->var_get("locale","register") . '</a></li>' . "\n";
                                 } else if (neptune_get_permissions() >= 1) {
-                                    echo '<li id="user-menu-dropdown">' . "\n                                " . '<a class="menu" href="#">' . neptune_get_username() . '</a>' . "\n                                " . '<ul class="menu-dropdown">' . "\n                                    " . '<li><a href="?logout/' . implode("/",$NeptuneCore->var_get("system","query")) . '">Logout</a></li>' . "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?profile">Edit Profile</a></li>' . "\n                                    " . '<li><a href="?ucp">User Control Panel</a></li>';
+                                    echo '<li id="user-menu-dropdown">' . "\n                                " . '<a class="menu" href="#">' . neptune_get_username() . '</a>' . "\n                                " . '<ul class="menu-dropdown">' . "\n                                    " . '<li><a href="?logout/' . implode("/",$NeptuneCore->var_get("system","query")) . '">' . $NeptuneCore->var_get("locale","logout") . '</a></li>' . "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?profile">' . $NeptuneCore->var_get("locale","editprofile") . '</a></li>' . "\n                                    " . '<li><a href="?ucp">' . $NeptuneCore->var_get("locale","ucp") . '</a></li>';
                                     if (neptune_get_permissions() >= 3) {
-                                        echo "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?acp">Admin Control Panel</a></li>';
+                                        echo "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?acp">' . $NeptuneCore->var_get("locale","acp") . '</a></li>';
                                     }
                                     echo "\n                                " . '</ul>' . "\n                            " . '</li>' . "\n";
                                 }
@@ -98,14 +115,14 @@
                     <div id="content-area">
                         <?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '<!--[if IE 7]>
                             <br><br>
-                            <div class="iewarning">Warning: Please upgrade your browser to something compatible with the internet.<br><a href="http://www.browserchoice.eu/" target="_blank">There are many browsers to choose from, any except the one you are using is good.</a></div>
+                            <div class="iewarning">' . $NeptuneCore->var_get("locale","ie7warning1") . '<br><a href="http://www.browserchoice.eu/" target="_blank">' . $NeptuneCore->var_get("locale","ie7warning2") . '</a></div>
                             <br><br>
                         <![endif]-->
                         <!--[if lte IE 6]>
                             <div class="iewarning">
-                                <h2>Unsupported Browser</h2>
-                                <p>You are using an <b>extremely outdated, unsupported browser</b>.</p>
-                                <p><a href="http://www.browserchoice.eu/" target="_blank">Please <b>keep it real</b> and use a browser that isn\'t <b>over 10 years old</b>.</a></p>
+                                <h2>' . $NeptuneCore->var_get("locale","ie6warning1") . '</h2>
+                                <p>' . $NeptuneCore->var_get("locale","ie6warning2") . '</p>
+                                <p><a href="http://www.browserchoice.eu/" target="_blank">' . $NeptuneCore->var_get("locale","ie6warning3") . '</a></p>
                             </div>
                         <![endif]-->';}?><h2><?php echo $NeptuneCore->var_get("output","title_prepend") . $NeptuneCore->var_get("output","title") . $NeptuneCore->var_get("output","title_append"); ?></h2>
                         <?php

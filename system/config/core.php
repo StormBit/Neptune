@@ -9,14 +9,12 @@
 	*/
 
 	$conf['config']['sitename'] = 'Neptune';
-
 	$conf['config']['defaultact'] = 'page';
+	$conf['config']['locale'] = 'en';
 
 //	$conf['cache']['type'] = 'apc';
 	$conf['cache']['type'] = 'none';
 	$conf['cache']['expire'] = 10;
 
 	$conf['database']['type'] = 'sqlite3';
-
-
 ?>
