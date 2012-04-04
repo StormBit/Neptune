@@ -31,7 +31,7 @@
 			if($_POST["pass1"] == $_POST["pass2"]) {
 				$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username'");
 				if ($NeptuneSQL->fetch_array($sql)) {
-					$NeptuneCore->fatal_error("Username already taken.");
+					$NeptuneCore->fatal_error($NeptuneCore->var_get("locale","usernametaken"));
 				} else {
 					$sql = $NeptuneSQL->query("INSERT INTO `neptune_users` VALUES('$Username','$Displayname','$Password','$Email','0','1','" . date ("Y-m-d H:i:s") . "','" . date ("Y-m-d H:i:s") . "','0','0','','')");
 					setcookie("NeptuneUser", $Username, 2147483647, "/");
@@ -42,14 +42,14 @@
 					header("Location: ?" . implode("/",$QueryString));
 				}
 			} else {
-				$NeptuneCore->fatal_error("Passwords do not match.");
+				$NeptuneCore->fatal_error($NeptuneCore->var_get("locale","mismatchedpass"));
 			}
 		} else {
 			$QueryString = $NeptuneCore->var_get("system","query");
 			unset($QueryString[0]);
 			
-			$NeptuneCore->title("Create Account");
-			$NeptuneCore->neptune_echo('<form action="?register/' . implode("/",$QueryString) . '" method="POST"><div class="clearfix"><input class="large" type="text" placeholder="Username" name="user" /></div><div class="clearfix"><input class="large" type="password" placeholder="Password" name="pass1" /></div><div class="clearfix"><input class="large" type="password" placeholder="Password (confirm)" name="pass2" /></div><div class="clearfix"><input class="large" type="text" placeholder="Email (optional)" name="email" /></div><div class="clearfix"><button class="btn primary" type="submit" name="submit">Register</button></div></form>');
+			$NeptuneCore->title($NeptuneCore->var_get("locale","createaccount"));
+			$NeptuneCore->neptune_echo('<form action="?register/' . implode("/",$QueryString) . '" method="POST"><div class="clearfix"><input class="large" type="text" placeholder="' . $NeptuneCore->var_get("locale","username") . '" name="user" /></div><div class="clearfix"><input class="large" type="password" placeholder="' . $NeptuneCore->var_get("locale","password") . '" name="pass1" /></div><div class="clearfix"><input class="large" type="password" placeholder="' . $NeptuneCore->var_get("locale","passwordconfirm") . '" name="pass2" /></div><div class="clearfix"><input class="large" type="text" placeholder="' . $NeptuneCore->var_get("locale","emailoptional") . '" name="email" /></div><div class="clearfix"><button class="btn primary" type="submit" name="submit">' . $NeptuneCore->var_get("locale","register") . '</button></div></form>');
 			$NeptuneCore->neptune_active("register-button");			
 		}
 	}
@@ -79,15 +79,15 @@
 				unset($QueryString[0]);
 				header("Location: ?" . implode("/",$QueryString));
 			} else {
-				$NeptuneCore->title("Login Failed");
-				$NeptuneCore->neptune_echo("<p>Incorrect username and/or password.</p>");
+				$NeptuneCore->title($NeptuneCore->var_get("locale","loginfailed"));
+				$NeptuneCore->neptune_echo($NeptuneCore->var_get("locale","baduserpass"));
 			}
 		} else {
 			$QueryString = $NeptuneCore->var_get("system","query");
 			unset($QueryString[0]);
 			
-			$NeptuneCore->title("Login");
-			$NeptuneCore->neptune_echo('<form action="?login/' . implode("/",$QueryString) . '" method="POST"><div class="clearfix"><input class="large" type="text" placeholder="Username" name="user" /></div><div class="clearfix"><input class="large" type="password" placeholder="Password" name="pass" /></div><div class="clearfix"><button class="btn primary" type="submit" name="submit">Login</button></div></form>');
+			$NeptuneCore->title($NeptuneCore->var_get("locale","Login"));
+			$NeptuneCore->neptune_echo('<form action="?login/' . implode("/",$QueryString) . '" method="POST"><div class="clearfix"><input class="large" type="text" placeholder="' . $NeptuneCore->var_get("locale","username") . '" name="user" /></div><div class="clearfix"><input class="large" type="password" placeholder="' . $NeptuneCore->var_get("locale","password") . '" name="pass" /></div><div class="clearfix"><button class="btn primary" type="submit" name="submit">' . $NeptuneCore->var_get("locale","login") . '</button></div></form>');
 			$NeptuneCore->neptune_active("login-button");
 		}
 	}

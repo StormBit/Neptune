@@ -15,8 +15,7 @@
 	
 	class NeptuneCore {
 		function __construct() {
-			global $NeptuneAdmin;
-			global $NeptuneSQL;
+			global $NeptuneCore;
 			
 			$this->var_set("system","querycount",0);
 			
@@ -24,6 +23,7 @@
 			require_once('system/core/bbcode.php');
 			require_once("system/core/tidy.php");
 			$this->parseconf('system/config/core.php');
+			$this->parseconf('system/locale/' . $this->var_get("config","locale") . '.php');
 
 			require_once("system/core/useraccounts.php");
 
@@ -165,6 +165,25 @@
 			$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; 
 			
 			return "Page generated in " . round($endtime - $starttime,3) * 1000 . " ms with " . $this->var_get("system","querycount") . " queries and " . $RAM["converted"] . " of RAM";
+		}
+		
+		function generate_menu() {
+			global $NeptuneCore, $NeptuneSQL, $NeptuneAdmin;
+		
+			// Create new SQL class if it doesn't already exist. 
+			if( !isset($NeptuneSQL)) {
+				$NeptuneSQL = new NeptuneSQL();
+			}
+			
+			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu` ORDER BY 'position'");
+			while ($result = $NeptuneSQL->fetch_array($sql)) {
+				if ($result["type"] == 0) {
+					$result["path"] = "?" . $result["path"];
+				}
+				$NeptuneMenu[$result["path"]] = $result["name"];
+			}
+			
+			return $NeptuneMenu;
 		}
 	}
 ?>

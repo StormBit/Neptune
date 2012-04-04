@@ -64,6 +64,6 @@
 	} else {
 		$NeptuneCore->var_set("output","body","");
 	}
-	
+
 	require("theme/layout.php");
 ?>
