@@ -23,8 +23,9 @@
 			require_once('system/core/bbcode.php');
 			require_once("system/core/tidy.php");
 			$this->parseconf('system/config/core.php');
+			
 			$this->parseconf('system/locale/' . $this->var_get("config","locale") . '.php');
-
+			
 			require_once("system/core/useraccounts.php");
 
 			if($this->var_get('cache', 'enabled')) {
