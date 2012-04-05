@@ -121,12 +121,12 @@
 
 			header("Location: ?page/$PageID");
 		} else { 
-			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_pages` WHERE `pid` = '" . $NeptuneSQL->escape_string($query[4]) . "'");
+			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_pages` WHERE `pid` = '" . $NeptuneSQL->escape_string($query[3]) . "'");
 
 			$result = $NeptuneSQL->fetch_array($sql);
 					
 			$NeptuneCore->title("Editing " . $result["name"]);
-			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/edit/" . $query[4] . "' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' value='" . $query[4] . "' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' value='" . $result["name"] . "' /></div>\n<div class='clearfix'><textarea name='pagecontent'>" . $result["content"] . "</textarea></div><div class='clearfix'><span><input type='submit' class='btn primary' value='Save'/></span></div></form>");
+			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/edit/" . $query[3] . "' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' value='" . $query[3] . "' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' value='" . $result["name"] . "' /></div>\n<div class='clearfix'><textarea name='pagecontent'>" . $result["content"] . "</textarea></div><div class='clearfix'><span><input type='submit' class='btn primary' value='Save'/></span></div></form>");
 			$NeptuneCore->var_set("output","notidy", true);
 		}
 	}
