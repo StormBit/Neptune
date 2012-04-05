@@ -99,9 +99,10 @@
 			$NeptuneSQL = new NeptuneSQL();
 		}
 
-		$query = $NeptuneCore->var_get("system","query");		
-		if (!array_key_exists(4,$query)) {
-			$query[4] = "index";
+		$query = $NeptuneCore->var_get("system","query");	
+
+		if (!array_key_exists(3,$query)) {
+			$query[3] = "index";
 		}
 
 		if ($_SERVER['REQUEST_METHOD'] == "POST") {

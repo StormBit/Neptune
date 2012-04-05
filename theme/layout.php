@@ -82,11 +82,20 @@
                     <ul class="nav mobile" id="mobile-menu">
                         <li id="mobile-menu-dropdown">
                             <a class="menu brand" href="#"><?php echo $NeptuneCore->var_get("config","sitename"); ?></a>
-                            <ul class="menu-dropdown">
-                                <li class="active"><a href="?" onclick="hideLoginForms();">Home</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#about">About</a></li>
-                                <li><a href="#contact">Contact</a></li>
+                            <ul class="menu-dropdown"><?php echo "\n";
+									$Menu = $NeptuneCore->generate_menu();
+									
+									foreach ($Menu as $key => $value) {
+										$path = $key;
+										
+										$key = ltrim($key,"?");
+										
+										$key = preg_replace('/[^a-zA-Z0-9\s]/', "_", $key );
+										$key = "menu_" . $key;
+										
+										echo "                        <li id=\"$key\"><a href=\"$path\">$value</a></li>\n";
+									}
+								?>
                             </ul>
                         </li>
                     </ul>

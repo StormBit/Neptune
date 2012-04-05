@@ -26,7 +26,7 @@
 			$Password = $NeptuneSQL->escape_string($_POST["pass1"]);
 			$Email = $NeptuneSQL->escape_string($_POST["email"]);
 			
-			$Password = hash("sha512",$Username . $Password);
+			$Password = hash("sha256", $NeptuneCore->var_get("auth","key") . $Username . $Password);
 			
 			if($_POST["pass1"] == $_POST["pass2"]) {
 				$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username'");
@@ -68,7 +68,7 @@
 			$Username = strtolower($NeptuneSQL->escape_string($_POST["user"]));
 			$Password = $NeptuneSQL->escape_string($_POST["pass"]);
 			
-			$Password = hash("sha512",$Username . $Password);
+			$Password = hash("sha256", $NeptuneCore->var_get("auth","key") . $Username . $Password);
 			
 			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username' AND `password` = '$Password'");
 			if ($NeptuneSQL->fetch_array($sql)) {

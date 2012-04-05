@@ -15,6 +15,8 @@
 //	$conf['cache']['type'] = 'apc';
 	$conf['cache']['type'] = 'none';
 	$conf['cache']['expire'] = 10;
+	
+	$conf['auth']['key'] = "derp";
 
-	$conf['database']['type'] = 'sqlite3';
+	$conf['database']['type'] = 'mysql';
 ?>
