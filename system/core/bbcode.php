@@ -30,8 +30,8 @@
 			
 		$mailsearchstring = $urlsearchstring . " a-zA-Z0-9\.@";
 
-		$text = preg_replace("/\[url\]([$urlsearchstring]*)\[\/url\]/", '<a href="$1" target="_blank">$1</a>', $text);
-		$text = preg_replace("(\[url\=([$urlsearchstring]*)\](.+?)\[/url\])", '<a href="$1" target="_blank">$2</a>', $text); 
+		$text = preg_replace("/\[url\]([$urlsearchstring]*)\[\/url\]/", '<a href="$1">$1</a>', $text);
+		$text = preg_replace("(\[url\=([$urlsearchstring]*)\](.+?)\[/url\])", '<a href="$1">$2</a>', $text); 
 				
 		$text = preg_replace("(\[mail\]([$mailsearchstring]*)\[/mail\])", '<a href="mailto:$1">$1</a>', $text);
 		$text = preg_replace("/\[mail\=([$mailsearchstring]*)\](.+?)\[\/mail\]/", '<a href="mailto:$1">$2</a>', $text);
@@ -54,7 +54,7 @@
 
 		$text = preg_replace("(\[font=(.+?)\](.+?)\[\/font\])", "<span style=\"font-family: $1;\">$2</span>",$text);
 
-		$codelayout = '<div class="bbcode"><div class="quotecodeheader">Code:</div><div class="codebody">$1</div></div>';
+		$codelayout = '<div class="bbcode"><div class="codebody">$1</div></div>';
 		$text = preg_replace("/\[code\](.+?)\[\/code\]/is","$codelayout", $text);
 			
 		$text = preg_replace("/\[php\](.+?)\[\/php\]/is",$codelayout, $text);
