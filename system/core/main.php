@@ -40,7 +40,7 @@
 			if (isset($_SERVER["QUERY_STRING"]) && !empty($_SERVER["QUERY_STRING"])) {
 				// Take each part of the query string, and split it into an array. The
 				// first value (0) is how functions hook themselves to requests.
-				$this->var_set("system","query",explode("/",$_SERVER["QUERY_STRING"]));
+				$this->var_set("system","query",explode("/",urldecode($_SERVER["QUERY_STRING"])));
 			} else {
 				// If there is no query string, use the default function hook instead.
 				$this->var_set("system","query",array($this->var_get("config","defaultact")));
