@@ -1,19 +1,20 @@
 html, body {
-	background-color: #eee;
 	text-rendering: optimizeLegibility; 
 }
-	  
-@media screen and (min-width: 960px) {
-	.container {
-		width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
-	}
 
-	.center {
-		margin-left: auto;
-		margin-right: auto;
+@media (max-width: 768px) {
+	.container {
 		width: 100%;
 	}
-	
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+@media (min-width: 980px) {
 	.container > .content {
 		padding: 20px;
 		background-color: #fff;
@@ -26,113 +27,37 @@ html, body {
 		   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
 				box-shadow: 0 1px 2px rgba(0,0,0,.15);
 	}
-		  
-	.content .span14 {
-		min-height: 480px;
+	
+	html, body {
+		background-color: #eee;
 	}
-		  
+	
 	body {
 		padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
 	}
-		  
-	.mobile, .mobile > li, #mobile-menu {
-		display: none;
-	}
-	
-	textarea {
-		width: 480px;
-		height: 320px;
-	}
-	
-	form.acp > div.clearfix > input {
-		width: 480px;
-	}
-	
-	#StormDEVLogo {
-		float: right;
-		width: 188px;
-		height: 64px;
-
-		background-image: url('../img/stormdev.png');
-		background-repeat: no-repeat;
-	}
 }
-	  
-@media screen and (max-width: 960px) {
-	html, body, hr {
-		width: 100%;
-		background-color: white;
-	}
-	  
-	.container {
-		width: 100%; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
-	}
 		  
-	div.container > ul#menu, div.container > ul#menu > li {
-		display: none;
-	}
-		  
-	ul.mobile {
-		display: block;
-	}
-		  
-	.content > .fill {
-		padding: 8px;
-	}
-	
-	.topbar > .fill, .content > .row > .span14 {
-		padding-left: 16px;
-	}
-		  
-	body {
-		padding-top: 48px; /* 40px to make the container go all the way to the bottom of the topbar */
-	}
-		  
-	form.desktop {
-		display: none;
-	}
 
-	.codebody, .quotebody {	
-		margin-right: 16px;
-	}
 	
-	footer {
-		padding: 8px;
-	}
+textarea {
+	width: 480px;
+	height: 320px;
+}
 	
-	form.acp {
-		width: 100%;
-	}
+form.acp > div.clearfix > input {
+	width: 480px;
+}
 	
-	form.acp > div.clearfix {
-		margin-right: 10px;
-	}
-	
-	form.acp > div.clearfix > input {
-		width: 100%;
-	}
-	
-	form.acp > div.clearfix > textarea {
-		width: 100%;
-		height: 160px;
-	}	
-	
-	.acprow {
-		margin-bottom: 8px;
-	}
-	
-	#StormDEVLogo {
-		margin-top: 8px;
-		margin-bottom: 8px;
-		
-		width: 188px;
-		height: 64px;
+#StormDEVLogo {
+	float: right;
+	width: 188px;
+	height: 64px;
 
-		background-image: url('../img/stormdev.png');
-		background-repeat: no-repeat;
-	}
+	background-image: url('../img/stormdev.png');
+	background-repeat: no-repeat;
 }
 
+	 
 @media only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
 	#StormDEVLogo {
 		background-image: url('../img/stormdev-2x.png');
@@ -156,8 +81,8 @@ html, body {
 
 .editButton {
 	position: relative;
-	top:4px;
 	padding-right:4px;
+	bottom: 2px;
 	width: 24px;
 	height: 24px;
 }
