@@ -6,7 +6,7 @@
 		Converts BBCode to HTML
 	*/
 	
-	function neptune_bbcode($text) {	
+	function neptune_bbcode($text, $filter_html = true) {	
 	
 		// HTML Whitelist
 		$text = str_replace("<b>", "[b]", $text); 
@@ -26,13 +26,16 @@
 		$text = str_replace("\r\n","\n",$text);
 		$text = str_replace("\n", "<br>\n\t\t\t\t\t\t\t", $text);
 
-		$urlsearchstring = " a-zA-Z0-9\:\/\-\?\&\.\=\_\~\#\'";
+		$urlsearchstring = " a-zA-Z0-9\:\/\-\?\&\.\=\_\~\#\%\'";
 			
 		$mailsearchstring = $urlsearchstring . " a-zA-Z0-9\.@";
 
 		$text = preg_replace("/\[url\]([$urlsearchstring]*)\[\/url\]/", '<a href="$1">$1</a>', $text);
 		$text = preg_replace("(\[url\=([$urlsearchstring]*)\](.+?)\[/url\])", '<a href="$1">$2</a>', $text); 
 				
+		$text = preg_replace("/\[urlnew\]([$urlsearchstring]*)\[\/urlnew\]/", '<a href="$1" target="_blank">$1</a>', $text);
+        $text = preg_replace("(\[urlnew\=([$urlsearchstring]*)\](.+?)\[/urlnew\])", '<a href="$1" target="_blank">$2</a>', $text); 
+		  
 		$text = preg_replace("(\[mail\]([$mailsearchstring]*)\[/mail\])", '<a href="mailto:$1">$1</a>', $text);
 		$text = preg_replace("/\[mail\=([$mailsearchstring]*)\](.+?)\[\/mail\]/", '<a href="mailto:$1">$2</a>', $text);
 			
