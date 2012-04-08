@@ -176,7 +176,7 @@
 				$NeptuneSQL = new NeptuneSQL();
 			}
 			
-			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu` ORDER BY 'position'");
+			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu` ORDER BY position ASC");
 			while ($result = $NeptuneSQL->fetch_array($sql)) {
 				if ($result["type"] == 0) {
 					$result["path"] = "?" . $result["path"];

@@ -90,9 +90,9 @@
 							if (neptune_get_permissions() == 0) {
 								echo '</ul><ul class="nav pull-right"><li id="menu_login"><a href="?login/' . implode("/",$NeptuneCore->var_get("system","query")) . '">' . $NeptuneCore->var_get("locale","login") . '</a></li>' . "\n" . '                            <li id="menu_register"><a href="?register/' . implode("/",$NeptuneCore->var_get("system","query")) . '">' . $NeptuneCore->var_get("locale","register") . '</a></li>' . "\n";
 							} else if (neptune_get_permissions() >= 1) {
-								echo '</ul><ul class="pull-right nav"><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">' . neptune_get_username() . ' <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="?logout/' . implode("/",$NeptuneCore->var_get("system","query")) . '">' . $NeptuneCore->var_get("locale","logout") . '</a></li><li class="divider"></li><li><a href="?profile">' . $NeptuneCore->var_get("locale","editprofile") . '</a></li><li><a href="?ucp">' . $NeptuneCore->var_get("locale","ucp") . '</a></li>';
+								echo '</ul><ul class="pull-right nav"><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">' . neptune_get_username() . ' <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="?logout/' . implode("/",$NeptuneCore->var_get("system","query")) . '"><i class="icon-remove-sign"></i> ' . $NeptuneCore->var_get("locale","logout") . '</a></li><li class="divider"></li><li><a href="?profile"><i class="icon-edit"></i> ' . $NeptuneCore->var_get("locale","editprofile") . '</a></li><li><a href="?ucp"><i class="icon-user"></i> ' . $NeptuneCore->var_get("locale","ucp") . '</a></li>';
 								if (neptune_get_permissions() >= 3) {
-									echo "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?acp">' . $NeptuneCore->var_get("locale","acp") . '</a></li>';
+									echo "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?acp"><i class="icon-cog"></i> ' . $NeptuneCore->var_get("locale","acp") . '</a></li>';
 								}
 								echo '</ul></li>' . "\n";
 							} ?>
