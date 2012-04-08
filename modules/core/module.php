@@ -76,6 +76,21 @@
 	}
 	$NeptuneAdmin->add_hook("Core","page/new","New Page","Create a new page");
 
+	function acp_page_delete() {
+		global $NeptuneCore, $NeptuneSQL, $NeptuneAdmin;
+		
+		// Create new SQL class if it doesn't already exist. 
+		if( !isset($NeptuneSQL)) {
+			$NeptuneSQL = new NeptuneSQL();
+		}
+
+		$query = $NeptuneCore->var_get("system","query");	
+
+		$sql = $NeptuneSQL->query("DELETE FROM `neptune_pages` WHERE `pid` = '" . $NeptuneSQL->escape_string($query[3]) . "' LIMIT 1");
+		
+		header("Location: ?acp/page/list");
+	}	
+	
 	function acp_page_list() {
 		global $NeptuneCore, $NeptuneSQL, $NeptuneAdmin;
 		
@@ -87,7 +102,14 @@
 		$NeptuneCore->title("Page List");
 		$NeptuneCore->subtitle("This is a listing of all of the pages in the database.");
 		
-		$NeptuneCore->neptune_echo("Not yet implimented");
+		$NeptuneCore->neptune_echo('<table class="table table-striped small-table"><thead><tr><th></th><th>Page ID</th><th>Page Name</th><tr></thead><tbody>');
+		
+		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_pages`");
+		while ($result = $NeptuneSQL->fetch_array($sql)) {
+			$NeptuneCore->neptune_echo('<tr><td style="width: 64px;"><div class="btn-group"><a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="?acp/page/edit/' . $result["pid"] . '"><i class="icon-edit"></i> Edit</a></li><li><a href="?acp/page/delete/' . $result["pid"] . '" onclick="return confirm(\'Are you sure you want to delete the page ' . $result["name"] . ' (' . $result["pid"] . ')? This operation cannot be undone.\');"><i class="icon-remove"></i> Delete</a></li></ul></div></td><td style="width: 160px;">' . $result["pid"] . "</td><td>" . $result["name"] . "</td></tr>");
+		}
+		
+		$NeptuneCore->neptune_echo('</tbody></table>');
 	}
 	$NeptuneAdmin->add_hook("Core","page/list","Page List","View and edit a list of pages");
 	
@@ -130,4 +152,19 @@
 			$NeptuneCore->var_set("output","notidy", true);
 		}
 	}
+	
+	function acp_menu_edit() {
+		global $NeptuneCore, $NeptuneSQL, $NeptuneAdmin;
+		
+		// Create new SQL class if it doesn't already exist. 
+		if( !isset($NeptuneSQL)) {
+			$NeptuneSQL = new NeptuneSQL();
+		}
+		
+		$NeptuneCore->title("Edit Menu");
+		$NeptuneCore->subtitle("Edit the list of links in the navigation bar.");
+		
+		$NeptuneCore->neptune_echo("Not yet implimented");
+	}
+	$NeptuneAdmin->add_hook("Core","menu/edit","Edit Menu","Edit the list of links in the navigation bar.");
 ?>

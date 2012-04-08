@@ -79,10 +79,19 @@ form.acp > div.clearfix > input {
 	color: #777;
 }
 
+.acpitem {
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
 .editButton {
 	position: relative;
 	padding-right:4px;
 	bottom: 2px;
 	width: 24px;
 	height: 24px;
+}
+
+.small-table {
+	max-width: 640px;
 }
