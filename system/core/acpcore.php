@@ -65,7 +65,8 @@
 			
 			$NeptuneCore->title("Admin Control Panel");
 			
-			
+			$NeptuneCore->neptune_echo("<div class='container'>");
+
 			$count = 0;
 			foreach ($AdminHooks as $Section) {
 				$NeptuneCore->neptune_echo("<h3>" . $this->KeyName($AdminHooks,$count) . "</h3>");
@@ -73,14 +74,15 @@
 				$count++;
 				
 				$count2 = 1;
-				$NeptuneCore->neptune_echo("<div class='row center'>");
+				$NeptuneCore->neptune_echo("<div class='row'>");
 				foreach ($Section as $Item) {
-					$NeptuneCore->neptune_echo("<div class='span4 acprow'><b><a href='?acp/" . $Item["path"] . "'>" . $Item["title"] . "</a></b><br>" . $Item["description"] . "\n</div>");
+					$NeptuneCore->neptune_echo("<div class='span4 acpitem'><b><a href='?acp/" . $Item["path"] . "'>" . $Item["title"] . "</a></b><br>" . $Item["description"] . "\n</div>");
 					
 					$count2++;
 				}
 				$NeptuneCore->neptune_echo("</div>");
 			}
+			$NeptuneCore->neptune_echo("</div>");
 		}
 		
 		function add_hook($section,$path,$title,$description) {
