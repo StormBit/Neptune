@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `neptune_pages` (
 --
 
 CREATE TABLE IF NOT EXISTS `neptune_users` (
-  `username` mediumtext COLLATE utf8_bin NOT NULL,
+  `username` varchar(255) COLLATE utf8_bin NOT NULL PRIMARY KEY,
   `displayname` mediumtext COLLATE utf8_bin NOT NULL,
   `password` mediumtext COLLATE utf8_bin NOT NULL,
   `email` mediumtext COLLATE utf8_bin,
