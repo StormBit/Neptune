@@ -2,11 +2,11 @@ html, body {
 	text-rendering: optimizeLegibility; 
 }
 
-@media (max-width: 768px) {
+/* @media {
 	.container {
 		width: 100%;
 	}
-}
+} */
 
 .center {
 	margin-left: auto;
@@ -20,16 +20,10 @@ html, body {
 		background-color: #fff;
 		margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
 		margin-bottom: 24px;
-		-webkit-border-radius: 0 0 6px 6px;
-		   -moz-border-radius: 0 0 6px 6px;
-				border-radius: 0 0 6px 6px;
-		-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-		   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-				box-shadow: 0 1px 2px rgba(0,0,0,.15);
 	}
 	
 	html, body {
-		background-color: #eee;
+		background-color: #FFF;
 	}
 	
 	body {
@@ -48,19 +42,19 @@ form.acp > div.clearfix > input {
 	width: 480px;
 }
 	
-#StormDEVLogo {
+#flogo {
 	float: right;
 	width: 188px;
 	height: 64px;
 
-	background-image: url('../img/stormdev.png');
+	background-image: url('../img/flogo.png');
 	background-repeat: no-repeat;
 }
 
 	 
 @media only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
-	#StormDEVLogo {
-		background-image: url('../img/stormdev-2x.png');
+	#flogo {
+		background-image: url('../img/flogo-2x.png');
 		background-size: 100%;
 	}
 }

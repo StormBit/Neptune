@@ -6,14 +6,10 @@
 		This file is responsible for loading the database druver specified in
 		the configuration. 
 	*/
-
-	if(!defined('NepNep')) {
-		die('NO U');
-	}
 	
 	if ($NeptuneCore->var_get("database","type") == "mysql") {
 		require_once("system/drivers/mysql.php");
 	} else {
-		$NeptuneCore->fatal_error("Unknown database type");
+		$NeptuneCore->fatal_error("Unknown database type. In other words, you're doing it wrong.");
 	}
 ?>
