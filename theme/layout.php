@@ -13,10 +13,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">	      
 		
-		<link href="resources/css/main.css" rel="stylesheet">
 		<link href="resources/css/bbcode.css" rel="stylesheet">
 		<link href="resources/css/bootstrap.css" rel="stylesheet">
 		<link href="resources/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="resources/css/main.css" rel="stylesheet">
 
         
         <?php
