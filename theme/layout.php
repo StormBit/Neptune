@@ -9,13 +9,15 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">        
         
 		
-        <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <link href="resources/css/bootstrap-responsive.min.css" rel="stylesheet">
-        <link href="resources/css/main.css" rel="stylesheet">
-        <link href="resources/css/bbcode.css" rel="stylesheet">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">	      
+		
+		<link href="resources/css/main.css" rel="stylesheet">
+		<link href="resources/css/bbcode.css" rel="stylesheet">
+		<link href="resources/css/bootstrap.css" rel="stylesheet">
+		<link href="resources/css/bootstrap-responsive.css" rel="stylesheet">
 
-        <script type="text/javascript" src="resources/js/jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
         
         <?php
 			$query = "";
@@ -133,5 +135,20 @@
                 <div id="StormDEVLogo"></div><p><small>Copyright © 2012 StormDEV, All Rights Reserved<br>Page generated in <?php $time = microtime(); $endtime=substr($time,11).substr($time,1,9); echo round($endtime - $starttime,3) * 1000; ?> ms with <?php echo $NeptuneCore->var_get("system","querycount"); ?> queries and <?php $RAM["raw"] = memory_get_peak_usage(true);$unit=array('bytes','KiB','MiB','GiB','TiB','PiB');$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; echo $RAM["converted"]; ?> of RAM<br>Using the <?php echo NeptuneSQL::type(); ?> database engine</small></p>
             </footer>
         </div>
+		
+	<script src="resources/js/jquery.js"></script>
+    <script src="resources/js/bootstrap-transition.js"></script>
+    <script src="resources/js/bootstrap-alert.js"></script>
+    <script src="resources/js/bootstrap-modal.js"></script>
+    <script src="resources/js/bootstrap-dropdown.js"></script>
+    <script src="resources/js/bootstrap-scrollspy.js"></script>
+    <script src="resources/js/bootstrap-tab.js"></script>
+    <script src="resources/js/bootstrap-tooltip.js"></script>
+    <script src="resources/js/bootstrap-popover.js"></script>
+    <script src="resources/js/bootstrap-button.js"></script>
+    <script src="resources/js/bootstrap-collapse.js"></script>
+    <script src="resources/js/bootstrap-carousel.js"></script>
+    <script src="resources/js/bootstrap-typeahead.js"></script>
+	
     </body>
 </html>

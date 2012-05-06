@@ -164,7 +164,7 @@
 		$NeptuneCore->title("Edit Menu");
 		$NeptuneCore->subtitle("Edit the list of links in the navigation bar.");
 		
-		$NeptuneCore->neptune_echo("Not yet implimented");
+		$NeptuneCore->neptune_echo("The Menu Editor has not yet been written. This is merely a placeholder. If you wish to edit the menu, edit neptune_menu directly in MySQL.");
 	}
 	$NeptuneAdmin->add_hook("Core","menu/edit","Edit Menu","Edit the list of links in the navigation bar.");
 ?>
