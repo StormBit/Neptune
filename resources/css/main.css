@@ -91,3 +91,18 @@ form.acp > div.clearfix > input {
 .small-table {
 	max-width: 640px;
 }
+
+.navbar .brand {
+  display: block;
+  float: left;
+  padding: 8px 20px 12px;
+  margin-left: -20px;
+  font-size: 20px;
+  font-weight: 200;
+  line-height: 1;
+  color: #FFFFFF;
+}
+
+.navbar .brand:hover {
+  text-decoration: underline;
+}
