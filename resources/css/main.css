@@ -1,8 +1,35 @@
+@font-face {
+	/* 
+		WebSymbols font from http://www.justbenicestudio.com/studio/websymbols/
+		
+		Licensed under the OFL. 
+		http://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web
+	*/
+
+    font-family: 'WebSymbolsRegular';
+    src: url('../font/websymbols-regular-webfont.eot');
+    src: url('../font/websymbols-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/websymbols-regular-webfont.woff') format('woff'),
+         url('../font/websymbols-regular-webfont.ttf') format('truetype'),
+         url('../font/websymbols-regular-webfont.svg#WebSymbolsRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.symbol {
+	font-family: WebSymbolsRegular;
+	position: relative;
+	bottom: 1px;
+	right: 4px;
+	
+	float: left;
+}
+
 html, body {
 	text-rendering: optimizeLegibility; 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 	.container {
 		width: 100%;
 	}
