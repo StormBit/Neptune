@@ -45,13 +45,16 @@ form.acp > div.clearfix > input {
 }
 
 @media (max-width: 550px) {
-	textarea, form.acp > div.clearfix > input {
-		width: 94%;
-		padding-right: 20px;
+	form.acp > div.clearfix > textarea, form.acp > div.clearfix > input {
+		width: 100%;
+		-webkit-box-sizing: border-box;
+		   -moz-box-sizing: border-box;
+		        box-sizing: border-box;
+		
 	}
 	
-	input {
-		width: 80%;
+	form.acp > div.clearfix > input {
+		height: 2em;
 	}
 }
 
@@ -91,8 +94,21 @@ form.acp > div.clearfix > input {
 	}
 }
 
+@media (min-width: 480px) {
+	#StormDEVLogo {
+		float: right;
+		margin-left: 8px;
+	}
+}
+
+@media (max-width: 480px) {
+	#StormDEVLogo {
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
 #StormDEVLogo {
-	float: right;
 	width: 188px;
 	height: 64px;
 	background-image: url('../img/stormdev.png');
