@@ -29,9 +29,29 @@ html, body {
 	text-rendering: optimizeLegibility; 
 }
 
+textarea {
+	width: 480px;
+	height: 320px;
+}
+
+form.acp > div.clearfix > input {
+	width: 480px;
+}
+
 @media (max-width: 767px) {
 	.container {
 		width: 100%;
+	}
+}
+
+@media (max-width: 550px) {
+	textarea, form.acp > div.clearfix > input {
+		width: 94%;
+		padding-right: 20px;
+	}
+	
+	input {
+		width: 80%;
 	}
 }
 
@@ -62,15 +82,6 @@ html, body {
 	body {
 		padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
 	}
-}
-
-textarea {
-	width: 480px;
-	height: 320px;
-}
-
-form.acp > div.clearfix > input {
-	width: 480px;
 }
 
 #StormDEVLogo {

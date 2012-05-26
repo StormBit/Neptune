@@ -12,7 +12,6 @@
 		<link href="resources/css/bootstrap.css" rel="stylesheet">
 		<link href="resources/css/bootstrap-responsive.css" rel="stylesheet">
 		<link href="resources/css/main.css" rel="stylesheet">
-
         
         <?php
 			$query = "";
@@ -28,11 +27,25 @@
 			
             echo '<style type="text/css">#' . $cssid . ', #menu_' . $query2[0] . '{background-color:#222;background-color:rgba(0, 0, 0, 0.5);}</style>' . "\n";
         ?>
-                    
+     	
+		<script type="text/javascript" src="resources/js/jquery.js"></script>
+		<script type="text/javascript" src="resources/js/bootstrap-transition.js"></script>
+		<script type="text/javascript" src="resources/js/bootstrap-alert.js"></script>
+		<script type="text/javascript" src="resources/js/bootstrap-modal.js"></script>
+		<script type="text/javascript" src="resources/js/bootstrap-dropdown.js"></script>
+		<script type="text/javascript" src="resources/js/bootstrap-scrollspy.js"></script>
+		<script type="text/javascript" src="resources/js/bootstrap-tab.js"></script>
+		<script type="text/javascript" src="resources/js/bootstrap-tooltip.js"></script>
+		<script type="text/javascript" src="resources/js/bootstrap-popover.js"></script>
+		<script type="text/javascript" src="resources/js/bootstrap-button.js"></script>
+		<script type="text/javascript" src="resources/js/bootstrap-collapse.js"></script>
+		<script type="text/javascript" src="resources/js/bootstrap-carousel.js"></script>
+		<script type="text/javascript" src="resources/js/bootstrap-typeahead.js"></script>
+		<script type="text/javascript" src="resources/js/jquery-1.7.2.min.js"></script>               
         <script type="text/javascript" src="resources/js/html5.js"></script>
 		<script type="text/javascript" src="resources/js/respond.min.js"></script><?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
         <!--[if gte IE 7]>
-            <script type="text/javascript">
+            <script type="text/javascript" defer="defer">
                 $(function() {
                     if(!$.support.placeholder) { 
                         var active = document.activeElement;
@@ -130,20 +143,5 @@
                 <div id="StormDEVLogo"></div><p><small>Copyright © 2012 StormDEV, All Rights Reserved<br>Page generated in <?php $time = microtime(); $endtime=substr($time,11).substr($time,1,9); echo round($endtime - $starttime,3) * 1000; ?> ms with <?php echo $NeptuneCore->var_get("system","querycount"); ?> queries and <?php $RAM["raw"] = memory_get_peak_usage(true);$unit=array('bytes','KiB','MiB','GiB','TiB','PiB');$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; echo $RAM["converted"]; ?> of RAM<br>Using the <?php echo NeptuneSQL::type(); ?> database engine</small></p>
             </footer>
         </div>
-		
-	<script src="resources/js/jquery.js"></script>
-    <script src="resources/js/bootstrap-transition.js"></script>
-    <script src="resources/js/bootstrap-alert.js"></script>
-    <script src="resources/js/bootstrap-modal.js"></script>
-    <script src="resources/js/bootstrap-dropdown.js"></script>
-    <script src="resources/js/bootstrap-scrollspy.js"></script>
-    <script src="resources/js/bootstrap-tab.js"></script>
-    <script src="resources/js/bootstrap-tooltip.js"></script>
-    <script src="resources/js/bootstrap-popover.js"></script>
-    <script src="resources/js/bootstrap-button.js"></script>
-    <script src="resources/js/bootstrap-collapse.js"></script>
-    <script src="resources/js/bootstrap-carousel.js"></script>
-    <script src="resources/js/bootstrap-typeahead.js"></script>
-	
-    </body>
+	</body>
 </html>
