@@ -40,8 +40,7 @@
 		<script type="text/javascript" src="resources/js/bootstrap-button.js"></script>
 		<script type="text/javascript" src="resources/js/bootstrap-collapse.js"></script>
 		<script type="text/javascript" src="resources/js/bootstrap-carousel.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap-typeahead.js"></script>
-		<script type="text/javascript" src="resources/js/jquery-1.7.2.min.js"></script>               
+		<script type="text/javascript" src="resources/js/bootstrap-typeahead.js"></script>             
         <script type="text/javascript" src="resources/js/html5.js"></script>
 		<script type="text/javascript" src="resources/js/respond.min.js"></script><?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
         <!--[if gte IE 7]>
