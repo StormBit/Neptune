@@ -27,7 +27,7 @@
 			
             echo '<style type="text/css">#' . $cssid . ', #menu_' . $query2[0] . '{background-color:#222;background-color:rgba(0, 0, 0, 0.5);}</style>' . "\n";
         ?>
-     	
+
 		<script type="text/javascript" src="resources/js/jquery.js"></script>
 		<script type="text/javascript" src="resources/js/bootstrap-transition.js"></script>
 		<script type="text/javascript" src="resources/js/bootstrap-alert.js"></script>
@@ -44,26 +44,37 @@
         <script type="text/javascript" src="resources/js/html5.js"></script>
 		<script type="text/javascript" src="resources/js/respond.min.js"></script><?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
         <!--[if gte IE 7]>
-            <script type="text/javascript" defer="defer">
-                $(function() {
-                    if(!$.support.placeholder) { 
-                        var active = document.activeElement;
-                        $(":text").focus(function () {
-                            if ($(this).attr("placeholder") != "" && $(this).val() == $(this).attr("placeholder")) {
-                                $(this).val("").removeClass("hasPlaceholder");
-                            }
-                        }).blur(function () {
-                            if ($(this).attr("placeholder") != "" && ($(this).val() == "" || $(this).val() == $(this).attr("placeholder"))) {
-                                $(this).val($(this).attr("placeholder")).addClass("hasPlaceholder");
-                            }
-                        });
-                        $(":text").blur();
-                        $(active).focus();
-                        $("form").submit(function () {
-                            $(this).find(".hasPlaceHolder").each(function() { $(this).val(""); });
-                        });
-                    }
-                });
+            <script type="text/javascript">
+				$(function() {
+					var input = document.createElement("input");
+					if(("placeholder" in input)==false) { 
+						$("[placeholder]").focus(function() {
+							var i = $(this);
+							if(i.val() == i.attr("placeholder")) {
+								i.val("").removeClass("placeholder");
+								if(i.hasClass("password")) {
+									i.removeClass("password");
+									this.type="password";
+								}			
+							}
+						}).blur(function() {
+							var i = $(this);	
+							if(i.val() == "" || i.val() == i.attr("placeholder")) {
+								i.addClass("placeholder").val(i.attr("placeholder"));
+								if(this.type=="password") {
+									i.addClass("password");
+									this.type="text";
+								}
+							}
+						}).blur().parents("form").submit(function() {
+							$(this).find("[placeholder]").each(function() {
+								var i = $(this);
+								if(i.val() == i.attr("placeholder"))
+									i.val("");
+							})
+						});
+					}
+				});
             </script>
         <![endif]-->';}?>
 	

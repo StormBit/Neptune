@@ -61,9 +61,16 @@ form.acp > div.clearfix > input {
 	width: 100%;
 }
 
+.content:first-child {
+	margin-top: 0px;
+	margin-top: 64px \9;
+    *margin-top: 64px;
+}
+
 @media (min-width: 980px) {
 	.container > .content {
 		padding: 20px;
+		
 		background-color: #fff;
 		margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
 		margin-bottom: 24px;
@@ -95,6 +102,14 @@ form.acp > div.clearfix > input {
 @media only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
 	#StormDEVLogo {
 		background-image: url('../img/stormdev-2x.png');
+		
+		/* 
+		   GOOD JOB IE! Aparently Internet Exploder is so braindead that it parses the above.
+		   Overriding it to prevent fuckups. 
+		*/
+		*background-image: url('../img/stormdev.png');
+		background-image: url('../img/stormdev.png') \9;
+		
 		background-size: 100%;
 	}
 }
@@ -105,7 +120,7 @@ form.acp > div.clearfix > input {
 	margin: -20px -20px 20px;
 }
 
-.topbar .btn {
+.navbar .btn {
 	border: 0;
 }
 

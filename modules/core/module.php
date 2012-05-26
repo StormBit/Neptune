@@ -27,7 +27,7 @@
 			$NeptuneCore->title($result["name"]);
 			
 			if (neptune_get_permissions() >= 3) {
-				$NeptuneCore->var_set("output","title_prepend","<a href='?acp/page/edit/" . $query[1] . "'><img src='resources/img/edit.svg' class='editButton'></a>");
+				$NeptuneCore->var_set("output","title_prepend","<a href='?acp/page/edit/" . $query[1] . "'><!--[if !IE]>--><img src='resources/img/edit.svg' class='editButton'><!--<![endif]--><!--[if IE]><img src='resources/img/edit.png' class='editButton'><![endif]--></a>");
 			}
 			
 			if ($result["editor"]) {
