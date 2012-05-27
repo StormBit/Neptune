@@ -34,7 +34,7 @@ textarea {
 	height: 320px;
 }
 
-form.acp > div.clearfix > input {
+form.acp input[type="text"] {
 	width: 480px;
 }
 
@@ -45,7 +45,7 @@ form.acp > div.clearfix > input {
 }
 
 @media (max-width: 550px) {
-	form.acp > div.clearfix > textarea, form.acp > div.clearfix > input {
+	form.acp  div.clearfix textarea, form.acp div.clearfix input {
 		width: 100%;
 		-webkit-box-sizing: border-box;
 		   -moz-box-sizing: border-box;
@@ -53,7 +53,7 @@ form.acp > div.clearfix > input {
 		
 	}
 	
-	form.acp > div.clearfix > input {
+	form.acp div.clearfix input {
 		height: 2em;
 	}
 }
@@ -71,7 +71,7 @@ form.acp > div.clearfix > input {
 }
 
 @media (min-width: 980px) {
-	.container > .content {
+	.container .content {
 		padding: 20px;
 		
 		background-color: #fff;
@@ -125,6 +125,7 @@ form.acp > div.clearfix > input {
 		*/
 		*background-image: url('../img/stormdev.png');
 		background-image: url('../img/stormdev.png') \9;
+		_background-image: url('../img/stormdev-ie6.gif');
 		
 		background-size: 100%;
 	}
@@ -153,6 +154,8 @@ form.acp > div.clearfix > input {
 	position: relative;
 	padding-right:4px;
 	bottom: 2px;
+	_bottom: 0px;
+	*bottom: 0px;
 	width: 24px;
 	height: 24px;
 }

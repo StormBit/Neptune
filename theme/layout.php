@@ -25,25 +25,14 @@
 			
 			$query2 = $NeptuneCore->var_get("system","query");
 			
-            echo '<style type="text/css">#' . $cssid . ', #menu_' . $query2[0] . '{background-color:#222;background-color:rgba(0, 0, 0, 0.5);}</style>' . "\n";
+            echo '<style type="text/css">#' . $cssid . ', #menu_' . $query2[0] . '{background-color:rgba(0, 0, 0, 0.5);background-color:#222;}</style>' . "\n";
         ?>
 
 		<script type="text/javascript" src="resources/js/jquery.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap-transition.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap-alert.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap-modal.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap-dropdown.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap-scrollspy.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap-tab.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap-tooltip.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap-popover.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap-button.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap-collapse.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap-carousel.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap-typeahead.js"></script>             
+		<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>          
         <script type="text/javascript" src="resources/js/html5.js"></script>
 		<script type="text/javascript" src="resources/js/respond.min.js"></script><?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
-        <!--[if gte IE 7]>
+        <!--[if IE]>
             <script type="text/javascript">
 				$(function() {
 					var input = document.createElement("input");
@@ -76,7 +65,12 @@
 					}
 				});
             </script>
-        <![endif]-->';}?>
+			<script type="text/javascript" src="resources/js/selectivizr-min.js"></script>
+        <![endif]-->
+		<!--[if lte IE 6]>
+			<link href="resources/css/ie6.css" rel="stylesheet">
+			<script type="text/javascript" src="resources/js/ie6.js"></script>
+		<![endif]-->';}?>
 	
 	</head>
     <body>        
@@ -134,9 +128,9 @@
                     <![endif]-->
                     <!--[if lte IE 6]>
                         <div class="iewarning">
-                            <h2>' . $NeptuneCore->var_get("locale","ie6warning1") . '</h2>
+                            <h1>' . $NeptuneCore->var_get("locale","ie6warning1") . '</h1>
                             <p>' . $NeptuneCore->var_get("locale","ie6warning2") . '</p>
-                            <p><a href="http://www.browserchoice.eu/" target="_blank">' . $NeptuneCore->var_get("locale","ie6warning3") . '</a></p>
+                            <p><a href="http://www.browserchoice.eu/" target="_blank">' . $NeptuneCore->var_get("locale","ie6warning3") . '</a></p><br><br>
                         </div>
                     <![endif]-->';}?><h2><?php echo $NeptuneCore->var_get("output","title_prepend") . $NeptuneCore->var_get("output","title") . $NeptuneCore->var_get("output","title_append"); ?></h2>
                     <?php
@@ -153,5 +147,6 @@
                 <div id="StormDEVLogo"></div><p><small>Copyright © 2012 StormDEV, All Rights Reserved<br>Page generated in <?php $time = microtime(); $endtime=substr($time,11).substr($time,1,9); echo round($endtime - $starttime,3) * 1000; ?> ms with <?php echo $NeptuneCore->var_get("system","querycount"); ?> queries and <?php $RAM["raw"] = memory_get_peak_usage(true);$unit=array('bytes','KiB','MiB','GiB','TiB','PiB');$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; echo $RAM["converted"]; ?> of RAM<br>Using the <?php echo NeptuneSQL::type(); ?> database engine</small></p>
             </footer>
         </div>
+		<script>supersleight.init();</script>
 	</body>
 </html>
