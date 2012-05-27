@@ -57,7 +57,7 @@
   display: none !important;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .visible-phone {
     display: inherit !important;
   }
@@ -72,7 +72,7 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 979px) {
+@media screen and(min-width: 768px) and (max-width: 979px) {
   .visible-tablet {
     display: inherit !important;
   }
@@ -87,7 +87,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
   .nav-collapse {
     -webkit-transform: translate3d(0, 0, 0);
   }
@@ -135,7 +135,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   body {
     padding-right: 20px;
     padding-left: 20px;
@@ -198,7 +198,7 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 979px) {
+@media screen and (min-width: 768px) and (max-width: 979px) {
   .row {
     margin-left: -20px;
     *zoom: 1;
@@ -434,7 +434,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media screen and (min-width: 1200px) {
   .row {
     margin-left: -30px;
     *zoom: 1;
@@ -679,7 +679,7 @@
   }
 }
 
-@media (max-width: 979px) {
+@media screen and (max-width: 979px) {
   body {
     padding-top: 0;
   }
@@ -800,7 +800,7 @@
   }
 }
 
-@media (min-width: 980px) {
+@media screen and (min-width: 980px) {
   .nav-collapse.collapse {
     height: auto !important;
     overflow: visible !important;
