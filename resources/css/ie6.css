@@ -82,7 +82,7 @@ input.btn, a.btn, button.btn {height:auto;width:auto}
 .icon-sprite {background-image:url("img/glyphicons-halflings.png");background-repeat:no-repeat;display:inline-block;height:14px;line-height:14px;vertical-align:text-top;width:14px;padding-left:3px}
 
 /* Navbar */
-.dropdown .caret {font-size:1px;height:2px;background:none;background-color:#292929;color:#292929}
+.caret {font-size:1px;height:2px;background:transparent;background-color:transparent;color:#292929}
 
 /* Pagination */
 .pagination-first-child {border-left-width:1px !important}
@@ -104,8 +104,12 @@ ul.thumbnails {margin-left:-20px;float:none;display:inline-block;zoom:1;clear:bo
 
 /* Buttons */
 .btn {margin-left:0px;padding:2px 8px}
-.btn:hover {opacity:.4;filter:alpha(opacity=40);background-color:transparent;background-position:0 0; color: #000000}
+.btn:hover {background-position:0 0; color: #000000;text-decoration:none}
 
 /* Modal */
 .modal {position:relative;filter:alpha(opacity=99);top: 55%}
     .modal-header a.close {cursor: pointer}
+
+.ie6-hide {
+	display: none;
+}
