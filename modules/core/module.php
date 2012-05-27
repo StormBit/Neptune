@@ -106,7 +106,7 @@
 		
 		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_pages`");
 		while ($result = $NeptuneSQL->fetch_array($sql)) {
-			$NeptuneCore->neptune_echo('<tr><td style="width: 64px;"><div class="btn-group"><a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a><ul class="dropdown-menu"><li><a href="?acp/page/edit/' . $result["pid"] . '"><i class="icon-edit"></i> Edit</a></li><li><a href="?acp/page/delete/' . $result["pid"] . '" onclick="return confirm(\'Are you sure you want to delete the page ' . $result["name"] . ' (' . $result["pid"] . ')? This operation cannot be undone.\');"><i class="icon-remove"></i> Delete</a></li></ul></div></td><td style="width: 160px;">' . $result["pid"] . "</td><td>" . $result["name"] . "</td></tr>");
+			$NeptuneCore->neptune_echo('<tr><td style="width: 64px;"><div class="btn-group"><a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret ie6-hide"></span></a><ul class="dropdown-menu"><li><a href="?acp/page/edit/' . $result["pid"] . '"><i class="icon-edit"></i> Edit</a></li><li><a href="?acp/page/delete/' . $result["pid"] . '" onclick="return confirm(\'Are you sure you want to delete the page ' . $result["name"] . ' (' . $result["pid"] . ')? This operation cannot be undone.\');"><i class="icon-remove"></i> Delete</a></li></ul></div></td><td style="width: 160px;">' . $result["pid"] . "</td><td>" . $result["name"] . "</td></tr>");
 		}
 		
 		$NeptuneCore->neptune_echo('</tbody></table>');
