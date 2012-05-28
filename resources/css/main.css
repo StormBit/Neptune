@@ -112,21 +112,21 @@ form.acp input[type="text"] {
 	width: 188px;
 	height: 64px;
 	background-image: url('../img/stormdev.png');
+	_background-image: url('../img/stormdev-ie6.gif');
 	background-repeat: no-repeat;
 }
 
 @media only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
 	#StormDEVLogo {
 		background-image: url('../img/stormdev-2x.png');
-
+		
 		/* 
 		   GOOD JOB IE! Aparently Internet Exploder is so braindead that it parses the above.
 		   Overriding it to prevent fuckups. 
 		*/
 		*background-image: url('../img/stormdev.png');
 		background-image: url('../img/stormdev.png') \9;
-		
-		_background-image: url('../img/stormdev-ie6.gif');
+		_background-image: url('../img/stormdev-ie6.gif');		
 		
 		background-size: 100%;
 	}
