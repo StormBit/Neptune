@@ -27,21 +27,27 @@
 	global $NeptuneSQL;
 	global $NeptuneAdmin;
 	
-	// Load the core class file
+	// Load Classes:
+	// * Core
 	require_once('system/core/main.php');
 	if(!isset($NeptuneCore)) {
 		$NeptuneCore = new NeptuneCore();
 	}
-	// Include the code for the Admin Control Panel. 
-	require_once("system/drivers/" . $NeptuneCore->var_get("database","type") . ".php");
+	// * Database
+	if (file_exists("system/drivers/" . $NeptuneCore->var_get("database","type") . ".php")) {
+		require_once("system/drivers/" . $NeptuneCore->var_get("database","type") . ".php");
+
+	} else {
+		require_once("system/drivers/null.php");
+	}
 	if(!isset($NeptuneSQL)) {
 		$NeptuneSQL = new NeptuneSQL();
 	}
+	// * Admin Panel
 	require_once('system/core/acpcore.php');
 	if (!isset($NeptuneAdmin)) {
 			$NeptuneAdmin = new NeptuneAdmin();
 	}
-
 	
 	// Enumerate modules. 
 	if ($handle = opendir('modules')) { 

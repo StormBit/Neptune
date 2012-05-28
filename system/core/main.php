@@ -137,18 +137,20 @@
 		}
 		
 		function parseconf($config) {
-			include($config);
+			if (file_exists($config)) {
+				include($config);
 				foreach($conf as $group => $variable) {
-				foreach($variable as $variable => $data) {
-					// Calling var_set
-					$this->var_set($group,$variable,$data);
+					foreach($variable as $variable => $data) {
+						// Calling var_set
+						$this->var_set($group,$variable,$data);
+						unset($variable);
+						unset($data);
+					}
+					unset($group);
 					unset($variable);
-					unset($data);
 				}
-				unset($group);
-				unset($variable);
+				unset($conf);
 			}
-			unset($conf);
 		}
 		
 		function fatal_error($error) {
@@ -177,6 +179,7 @@
 			}
 			
 			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu` ORDER BY `position` ASC");
+			$NeptuneMenu = array();
 			while ($result = $NeptuneSQL->fetch_array($sql)) {
 				if ($result["type"] == 0) {
 					$result["path"] = "?" . $result["path"];
