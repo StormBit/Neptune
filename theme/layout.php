@@ -30,6 +30,7 @@
 
 		<script type="text/javascript" src="resources/js/jquery.js"></script>
 		<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>          
+		<script type="text/javascript" src="resources/js/midori.js"></script>          
         <script type="text/javascript" src="resources/js/html5.js"></script>
 		<!--[if gte IE 8]><!--><script type="text/javascript" src="resources/js/respond.min.js"><!--<![endif]--></script><?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
         <!--[if IE]>

@@ -51,9 +51,9 @@
 	
 	// Enumerate modules. 
 	if ($handle = opendir('modules')) { 
-		while (false !== ($dir = readdir($handle))) { 
-			if ($dir != "." && $dir != ".." && is_dir("modules/" . $dir)) { 
-				include_once("modules/$dir/module.php"); 
+		while (false !== ($file = readdir($handle))) { 
+			if ($file != "." && $file != ".." && !is_dir("modules/" . $file)) { 
+				include_once("modules/$file"); 
 			} 
 		} 
 		closedir($handle); 

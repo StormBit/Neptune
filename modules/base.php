@@ -1,7 +1,7 @@
 <?php
 	/*
 		Neptune Content Management System
-		Core Module - /modules/core/module.php
+		Base Module - /modules/base.php
 
 		Module that does all of the basic tasks. 
 	*/
@@ -102,7 +102,7 @@
 		$NeptuneCore->title("Page List");
 		$NeptuneCore->subtitle("This is a listing of all of the pages in the database.");
 		
-		$NeptuneCore->neptune_echo('<table class="table table-striped small-table"><thead><tr><th></th><th>Page ID</th><th>Page Name</th><tr></thead><tbody>');
+		$NeptuneCore->neptune_echo('<table class="table table-striped small-table"><thead><tr><th></th><th>Page ID</th><th>Page Name</th></tr></thead><tbody>');
 		
 		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_pages`");
 		while ($result = $NeptuneSQL->fetch_array($sql)) {
@@ -164,7 +164,18 @@
 		$NeptuneCore->title("Edit Menu");
 		$NeptuneCore->subtitle("Edit the list of links in the navigation bar.");
 		
-		$NeptuneCore->neptune_echo("The Menu Editor has not yet been written. This is merely a placeholder. If you wish to edit the menu, edit neptune_menu directly in MySQL.");
+		$NeptuneCore->neptune_echo('<table class="table table-striped small-table"><thead><tr><th>Location</th><th>Label</th></tr></thead><tbody>');
+		
+		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu`");
+		while ($result = $NeptuneSQL->fetch_array($sql)) {
+			$location = "";
+			if ($result["type"] == 0) {
+				$location =  $result["path"];
+			}
+			$NeptuneCore->neptune_echo('<tr><td style="width: 160px;">' . $location . "</td><td>" . $result["name"] . "</td></tr>");
+		}
+		
+		$NeptuneCore->neptune_echo('</tbody></table>');
 	}
 	$NeptuneAdmin->add_hook("Core","menu/edit","Edit Menu","Edit the list of links in the navigation bar.");
 ?>
