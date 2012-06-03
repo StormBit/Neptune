@@ -70,6 +70,8 @@
 	//} else {
 	//	$NeptuneCore->var_set("output","body","");
 	//}
-	
-	require("theme/" . $NeptuneCore->var_get("config","theme") . ".php");
+	if (file_exists("theme/" . $NeptuneCore->var_get("config","theme") . "/config.php")) {
+		parseconf("theme/" . $NeptuneCore->var_get("config","theme") . "/config.php");
+	}
+	require("theme/" . $NeptuneCore->var_get("config","theme") . "/layout.php");
 ?>

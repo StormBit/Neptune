@@ -9,5 +9,5 @@
 	$conf['database']['host'] = 'localhost';
 	$conf['database']['user'] = 'root';
 	$conf['database']['pass'] = 'password';
-	$conf['database']['db'] = 'stormdev_neptune';
+	$conf['database']['db'] = 'reimu_neptune';
 ?>
