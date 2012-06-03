@@ -179,3 +179,7 @@ form.acp input[type="text"] {
 .navbar .brand:hover {
   text-decoration: underline;
 }
+
+.draggable {
+	cursor: move;
+}

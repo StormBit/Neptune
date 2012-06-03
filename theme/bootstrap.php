@@ -29,8 +29,8 @@
         ?>
 
 		<script type="text/javascript" src="resources/js/jquery.js"></script>
+		<script type="text/javascript" src="resources/js/jquery-ui-1.8.20.custom.min.js"></script>
 		<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>          
-		<script type="text/javascript" src="resources/js/midori.js"></script>          
         <script type="text/javascript" src="resources/js/html5.js"></script>
 		<!--[if gte IE 8]><!--><script type="text/javascript" src="resources/js/respond.min.js"><!--<![endif]--></script><?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
         <!--[if IE]>
@@ -148,5 +148,6 @@
                 <div id="StormDEVLogo"></div><p><small>Copyright © 2012 StormDEV, All Rights Reserved<br>Page generated in <?php $time = microtime(); $endtime=substr($time,11).substr($time,1,9); echo round($endtime - $starttime,3) * 1000; ?> ms with <?php echo $NeptuneCore->var_get("system","querycount"); ?> queries and <?php $RAM["raw"] = memory_get_peak_usage(true);$unit=array('bytes','KiB','MiB','GiB','TiB','PiB');$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; echo $RAM["converted"]; ?> of RAM<br>Using the <?php echo NeptuneSQL::type(); ?> database engine</small></p>
             </footer>
         </div>
+	</div>
 	</body>
 </html>
