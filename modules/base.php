@@ -106,7 +106,7 @@
 		
 		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_pages`");
 		while ($result = $NeptuneSQL->fetch_array($sql)) {
-			$NeptuneCore->neptune_echo('<tr><td style="width: 64px;"><div class="btn-group"><a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret ie6-hide"></span></a><ul class="dropdown-menu"><li><a href="?acp/page/edit/' . $result["pid"] . '"><i class="icon-edit"></i> Edit</a></li><li><a href="?acp/page/delete/' . $result["pid"] . '" onclick="return confirm(\'Are you sure you want to delete the page ' . $result["name"] . ' (' . $result["pid"] . ')? This operation cannot be undone.\');"><i class="icon-remove"></i> Delete</a></li></ul></div></td><td style="width: 160px;">' . $result["pid"] . "</td><td>" . $result["name"] . "</td></tr>");
+			$NeptuneCore->neptune_echo('<tr><td style="width: 64px;"><div class="btn-group"><a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="javascript:;">Actions <span class="caret ie6-hide"></span></a><ul class="dropdown-menu"><li><a href="?acp/page/edit/' . $result["pid"] . '"><i class="icon-edit"></i> Edit</a></li><li><a href="?acp/page/delete/' . $result["pid"] . '" onclick="return confirm(\'Are you sure you want to delete the page ' . $result["name"] . ' (' . $result["pid"] . ')? This operation cannot be undone.\');"><i class="icon-remove"></i> Delete</a></li></ul></div></td><td style="width: 160px;">' . $result["pid"] . "</td><td>" . $result["name"] . "</td></tr>");
 		}
 		
 		$NeptuneCore->neptune_echo('</tbody></table>');
@@ -163,19 +163,26 @@
 		
 		$NeptuneCore->title("Edit Menu");
 		$NeptuneCore->subtitle("Edit the list of links in the navigation bar.");
-		
-		$NeptuneCore->neptune_echo('<table class="table table-striped small-table"><thead><tr><th>Location</th><th>Label</th></tr></thead><tbody>');
+				
+		$NeptuneCore->neptune_echo('<table class="table table-striped small-table" id="menuedit"><thead><tr><th></th><th>Location</th><th>Label</th><th>Type</th></tr></thead><tbody>');
 		
 		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu`");
+		
+		$ItemNumber = 0;
+		
 		while ($result = $NeptuneSQL->fetch_array($sql)) {
 			$location = "";
+			$location =  $result["path"];
 			if ($result["type"] == 0) {
-				$location =  $result["path"];
+				$type = "Internal";
+			} else {
+				$type = "External";
 			}
-			$NeptuneCore->neptune_echo('<tr><td style="width: 160px;">' . $location . "</td><td>" . $result["name"] . "</td></tr>");
+			$ItemNumber++;
+			$NeptuneCore->neptune_echo('<tr id="menuedit-num-' . $ItemNumber . '"><td style="width: 64px;"><div class="btn-group"><a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="javascript:;">Actions <span class="caret ie6-hide"></span></a><ul class="dropdown-menu"><li><a href="javascript:;"><i class="icon-edit"></i> Rename</a></li><li><a href="javascript:;" onclick="$(\'#menuedit-num-' . $ItemNumber . '\').hide(500, function(){$(\'#menuedit-num-' . $ItemNumber . '\').remove();});"><i class="icon-remove"></i> Delete</a></li></ul></div></td><td style="width: 160px;" class="item">' . $location . "</td><td class='item'>" . $result["name"] . "</td><td>" . $type . "</td></tr>");
 		}
 		
-		$NeptuneCore->neptune_echo('</tbody></table>');
+		$NeptuneCore->neptune_echo('</tbody></table><hr><input type="text" placeholder="Location" id="add_location"><br><input type="text" placeholder="Link Title" id="add_title"><div class="btn-group"><button class="btn btn-primary" onclick="addInternal();">Add Internal</button><button class="btn">Add External</button></div><script type="text/javascript">var fixHelper = function(e, ui){ui.children().each(function() {$(this).width($(this).width());});return ui;}; $("#menuedit tbody").sortable({helper: fixHelper}); $("#menuedit tbody tr td.item").disableSelection();var ItemNumber = ' . $ItemNumber . ';</script>');
 	}
 	$NeptuneAdmin->add_hook("Core","menu/edit","Edit Menu","Edit the list of links in the navigation bar.");
 ?>

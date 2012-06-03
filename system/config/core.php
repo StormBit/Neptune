@@ -11,6 +11,8 @@
 	$conf['config']['sitename'] = 'Neptune';
 	$conf['config']['defaultact'] = 'page';
 	$conf['config']['locale'] = 'en';
+	$conf['config']['theme'] = 'bootstrap';
+	
 
 //	$conf['cache']['type'] = 'apc';
 	$conf['cache']['type'] = 'none';
