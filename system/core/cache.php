@@ -7,11 +7,6 @@
 		(such as APC, memcached or XCache).
 	*/
 
-	// Checking if NepNep is defined, for security purposes.
-	if(!defined('NepNep')) {
-		die('NO U');
-	}
-
 	// No need to overdeclare NeptuneCore if it's already set
 	if(!isset($NeptuneCore)) {
 		$NeptuneCore = new NeptuneCore();
