@@ -73,5 +73,9 @@
 	if (file_exists("theme/" . $NeptuneCore->var_get("config","theme") . "/config.php")) {
 		parseconf("theme/" . $NeptuneCore->var_get("config","theme") . "/config.php");
 	}
-	require("theme/" . $NeptuneCore->var_get("config","theme") . "/layout.php");
+	if ($NeptuneCore->var_get("theme","altlayout")) {
+		require("theme/" . $NeptuneCore->var_get("config","theme") . "/" . $NeptuneCore->var_get("theme","altlayout") . ".php");
+	} else {
+		require("theme/" . $NeptuneCore->var_get("config","theme") . "/layout.php");
+	}
 ?>
