@@ -1,0 +1,38 @@
+html, body {
+	background-color: #eee;
+}
+
+.container .content {
+	background-color: #fff;
+	padding: 20px;
+	margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+	margin-bottom: 24px;
+	margin-top: 32px;
+	_margin-top: -24px;
+}
+
+.nav-collapse .nav {
+	_position: relative;
+	_right: 24px;
+}
+
+*+html input {
+	position: relative;
+	left: 20px;
+}
+
+.content > footer {
+	position: relative;
+}
+
+/* itc IE 7 fails at floats */
+*+html #StormDEVLogo {
+	position: absolute;
+	right: 0;
+	padding-right: 16px;
+}
+
+.dropdown-menu {
+	width: 180px;
+	border: 1px solid;
+}
