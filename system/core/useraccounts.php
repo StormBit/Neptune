@@ -6,11 +6,6 @@
 		Manages user accouts
 	*/
 
-	if(!defined('NepNep')) {
-		die('NO U');
-	}
-
-
 	function mod_core_register() {
 		global $NeptuneCore;
 		global $NeptuneSQL;

@@ -7,11 +7,6 @@
 		rest of the Neptune CMS. It contains code for printing output, setting
 		and retrieving variables, and other core operations.
 	*/
-
-	// Checking if NepNep is defined, for security purposes.
-	if(!defined('NepNep')) {
-		die('NO U');
-	}
 	
 	class NeptuneCore {
 		function __construct() {
