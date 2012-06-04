@@ -44,8 +44,7 @@
 								i.val("").removeClass("placeholder");
 								if(i.hasClass("password")) {
 									i.removeClass("password");
-									this.type="password";
-								}			
+								}
 							}
 						}).blur(function() {
 							var i = $(this);	
@@ -53,7 +52,6 @@
 								i.addClass("placeholder").val(i.attr("placeholder"));
 								if(this.type=="password") {
 									i.addClass("password");
-									this.type="text";
 								}
 							}
 						}).blur().parents("form").submit(function() {
@@ -67,6 +65,9 @@
 				});
             </script>
 			<script type="text/javascript" src="resources/js/selectivizr-min.js"></script>
+        <![endif]-->
+        <!--[if lte IE 7]>
+        	<link href="resources/css/ie7.css" rel="stylesheet">
         <![endif]-->
 		<!--[if lte IE 6]>
 			<link href="resources/css/ie6.css" rel="stylesheet">
@@ -104,7 +105,7 @@
 							if (neptune_get_permissions() == 0) {
 								echo '</ul><ul class="nav pull-right"><li id="menu_login"><a href="?login/' . implode("/",$NeptuneCore->var_get("system","query")) . '">' . $NeptuneCore->var_get("locale","login") . '</a></li>' . "\n" . '                            <li id="menu_register"><a href="?register/' . implode("/",$NeptuneCore->var_get("system","query")) . '">' . $NeptuneCore->var_get("locale","register") . '</a></li>' . "\n";
 							} else if (neptune_get_permissions() >= 1) {
-								echo '</ul><ul class="pull-right nav"><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">' . neptune_get_username() . ' <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="?logout/' . implode("/",$NeptuneCore->var_get("system","query")) . '"><div class="symbol">X</div> ' . $NeptuneCore->var_get("locale","logout") . '</a></li><li class="divider"></li><li><a href="?profile"><div class="symbol">²</div> ' . $NeptuneCore->var_get("locale","editprofile") . '</a></li><li><a href="?ucp"><div class="symbol">U</div> ' . $NeptuneCore->var_get("locale","ucp") . '</a></li>';
+								echo '</ul><ul class="pull-right nav"><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">' . neptune_get_username() . ' <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="?logout/' . implode("/",$NeptuneCore->var_get("system","query")) . '"><div class="symbol">X</div> ' . $NeptuneCore->var_get("locale","logout") . '</a></li><li class="divider"></li><li><a href="?profile"><div class="symbol">p</div> ' . $NeptuneCore->var_get("locale","editprofile") . '</a></li><li><a href="?ucp"><div class="symbol">U</div> ' . $NeptuneCore->var_get("locale","ucp") . '</a></li>';
 								if (neptune_get_permissions() >= 3) {
 									echo "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?acp"><div class="symbol">S</div> ' . $NeptuneCore->var_get("locale","acp") . '</a></li>';
 								}
