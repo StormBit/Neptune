@@ -16,7 +16,7 @@ html, body {
 	_right: 24px;
 }
 
-*+html input {
+*+html input, *+html textarea {
 	position: relative;
 	left: 20px;
 }
@@ -35,4 +35,10 @@ html, body {
 .dropdown-menu {
 	width: 180px;
 	border: 1px solid;
+}
+
+*+html div.clearfix span {
+	display: block;
+	position: relative;
+	right: 20px;
 }
