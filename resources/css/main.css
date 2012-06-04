@@ -66,8 +66,8 @@ form.acp input[type="text"] {
 
 .content:first-child {
 	margin-top: 0px;
-	margin-top: 64px \9;
-    *margin-top: 64px;
+	*margin-top: 64px;
+	_margin-top: 0px;
 }
 
 @media (min-width: 980px) {

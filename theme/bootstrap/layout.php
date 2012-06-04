@@ -72,7 +72,6 @@
 			<link href="resources/css/ie6.css" rel="stylesheet">
 			<script type="text/javascript" src="resources/js/ie6.js"></script>
 		<![endif]-->';}?>
-	
 	</head>
     <body>        
         <div class="navbar navbar-fixed-top">
@@ -120,20 +119,8 @@
         <div class="container">
             <div class="content">
                 <!--<ul class="breadcrumb"></ul>-->
-
-                <div id="content-area">
-                    <?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '<!--[if IE 7]>
-                        <br><br>
-                        <div class="iewarning">' . $NeptuneCore->var_get("locale","ie7warning1") . '<br><a href="http://www.browserchoice.eu/" target="_blank">' . $NeptuneCore->var_get("locale","ie7warning2") . '</a></div>
-                        <br><br>
-                    <![endif]-->
-                    <!--[if lte IE 6]>
-                        <div class="iewarning">
-                            <h1>' . $NeptuneCore->var_get("locale","ie6warning1") . '</h1>
-                            <p>' . $NeptuneCore->var_get("locale","ie6warning2") . '</p>
-                            <p><a href="http://www.browserchoice.eu/" target="_blank">' . $NeptuneCore->var_get("locale","ie6warning3") . '</a></p><br><br>
-                        </div>
-                    <![endif]-->';}?><h2><?php echo $NeptuneCore->var_get("output","title_prepend") . $NeptuneCore->var_get("output","title") . $NeptuneCore->var_get("output","title_append"); ?></h2>
+                <div class="content-area">
+                    <h2><?php echo $NeptuneCore->var_get("output","title_prepend") . $NeptuneCore->var_get("output","title") . $NeptuneCore->var_get("output","title_append"); ?></h2>
                     <?php
                         if ($NeptuneCore->var_get("output","subtitle") != "") {
                             echo "<p><small>" . $NeptuneCore->var_get("output","subtitle") . "</small></p>\n";
@@ -143,11 +130,11 @@
                     <hr>
                     <?php echo "\n" . $NeptuneCore->var_get("output","body") . "\n"; ?>
                 </div>
-			<hr>
-            <footer>
-                <div id="StormDEVLogo"></div><p><small>Copyright © 2012 StormDEV, All Rights Reserved<br>Page generated in <?php $time = microtime(); $endtime=substr($time,11).substr($time,1,9); echo round($endtime - $starttime,3) * 1000; ?> ms with <?php echo $NeptuneCore->var_get("system","querycount"); ?> queries and <?php $RAM["raw"] = memory_get_peak_usage(true);$unit=array('bytes','KiB','MiB','GiB','TiB','PiB');$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; echo $RAM["converted"]; ?> of RAM<br>Using the <?php echo NeptuneSQL::type(); ?> database engine</small></p>
-            </footer>
-        </div>
-	</div>
+	            <footer>
+	            	<hr>
+	                <div id="StormDEVLogo"></div><p><small>Copyright © 2012 StormDEV, All Rights Reserved<br>Page generated in <?php $time = microtime(); $endtime=substr($time,11).substr($time,1,9); echo round($endtime - $starttime,3) * 1000; ?> ms with <?php echo $NeptuneCore->var_get("system","querycount"); ?> queries and <?php $RAM["raw"] = memory_get_peak_usage(true);$unit=array('bytes','KiB','MiB','GiB','TiB','PiB');$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; echo $RAM["converted"]; ?> of RAM<br>Using the <?php echo NeptuneSQL::type(); ?> database engine</small></p>
+	            </footer>
+        	</div>
+		</div>
 	</body>
 </html>
