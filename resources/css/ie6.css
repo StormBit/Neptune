@@ -113,3 +113,17 @@ ul.thumbnails {margin-left:-20px;float:none;display:inline-block;zoom:1;clear:bo
 .ie6-hide {
 	display: none;
 }
+
+.content {
+	position: absolute;
+	top: 64px;	
+}
+
+hr {
+	z-index:0;
+}
+
+ul, li, a {
+	z-index: 9999;
+}
+

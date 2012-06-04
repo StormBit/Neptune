@@ -19,13 +19,4 @@
 	$conf['locale']['editprofile']		= "Edit Profile";
 	$conf['locale']['ucp']				= "User Control Panel";
 	$conf['locale']['acp']				= "Admin Control Panel";
-
-	// IE warnings
-	$conf['locale']['ie7warning1']		= "Warning: Please upgrade your browser to something compatible with the internet.";
-	$conf['locale']['ie7warning2']		= "There are many browsers to choose from, any except the one you are using is good.";
-	$conf['locale']['ie6warning1']		= "Unsupported Browser";
-	$conf['locale']['ie6warning2']		= "You are using an <b>extremely outdated, unsupported browser</b>.";
-	$conf['locale']['ie6warning3']		= "Please <b>keep it real</b> and use a browser that isn't <b>over 10 years old</b>.";
-	
-	
 ?>
