@@ -5,17 +5,15 @@ html, body {
 .container .content {
 	background-color: #fff;
 	padding: 20px;
-	margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
 	margin-bottom: 24px;
 	margin-top: 32px;
 	_margin-top: -24px;
 }
 
-.nav-collapse .nav {
-	_position: relative;
-	_right: 24px;
+.navbar .container {
+	width: 900px;
 }
-
+``
 *+html input, *+html textarea {
 	position: relative;
 	left: 20px;
