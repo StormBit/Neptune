@@ -114,7 +114,7 @@ ul.thumbnails {margin-left:-20px;float:none;display:inline-block;zoom:1;clear:bo
 	display: none;
 }
 
-.content {
+.content-ie6 {
 	position: absolute;
 	top: 64px;	
 }
