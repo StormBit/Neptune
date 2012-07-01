@@ -6,11 +6,6 @@
 		This file does some extremely basic database abstraction.
 	*/
 	
-	// Checking if NepNep is defined, for security purposes.	
-	if(!defined('NepNep')) {
-		die('NO U');
-	}
-	
 	$NeptuneCore->parseconf('system/config/mysql.php');
 	
 	class NeptuneSQL {
