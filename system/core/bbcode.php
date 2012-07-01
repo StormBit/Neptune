@@ -30,11 +30,14 @@
 			
 		$mailsearchstring = $urlsearchstring . " a-zA-Z0-9\.@";
 
+		$text = preg_replace("(\[url\=([$urlsearchstring]*)\ type=button](.+?)\[/url\])", '<a href="$1" class="btn">$2</a>', $text); 
+		$text = preg_replace("(\[url\=([$urlsearchstring]*)\ type=button-primary](.+?)\[/url\])", '<a href="$1" class="btn btn-primary">$2</a>', $text); 	
+
 		$text = preg_replace("/\[url\]([$urlsearchstring]*)\[\/url\]/", '<a href="$1">$1</a>', $text);
 		$text = preg_replace("(\[url\=([$urlsearchstring]*)\](.+?)\[/url\])", '<a href="$1">$2</a>', $text); 
-				
+
 		$text = preg_replace("/\[urlnew\]([$urlsearchstring]*)\[\/urlnew\]/", '<a href="$1" target="_blank">$1</a>', $text);
-        $text = preg_replace("(\[urlnew\=([$urlsearchstring]*)\](.+?)\[/urlnew\])", '<a href="$1" target="_blank">$2</a>', $text); 
+    $text = preg_replace("(\[urlnew\=([$urlsearchstring]*)\](.+?)\[/urlnew\])", '<a href="$1" target="_blank">$2</a>', $text); 
 		  
 		$text = preg_replace("(\[mail\]([$mailsearchstring]*)\[/mail\])", '<a href="mailto:$1">$1</a>', $text);
 		$text = preg_replace("/\[mail\=([$mailsearchstring]*)\](.+?)\[\/mail\]/", '<a href="mailto:$1">$2</a>', $text);
@@ -53,6 +56,7 @@
 		$text = preg_replace("/\[list=I\](.+?)\[\/list\]/s", '<ul class="listupperroman">$1</ul>' ,$text);
 		$text = preg_replace("/\[list=a\](.+?)\[\/list\]/s", '<ul class="listloweralpha">$1</ul>' ,$text);
 		$text = preg_replace("/\[list=A\](.+?)\[\/list\]/s", '<ul class="listupperalpha">$1</ul>' ,$text);
+	
 		$text = str_replace("[*]", "<li>", $text);
 
 		$text = preg_replace("(\[font=(.+?)\](.+?)\[\/font\])", "<span style=\"font-family: $1;\">$2</span>",$text);

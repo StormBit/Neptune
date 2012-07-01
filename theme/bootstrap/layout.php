@@ -118,7 +118,7 @@
         </div>
 
         <div class="container">
-            <div class="content">
+            <div class="content content-ie6">
                 <!--<ul class="breadcrumb"></ul>-->
                 <div class="content-area">
                     <h2><?php echo $NeptuneCore->var_get("output","title_prepend") . $NeptuneCore->var_get("output","title") . $NeptuneCore->var_get("output","title_append"); ?></h2>
