@@ -17,9 +17,6 @@
 	
 	date_default_timezone_set('America/Los_Angeles');
 	
-	// Defining NEPNEP for security purposes
-	define('NEPNEP', true, true);
-	
 	// Create the global array that will be used in many system functions to
 	// store state data.
 	global $Neptune;
@@ -71,7 +68,7 @@
 	//	$NeptuneCore->var_set("output","body","");
 	//}
 	if (file_exists("theme/" . $NeptuneCore->var_get("config","theme") . "/config.php")) {
-		parseconf("theme/" . $NeptuneCore->var_get("config","theme") . "/config.php");
+		$NeptuneCore->parseconf("theme/" . $NeptuneCore->var_get("config","theme") . "/config.php");
 	}
 	if ($NeptuneCore->var_get("theme","altlayout")) {
 		require("theme/" . $NeptuneCore->var_get("config","theme") . "/" . $NeptuneCore->var_get("theme","altlayout") . ".php");
