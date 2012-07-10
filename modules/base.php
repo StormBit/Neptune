@@ -86,7 +86,7 @@
 
 		$query = $NeptuneCore->var_get("system","query");	
 
-		$sql = $NeptuneSQL->query("DELETE FROM `neptune_pages` WHERE `pid` = '" . $NeptuneSQL->escape_string($query[3]) . "' LIMIT 1");
+		$sql = $NeptuneSQL->query("DELETE FROM `neptune_pages` WHERE `pid` = '" . $NeptuneSQL->escape_string($query[3]) . "'");
 		
 		header("Location: ?acp/page/list");
 	}	
