@@ -60,13 +60,6 @@
 	// Run whatever function is hooked to the current request.
 	$NeptuneCore->hook_run($NeptuneCore->var_get("system","query"));
 	
-	//if ($NeptuneCore->var_get("output","body") != "") {
-	//	if (!$NeptuneCore->var_get("output","notidy")) {
-	//		$NeptuneCore->var_set("output","body", clean_html_code($NeptuneCore->var_get("output","body")));
-	//	}
-	//} else {
-	//	$NeptuneCore->var_set("output","body","");
-	//}
 	if (file_exists("theme/" . $NeptuneCore->var_get("config","theme") . "/config.php")) {
 		$NeptuneCore->parseconf("theme/" . $NeptuneCore->var_get("config","theme") . "/config.php");
 	}
