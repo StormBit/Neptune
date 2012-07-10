@@ -1,6 +1,4 @@
-* Update to Bootstrap 2
 * Add breadcrumbs
 * Add support for a blog-style mode
 * Cretae a forum module
-* Add PostGreSQL support
 * Localize

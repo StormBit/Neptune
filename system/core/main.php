@@ -16,7 +16,6 @@
 			
 			// Loading the rest of the core files. 
 			require_once('system/core/bbcode.php');
-			require_once("system/core/tidy.php");
 			$this->parseconf('system/config/core.php');
 			
 			$this->parseconf('system/locale/' . $this->var_get("config","locale") . '.php');
