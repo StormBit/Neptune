@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `neptune_pages` (
   `name` text NOT NULL,
   `content` longtext NOT NULL,
   `author` text NOT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `editor` text NOT NULL,
   `edited` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `bbcode` int(11) NOT NULL,
