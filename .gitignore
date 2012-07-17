@@ -1,4 +1,4 @@
 system/config/mysql.php
 system/config/pgsql.php
 system/config/core.php
-modules/*
+modules/*.php
