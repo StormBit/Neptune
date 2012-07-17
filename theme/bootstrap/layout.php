@@ -34,7 +34,7 @@
 		<script type="text/javascript" src="resources/js/jquery-ui-1.8.20.custom.min.js"></script>
 		<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>          
         <script type="text/javascript" src="resources/js/html5.js"></script>
-		<!--[if gte IE 8]><!--><script type="text/javascript" src="resources/js/respond.min.js"><!--<![endif]--></script><?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
+		<!--[if gte IE 8]><!--><script type="text/javascript" src="resources/js/respond.min.js"></script><!--<![endif]--><?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
         <!--[if IE]>
             <script type="text/javascript">
 				$(function() {
@@ -75,6 +75,7 @@
 			<link href="resources/css/ie6.css" rel="stylesheet">
 			<script type="text/javascript" src="resources/js/ie6.js"></script>
 		<![endif]-->';}?>
+		
 	</head>
     <body>        
         <div class="navbar navbar-fixed-top">
