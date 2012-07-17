@@ -70,6 +70,8 @@
 	// Run whatever function is hooked to the current request.
 	$NeptuneCore->hook_run($NeptuneCore->var_get("system","query"));
 	
+	$NeptuneCore->footer("Modules loaded: " . $NeptuneCore->var_get("footer","modules"));
+	
 	if (file_exists("theme/" . $NeptuneCore->var_get("config","theme") . "/config.php")) {
 		$NeptuneCore->parseconf("theme/" . $NeptuneCore->var_get("config","theme") . "/config.php");
 	}

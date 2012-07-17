@@ -102,6 +102,14 @@
 			$this->var_set("output","subtitle",$text);
 		}
 		
+		function footer($footer) {
+			$this->var_append("output","footer","<br>" . $footer);
+		}
+		
+		function register_module($mod) {
+			$this->var_append("footer","modules",$mod . " ");
+		}
+		
 		function neptune_active($id) {
 			$this->var_set("output","menu_active",$id);
 		}
