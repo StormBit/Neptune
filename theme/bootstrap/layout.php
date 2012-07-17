@@ -2,7 +2,7 @@
 <html lang="<?php echo $NeptuneCore->var_get("config","locale"); ?>">
     <head>
         <meta charset="utf-8">
-        <title><?php echo $NeptuneCore->var_get("output","title"); ?> :: <?php echo $NeptuneCore->var_get("config","sitename"); ?></title>
+        <title><?php echo $NeptuneCore->var_get("output","title"); ?><?php if (!$NeptuneCore->var_get("output","rawtitle")) { echo " :: " . $NeptuneCore->var_get("config","sitename"); } ?></title>
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
