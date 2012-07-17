@@ -5,7 +5,9 @@
 
 		Module that does all of the basic tasks. 
 	*/
-
+	
+	$NeptuneCore->register_module("neptune_base");
+	
 	function mod_core_page() {
 		global $NeptuneCore;
 		global $NeptuneSQL;
