@@ -156,7 +156,8 @@
 		}
 		
 		function fatal_error($error) {
-			die($error);
+			$this->title("Error");
+			$this->neptune_echo($error);
 		}
 		
 		function footer_timer() {
@@ -191,5 +192,24 @@
 			
 			return $NeptuneMenu;
 		}
+		
+		function display() {
+			global $NeptuneCore, $starttime;
+			
+			$this->footer("Modules loaded: " . $this->var_get("footer","modules"));
+		
+			if (file_exists("theme/" . $this->var_get("config","theme") . "/config.php")) {
+				$this->parseconf("theme/" . $this->var_get("config","theme") . "/config.php");
+			}
+			if ($this->var_get("theme","altlayout")) {
+				require("theme/" . $this->var_get("config","theme") . "/" . $this->var_get("theme","altlayout") . ".php");
+			} else {
+				require("theme/" . $this->var_get("config","theme") . "/layout.php");
+			}
+		
+			exit;
+		}
 	}
+	
+
 ?>
