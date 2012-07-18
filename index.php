@@ -19,10 +19,7 @@
 	
 	// Create the global array that will be used in many system functions to
 	// store state data.
-	global $Neptune;
-	global $NeptuneCore;
-	global $NeptuneSQL;
-	global $NeptuneAdmin;
+	global $Neptune, $NeptuneCore, $NeptuneSQL, $NeptuneAdmin;
 	
 	// Load Classes:
 	// * Core
@@ -55,7 +52,6 @@
 		} 
 		closedir($handle); 
 	}	
-	
 	// ...followed by loading user modules.
 	if ($handle = opendir('modules')) { 
 		while (false !== ($file = readdir($handle))) { 
@@ -65,19 +61,9 @@
 		} 
 		closedir($handle); 
 	}	
-
 	
 	// Run whatever function is hooked to the current request.
 	$NeptuneCore->hook_run($NeptuneCore->var_get("system","query"));
 	
-	$NeptuneCore->footer("Modules loaded: " . $NeptuneCore->var_get("footer","modules"));
-	
-	if (file_exists("theme/" . $NeptuneCore->var_get("config","theme") . "/config.php")) {
-		$NeptuneCore->parseconf("theme/" . $NeptuneCore->var_get("config","theme") . "/config.php");
-	}
-	if ($NeptuneCore->var_get("theme","altlayout")) {
-		require("theme/" . $NeptuneCore->var_get("config","theme") . "/" . $NeptuneCore->var_get("theme","altlayout") . ".php");
-	} else {
-		require("theme/" . $NeptuneCore->var_get("config","theme") . "/layout.php");
-	}
+	$NeptuneCore->display();
 ?>
