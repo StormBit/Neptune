@@ -123,7 +123,7 @@
 		}
 	}
 		
-	function neptune_get_username() {
+	function neptune_get_username($display = true) {
 		global $NeptuneCore;
 		global $NeptuneSQL;
 		
@@ -139,9 +139,40 @@
 			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username' AND `password` = '$Password'");
 			$result = $NeptuneSQL->fetch_array($sql);
 			
-			return $result["displayname"];
+			if ($display) {
+				return $result["displayname"];
+			} else {
+				return $result["username"];
+			}
 		} else {
 			return "Guest";
+		}
+	}
+	
+	function neptune_get_email() {
+		global $NeptuneCore;
+		global $NeptuneSQL;
+		
+		if (neptune_get_permissions()) {
+			// Create new SQL class if it doesn't already exist. 
+			if(!isset($NeptuneSQL)) {
+				$NeptuneSQL = new NeptuneSQL();
+			}
+			
+			$Username = $NeptuneSQL->escape_string($_COOKIE["NeptuneUser"]);
+			$Password = $NeptuneSQL->escape_string($_COOKIE["NeptunePass"]);
+			
+			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username' AND `password` = '$Password'");
+			$result = $NeptuneSQL->fetch_array($sql);
+			
+			if ($result["email"] != "") {
+				$email = $result["email"];
+			} else {
+				$email = "None Entered";
+			}
+			return $email;
+		} else {
+			return "N/A";
 		}
 	}
 	
