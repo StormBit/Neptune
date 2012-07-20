@@ -102,8 +102,16 @@
 			$this->var_set("output","subtitle",$text);
 		}
 		
-		function footer($footer) {
-			$this->var_append("output","footer","<br>" . $footer);
+		function header($header) {
+			$this->var_append("output","header","\n" . $header);
+		}
+		
+		function footer($footer, $aftercontent = false) {
+			if (!$aftercontent) {
+				$this->var_append("output","footer","<br>" . $footer);
+			} else {
+				$this->var_append("output","footer2","" . $footer);
+			}
 		}
 		
 		function register_module($mod) {
