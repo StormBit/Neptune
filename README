@@ -1,9 +1,0 @@
-Neptune is a fast, lightweight, easy-to-use content management system written
-in PHP. 
-
-Features: 
-* Supports many database types (MySQL, PostgreSQL, SQLite3)
-* Themable - default theme uses Twitter Bootstrap v2.0
-* Modular - you can extend Neptune with easy-to-develop modules
-* Responsive - go to a bootstrap site on your smartphone and notice how well
-  it works.
