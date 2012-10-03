@@ -12,6 +12,8 @@
 		function __construct() {
 			global $NeptuneCore;
 			
+			$this->register_module("neptune_core");
+			
 			$this->var_set("system","querycount",0);
 			
 			// Loading the rest of the core files. 
@@ -52,6 +54,14 @@
 			return 0;
 		}
 
+		function var_clear($group,$variable) {
+			global $Neptune;
+						
+			$Neptune["stack"][$group][$variable] = '';
+
+			return 0;
+		}
+		
 		// Variable append: Does the same as the above, but appends.
 		function var_append($group,$variable,$data) {
 			global $Neptune;

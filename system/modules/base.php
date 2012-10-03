@@ -52,7 +52,95 @@
 	}
 	$NeptuneCore->hook_function("page","core","page");
 
+	function mod_core_article() {
+		global $NeptuneCore;
+		global $NeptuneSQL;
 
+		// Create new SQL class if it doesn't already exist. 
+		if( !isset($NeptuneSQL)) {
+			$NeptuneSQL = new NeptuneSQL();
+		}
+
+		$query = $NeptuneCore->var_get("system","query");
+
+		if (!array_key_exists(1,$query)) {
+			$query[1] = "index";
+		}
+
+		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_blog` WHERE `id` = '" . $NeptuneSQL->escape_string($query[1]) . "'");
+
+		if ($result = $NeptuneSQL->fetch_array($sql)) {
+			$NeptuneCore->title($result["name"]);
+			
+			if (neptune_get_permissions() >= 3) {
+				$NeptuneCore->var_set("output","title_prepend","<a href='?acp/article/edit/" . $query[1] . "'><!--[if !IE]>--><img src='resources/img/edit.svg' class='editButton'><!--<![endif]--><!--[if IE]><img src='resources/img/edit.png' class='editButton'><![endif]--></a>");
+			}
+			
+			if ($result["editor"]) {
+				$EditedString = ", and last edited by " . neptune_get_username_from_id($result["editor"]) . " on " . date(" F jS, Y ", strtotime($result['edited'])) . "at" . date(" g:i A", strtotime($result['edited']));
+			} else {
+				$EditedString = "";
+			}
+			
+			$NeptuneCore->subtitle("Page created by " . neptune_get_username_from_id($result["author"]) . " on" . date(" F jS, Y ", strtotime($result['created'])) . "at" . date(" g:i A", strtotime($result['created'])) . $EditedString);
+
+			if ($result["bbcode"] == 1) {
+				$NeptuneCore->neptune_echo_bbcode($result["content"]);
+			} else {
+				$NeptuneCore->neptune_echo($result["content"]);
+			}
+		} else {
+			$NeptuneCore->title("404 Page Not Found");
+			$NeptuneCore->neptune_echo("Your request could not be processed, because the specified page does not exist.");
+		}
+	}
+	$NeptuneCore->hook_function("article","core","article");
+
+	function mod_core_blog() {
+		global $NeptuneCore;
+		global $NeptuneSQL;
+
+		// Create new SQL class if it doesn't already exist. 
+		if( !isset($NeptuneSQL)) {
+			$NeptuneSQL = new NeptuneSQL();
+		}
+
+		$query = $NeptuneCore->var_get("system","query");
+		
+		$NeptuneCore->var_set("theme","altlayout","layout_blog"); 
+		
+		if (!array_key_exists(1,$query)) {
+			$query[1] = "index";
+		}
+
+		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_blog` ORDER BY `id` DESC");
+
+		while ($result = $NeptuneSQL->fetch_array($sql)) {
+			$NeptuneCore->title($result["title"]);
+			
+			if (neptune_get_permissions() >= 3) {
+				$NeptuneCore->var_set("output","title_prepend","<a href='?acp/article/edit/" . $query[1] . "'><!--[if !IE]>--><img src='resources/img/edit.svg' class='editButton'><!--<![endif]--><!--[if IE]><img src='resources/img/edit.png' class='editButton'><![endif]--></a>");
+			}
+			
+			if ($result["editor"]) {
+				$EditedString = ", and last edited by " . neptune_get_username_from_id($result["editor"]) . " on " . date(" F jS, Y ", strtotime($result['edited'])) . "at" . date(" g:i A", strtotime($result['edited']));
+			} else {
+				$EditedString = "";
+			}
+			
+			$NeptuneCore->subtitle("Page created by " . neptune_get_username_from_id($result["author"]) . " on" . date(" F jS, Y ", strtotime($result['created'])) . "at" . date(" g:i A", strtotime($result['created'])) . $EditedString);
+
+			if ($result["bbcode"] == 1) {
+				$NeptuneCore->neptune_echo_bbcode($result["content"]);
+			} else {
+				$NeptuneCore->neptune_echo($result["content"]);
+			}
+			
+			require('theme/bootstrap/snippet_blog_article.php');
+		}
+	}
+	$NeptuneCore->hook_function("blog","core","blog");
+	
 	function acp_page_new() {
 		global $NeptuneCore, $NeptuneSQL, $NeptuneAdmin;
 
