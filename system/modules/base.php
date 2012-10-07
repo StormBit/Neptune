@@ -138,6 +138,9 @@
 			
 			require('theme/bootstrap/snippet_blog_article.php');
 		}
+		
+		$NeptuneCore->var_set("output","rawtitle",true);
+		$NeptuneCore->title($NeptuneCore->var_get("config","sitename"));
 	}
 	$NeptuneCore->hook_function("blog","core","blog");
 	

@@ -1,4 +1,12 @@
+General:
 * Add breadcrumbs
-* Add support for a blog-style mode
 * Cretae a forum module
 * Localize
+* Global commenting
+
+Blog Module:
+* Individual article view
+* Pagination in index
+* Article editing
+* Article creation
+* Port article database tables to other databases
