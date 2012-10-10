@@ -70,7 +70,7 @@
 		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_blog` WHERE `id` = '" . $NeptuneSQL->escape_string($query[1]) . "'");
 
 		if ($result = $NeptuneSQL->fetch_array($sql)) {
-			$NeptuneCore->title($result["name"]);
+			$NeptuneCore->title($result["title"]);
 			
 			if (neptune_get_permissions() >= 3) {
 				$NeptuneCore->var_set("output","title_prepend","<a href='?acp/article/edit/" . $query[1] . "'><!--[if !IE]>--><img src='resources/img/edit.svg' class='editButton'><!--<![endif]--><!--[if IE]><img src='resources/img/edit.png' class='editButton'><![endif]--></a>");
