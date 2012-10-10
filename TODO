@@ -1,8 +1,15 @@
 General:
-* Add breadcrumbs
 * Cretae a forum module
 * Localize
 * Global commenting
+
+Layout:
+* Add breadcrumbs
+
+Editor:
+* Add support for Markdown
+* Add support for Textile
+* Add a selector between raw HTML / Markdown / Textile / BBCode modes
 
 Blog Module:
 * Individual article view
