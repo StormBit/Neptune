@@ -5,7 +5,7 @@
 					$notFirstArticle = true;
 				}
 				$NeptuneCore->var_append("output","blog-body",'<div class="content-area blog-article">
-                    <h2>' . $NeptuneCore->var_get("output","title_prepend") . $NeptuneCore->var_get("output","title") . $NeptuneCore->var_get("output","title_append") . '</h2>');
+                    <h2>' . $NeptuneCore->var_get("output","title_prepend") . '<a href="?article/' . $result["id"] . '">' . $NeptuneCore->var_get("output","title") . $NeptuneCore->var_get("output","title_append") . '</a></h2>');
                     if ($NeptuneCore->var_get("output","subtitle") != "") {
                         $NeptuneCore->var_append("output","blog-body","<p><small>" . $NeptuneCore->var_get("output","subtitle") . "</small></p>\n");
                     }
