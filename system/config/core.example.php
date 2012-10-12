@@ -13,8 +13,8 @@
 	$conf['config']['locale'] = 'en';
 	$conf['config']['theme'] = 'bootstrap';
 	
-	$conf['config']['favicon'] = 'resources/icon/favicon.ico';
-	$conf['config']['apple-touch-icon'] = 'resources/icon/apple-touch-icon.png';
+	//$conf['config']['favicon'] = 'resources/icon/favicon.ico';
+	//$conf['config']['apple-touch-icon'] = 'resources/icon/apple-touch-icon.png';
 	
 
 //	$conf['cache']['type'] = 'apc';

@@ -2,3 +2,7 @@ system/config/mysql.php
 system/config/pgsql.php
 system/config/core.php
 modules/*.php
+resources/icon/*.png
+resources/icon/*.ico
+resources/icon/*.gif
+resources/icon/*.jpg
