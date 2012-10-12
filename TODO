@@ -1,19 +1,27 @@
 General:
-* Cretae a forum module
-* Localize
-* Global commenting
+- Cretae a forum module (medium priority)
+- Create an e-commerce module (low priority)
+- Localize
+- Global commenting
 
 Layout:
-* Add breadcrumbs
+- Add breadcrumbs
 
 Editor:
-* Add support for Markdown
-* Add support for Textile
-* Add a selector between raw HTML / Markdown / Textile / BBCode modes
+- Add support for Markdown - potentially supporting PHPMarkdown's binds, to allow replacements
+- Add support for Textile - potentially supporting the official Textile module's binds, to allow replacements
+- Investigate HTML whitelisting
+- Add a selector between raw HTML / Markdown / Textile / BBCode modes
 
 Blog Module:
-* Individual article view
-* Pagination in index
-* Article editing
-* Article creation
-* Port article database tables to other databases
+- Individual article view
+- Pagination in index (potentially implementable into template syntax, should be optional)
+- Article creation
+- Article editing
+- Port article database tables to other databases
+
+Optimization:
+- Re-implement support for various opcode caches such as eAccelerator, APC or Memcached
+- Attempt to add special support for reverse caches such as Cloudflare, Polipo or Varnish
+- Investigate automagic minification of content served
+- [Continuous] Refactor wherever possible to maintain minimum memory footprint and execution time
