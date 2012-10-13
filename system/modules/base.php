@@ -42,6 +42,10 @@
 
 			if ($result["bbcode"] == 1) {
 				$NeptuneCore->neptune_echo_bbcode($result["content"]);
+			} else if ($result["bbcode"] == 2) {
+				$NeptuneCore->neptune_echo_markdown($result["content"]);
+			} else if ($result["bbcode"] == 3) {
+				$NeptuneCore->neptune_echo_textile($result["content"],false);
 			} else {
 				$NeptuneCore->neptune_echo($result["content"]);
 			}
@@ -95,6 +99,10 @@
 
 			if ($result["bbcode"] == 1) {
 				$NeptuneCore->neptune_echo_bbcode($result["content"]);
+			} else if ($result["bbcode"] == 2) {
+				$NeptuneCore->neptune_echo_markdown($result["content"]);
+			} else if ($result["bbcode"] == 3) {
+				$NeptuneCore->neptune_echo_textile($result["content"],false);
 			} else {
 				$NeptuneCore->neptune_echo($result["content"]);
 			}
@@ -174,9 +182,9 @@
 			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/article/new' method='POST'><div class='clearfix'><input type='text' placeholder='Post Name' name='posttitle' /></div>\n<div class='clearfix'><textarea name='postcontent'></textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Create'/></span></div></form>");
 		}
 	}
-	
 	$NeptuneAdmin->add_hook("Blog","article/new","New Article","Create a new blog post");
-		function acp_article_delete() {
+	
+	function acp_article_delete() {
 		global $NeptuneCore, $NeptuneSQL, $NeptuneAdmin;
 		
 		// Create new SQL class if it doesn't already exist. 
