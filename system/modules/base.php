@@ -149,6 +149,10 @@
 
 			if ($result["bbcode"] == 1) {
 				$NeptuneCore->neptune_echo_bbcode($result["content"]);
+			} else if ($result["bbcode"] == 2) {
+				$NeptuneCore->neptune_echo_markdown($result["content"]);
+			} else if ($result["bbcode"] == 3) {
+				$NeptuneCore->neptune_echo_textile($result["content"],false);
 			} else {
 				$NeptuneCore->neptune_echo($result["content"]);
 			}
@@ -214,7 +218,7 @@
 		$Articles = 0;
 		while ($result = $NeptuneSQL->fetch_array($sql)) {
 			if (!$Articles) {
-				$NeptuneCore->neptune_echo('<table class="table table-striped small-table"><thead><tr><th></th><th>Article Name</th></tr></thead><tbody>');
+				$NeptuneCore->neptune_echo('<table class="table table-striped small-table"><thead><tr><th></th><th>Article ID</th><th>Article Name</th></tr></thead><tbody>');
 			}
 			
 			$Articles++;
