@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `neptune_menu` (
   `path` text NOT NULL,
   `name` text NOT NULL,
   `type` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `neptune_pages` (
   `edited` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `bbcode` int(11) NOT NULL,
   `commenting` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -71,6 +71,26 @@ CREATE TABLE IF NOT EXISTS `neptune_users` (
   `avatar` longtext COLLATE utf8_bin,
   `signature` longtext COLLATE utf8_bin
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `neptune_blog`
+--
+
+CREATE TABLE IF NOT EXISTS `neptune_blog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` text NOT NULL,
+  `content` longtext NOT NULL,
+  `author` text NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `editor` text NOT NULL,
+  `edited` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `bbcode` int(11) NOT NULL,
+  `commenting` int(11) NOT NULL,
+  `sticky` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
