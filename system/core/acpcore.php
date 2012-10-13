@@ -47,6 +47,8 @@
 			
 			global $AdminHooks;
 			$AdminHooks = array();
+			
+			$AdminHooks["Core"] = array(); // Force the Core section to be at the top of the Admin Control Panel.
 		}
 		
 		function run() {
@@ -95,10 +97,6 @@
 			if (!isset($NeptuneAdmin)) {
 				$NeptuneAdmin = new NeptuneAdmin();
 			}	
-			
-			if (!isset($AdminHooks[$section])) {
-				$AdminHooks[$section] = array();
-			}
 			
 			if (!isset($AdminHooks[$section])) {
 				$AdminHooks[$section] = array();
