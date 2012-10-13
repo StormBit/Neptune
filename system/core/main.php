@@ -18,9 +18,6 @@
 			
 			// Loading the rest of the core files. 
 			require_once('system/core/bbcode.php');
-			require_once('system/lib/markdown.php');
-			require_once('system/lib/smartypants.php');
-			require_once('system/lib/textile.php');
 			$this->parseconf('system/config/core.php');
 			
 			$this->parseconf('system/locale/' . $this->var_get("config","locale") . '.php');
@@ -108,14 +105,19 @@
 		}
 		
 		function neptune_echo_markdown($text, $smartypants = true) {
+			require_once('system/lib/markdown.php');
+			require_once('system/lib/smartypants.php');
+			
 			$this->var_append("output","body",Markdown($text));
 		}
 		
 		function neptune_echo_textile($text, $restricted = true) {
+			require_once('system/lib/textile.php');
+			
 			global $Textile;
 			
 			// Create new Textile class if it doesn't already exist. 
-			if(!isset($Textile->Textile)) {
+			if(!isset($Textile)) {
 				$Textile = new Textile();
 			}
 
