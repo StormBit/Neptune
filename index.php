@@ -34,9 +34,7 @@
 	} else {
 		require_once("system/drivers/null.php");
 	}
-	if(!isset($NeptuneSQL)) {
-		$NeptuneSQL = new NeptuneSQL();
-	}
+
 	// * Admin Panel
 	require_once('system/core/acpcore.php');
 	if (!isset($NeptuneAdmin)) {
