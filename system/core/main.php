@@ -243,7 +243,7 @@
 			if (file_exists("theme/" . $this->var_get("config","theme") . "/config.php")) {
 				$this->parseconf("theme/" . $this->var_get("config","theme") . "/config.php");
 			}
-			if ($this->var_get("theme","altlayout")) {
+			if ($this->var_get("theme","altlayout") && file_exists("theme/" . $this->var_get("config","theme") . "/" . $this->var_get("theme","altlayout") . ".php")) {
 				require("theme/" . $this->var_get("config","theme") . "/" . $this->var_get("theme","altlayout") . ".php");
 			} else {
 				require("theme/" . $this->var_get("config","theme") . "/layout.php");

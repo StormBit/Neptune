@@ -17,4 +17,4 @@
 				$NeptuneCore->var_clear("output","title_append");
 				$NeptuneCore->var_clear("output","subtitle");
 				$NeptuneCore->var_clear("output","body");
-				?>
+?>
