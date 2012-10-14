@@ -131,16 +131,23 @@
         <div class="container">
             <div class="content content-ie6">
                 <!--<ul class="breadcrumb"></ul>-->
-                <div class="content-area">
-                    <h2><?php echo $NeptuneCore->var_get("output","title_prepend") . $NeptuneCore->var_get("output","title") . $NeptuneCore->var_get("output","title_append"); ?></h2>
-                    <?php
+                <?php
+					if ($NeptuneCore->var_get("theme","altlayout") == "layout_blog") {
+						echo $NeptuneCore->var_get("output","blog-body");
+					} else {
+						echo '<div class="content-area">
+                    <h2>';
+						echo $NeptuneCore->var_get("output","title_prepend") . $NeptuneCore->var_get("output","title") . $NeptuneCore->var_get("output","title_append");
+						echo '</h2>';
+
                         if ($NeptuneCore->var_get("output","subtitle") != "") {
                             echo "<p><small>" . $NeptuneCore->var_get("output","subtitle") . "</small></p>\n";
                         }
-                    ?>
 
-                    <hr>
-                    <?php echo "\n" . $NeptuneCore->var_get("output","body") . "\n"; ?>
+						echo '<hr>';
+						echo "\n" . $NeptuneCore->var_get("output","body") . "\n"; 
+					}
+				?>
                 </div>
 	            <footer>
 	            	<hr>
