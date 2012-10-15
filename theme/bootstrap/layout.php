@@ -111,8 +111,8 @@
 									}
 									echo '</ul></li>' . "\n";
 								} ?>
-							</span>
-                        </ul>
+							</ul>
+						</span>
 					</div>
 				</div>
             </div>
