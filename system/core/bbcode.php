@@ -24,7 +24,7 @@
 		
 		// Convert newlines to HTML newlines.
 		$text = str_replace("\r\n","\n",$text);
-		$text = str_replace("\n", "<br>\n\t\t\t\t\t\t\t", $text);
+		$text = str_replace("\n", "<br>\n\t\t\t\t\t", $text);
 
 		$urlsearchstring = " a-zA-Z0-9\:\/\-\?\&\.\=\_\~\#\%\'";
 			

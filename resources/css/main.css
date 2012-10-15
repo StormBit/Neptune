@@ -177,3 +177,7 @@ form.acp input[type="text"] {
 .float-right {
 	float: right;
 }
+
+.blog-article > h2 > a {
+	color: black;
+}

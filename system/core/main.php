@@ -18,6 +18,7 @@
 			
 			// Loading the rest of the core files. 
 			require_once('system/core/bbcode.php');
+			require_once('system/lib/truncateHtml.php');
 			$this->parseconf('system/config/core.php');
 			
 			$this->parseconf('system/locale/' . $this->var_get("config","locale") . '.php');
@@ -108,18 +109,26 @@
 			$this->var_append("output","body",$text);
 		}
 		
-		function neptune_echo_bbcode($text) {
-			$this->var_append("output","body",neptune_bbcode($text));
+		function neptune_echo_bbcode($text,$trim = 0) {
+			if ($trim == 0) {
+				$this->var_append("output","body",neptune_bbcode($text));
+			} else {
+				$this->var_append("output","body",truncateHtml(neptune_bbcode($text),$trim));
+			}
 		}
 		
-		function neptune_echo_markdown($text, $smartypants = true) {
+		function neptune_echo_markdown($text, $smartypants = true,$trim = 0) {
 			require_once('system/lib/markdown.php');
 			require_once('system/lib/smartypants.php');
 			
-			$this->var_append("output","body",Markdown($text));
+			if ($trim == 0) {
+				$this->var_append("output","body",Markdown($text));
+			} else {
+				$this->var_append("output","body",truncateHtml(Markdown($text),$trim));
+			}
 		}
 		
-		function neptune_echo_textile($text, $restricted = true) {
+		function neptune_echo_textile($text, $restricted = true,$trim = 0) {
 			require_once('system/lib/textile.php');
 			
 			global $Textile;
@@ -128,11 +137,19 @@
 			if(!isset($Textile)) {
 				$Textile = new Textile();
 			}
-
-			if (!$restricted) {
-				$this->var_append("output","body",$Textile->TextileThis($text));
+			
+			if ($trim == 0) {
+				if (!$restricted) {
+					$this->var_append("output","body",$Textile->TextileThis($text));
+				} else {
+					$this->var_append("output","body",$Textile->TextileRestricted($text));
+				}
 			} else {
-				$this->var_append("output","body",$Textile->TextileRestricted($text));
+				if (!$restricted) {
+					$this->var_append("output","body",truncateHtml($Textile->TextileThis($text),$trim));
+				} else {
+					$this->var_append("output","body",truncateHtml($Textile->TextileRestricted($text),$trim));
+				}			
 			}
 		}
 		
