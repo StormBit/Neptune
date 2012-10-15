@@ -59,5 +59,13 @@
 			
 			return pg_escape_string($string);
 		}
-	}
+		
+		// PostgreSQL Row Count
+		function num_rows($sql) {
+			global $NeptuneCore;
+			global $Neptune;
+			
+			return pg_num_rows($sql);
+		}
+}
 ?>

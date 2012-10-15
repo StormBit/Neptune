@@ -58,5 +58,13 @@
 			
 			return mysql_real_escape_string($string);
 		}
+		
+		// MySQL Row Count
+		function num_rows($sql) {
+			global $NeptuneCore;
+			global $Neptune;
+			
+			return mysql_num_rows($sql);
+		}
 	}
 ?>

@@ -112,7 +112,6 @@ form.acp input[type="text"] {
 	width: 188px;
 	height: 64px;
 	background-image: url('../img/stormdev.png');
-	_background-image: url('../img/stormdev-ie6.gif');
 	background-repeat: no-repeat;
 }
 
@@ -126,7 +125,6 @@ form.acp input[type="text"] {
 		*/
 		*background-image: url('../img/stormdev.png');
 		background-image: url('../img/stormdev.png') \9;
-		_background-image: url('../img/stormdev-ie6.gif');		
 		
 		background-size: 100%;
 	}
@@ -165,21 +163,17 @@ form.acp input[type="text"] {
 	max-width: 640px;
 }
 
-.navbar .brand {
-  display: block;
-  float: left;
-  padding: 8px 20px 12px;
-  margin-left: -20px;
-  font-size: 20px;
-  font-weight: 200;
-  line-height: 1;
-  color: #FFFFFF;
-}
-
 .navbar .brand:hover {
   text-decoration: underline;
 }
 
 .draggable {
 	cursor: move;
+}
+
+.float-left {
+	float: left;
+}
+.float-right {
+	float: right;
 }

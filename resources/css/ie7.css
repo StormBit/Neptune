@@ -31,7 +31,7 @@ html, body {
 }
 
 .dropdown-menu {
-	width: 180px;
+	width: 185px;
 	border: 1px solid;
 }
 
@@ -39,4 +39,29 @@ html, body {
 	display: block;
 	position: relative;
 	right: 20px;
+}
+
+.nav-collapse.collapse {
+	height: auto;
+	overflow: visible;
+	position: relative;
+	top: 1px;
+}
+
+.content-area hr {
+	margin-top: 0px;
+}
+
+.blog-article {
+	padding-bottom: 12px;
+}
+
+ html>body .acp .btn {
+	position: relative;
+	*left: 20px;
+}
+
+hr {
+	margin-top: 8px;
+	margin-bottom: 8px;
 }

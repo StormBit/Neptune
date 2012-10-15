@@ -28,6 +28,11 @@
 		function escape_string($string) {
 			return $string;
 		}
+		
+		//NullNumRows
+		function num_rows($sql) {
+			return 0;
+		}
 	}
 	
 	$NeptuneCore->var_set("config","sitename","Neptune CMS");

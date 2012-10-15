@@ -15,6 +15,7 @@
 	$conf['locale']['mismatchedpass']	= "Die Passwörter stimmen nicht überein.";
 	$conf['locale']['loginfailed']		= "Anmeldung fehlgeschlagen.";
 	$conf['locale']['baduserpass']		= "Benutzername und Passwort stimmen nicht überein.";
+	$conf['locale']['ie6useraccounts']	= "User Accounts are not supported in Internet Explorer 6. Please update your web browser.";
 	
 	// Dropdown menu stuff
 	$conf['locale']['editprofile']		= "Profil ändern";

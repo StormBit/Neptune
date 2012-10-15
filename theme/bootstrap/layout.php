@@ -22,18 +22,7 @@
 		<link href="resources/css/main.css" rel="stylesheet">
 		
         <?php
-			$query = "";
-			
-			if (isset($_SERVER["QUERY_STRING"])) {
-				$query = $_SERVER["QUERY_STRING"];
-			}
-			if ($query == "") { $query = "page/index"; }
-			
-			$cssid = "menu_" . preg_replace('/[^a-zA-Z0-9\s]/', "_", $query);
-			
-			$query2 = $NeptuneCore->var_get("system","query");
-			
-            echo '<style type="text/css">#' . $cssid . ', #menu_' . $query2[0] . '{background-color:rgba(0, 0, 0, 0.5);background-color:#222;}</style>' . "\n";
+			$query = $NeptuneCore->var_get("system","query");
         ?>
 
 		<script type="text/javascript" src="resources/js/jquery.js"></script>
@@ -81,12 +70,12 @@
 			<link href="resources/css/ie6.css" rel="stylesheet">
 			<script type="text/javascript" src="resources/js/ie6.js"></script>
 		<![endif]-->';}?>
-		
+
 		<?php echo $NeptuneCore->var_get("output","header"); ?>
 		
 	</head>
     <body>        
-        <div class="navbar navbar-fixed-top">
+        <div class="navbar navbar-fixed-top<?php if ($NeptuneCore->var_get('theme','inverse-navbar')) {echo ' navbar-inverse';}?>">
             <div class="navbar-inner">
                 <div class="container">
 					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -95,33 +84,34 @@
 						<span class="icon-bar"></span>
 					</a>
 					<a class="brand" href="?"><?php echo $NeptuneCore->var_get("config","sitename"); ?></a>
-					<div class="nav-collapse">
+					<div class="nav-collapse collapse">
 						<ul class="nav">
 							<?php echo "\n";
 								$Menu = $NeptuneCore->generate_menu();
 								
-								foreach ($Menu as $key => $value) {
-									$path = $key;
-									
-									$key = ltrim($key,"?");
-									
-									$key = preg_replace('/[^a-zA-Z0-9\s]/', "_", $key );
-									$key = "menu_" . $key;
-									
-									echo "                        <li id=\"$key\"><a href=\"$path\">$value</a></li>\n";
+								$queryPath = "?" . implode("/",$query);
+
+								foreach ($Menu as $key => $value) {	
+									if ($key == $queryPath) {
+										echo "                        <li class=\"active\"><a href=\"$key\">$value</a></li>\n";
+									} else {
+										echo "                        <li><a href=\"$key\">$value</a></li>\n";
+									}
 								}
 							?>
 						</ul>
-                        <ul class="nav"><?php
-							if (neptune_get_permissions() == 0) {
-								echo '</ul><ul class="nav pull-right"><li id="menu_login"><a href="?login/' . implode("/",$NeptuneCore->var_get("system","query")) . '">' . $NeptuneCore->var_get("locale","login") . '</a></li>' . "\n" . '                            <li id="menu_register"><a href="?register/' . implode("/",$NeptuneCore->var_get("system","query")) . '">' . $NeptuneCore->var_get("locale","register") . '</a></li>' . "\n";
-							} else if (neptune_get_permissions() >= 1) {
-								echo '</ul><ul class="pull-right nav"><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">' . neptune_get_username() . ' <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="?logout/' . implode("/",$NeptuneCore->var_get("system","query")) . '"><div class="symbol">X</div> ' . $NeptuneCore->var_get("locale","logout") . '</a></li><li class="divider"></li><li><a href="?profile"><div class="symbol">p</div> ' . $NeptuneCore->var_get("locale","editprofile") . '</a></li><li><a href="?ucp"><div class="symbol">U</div> ' . $NeptuneCore->var_get("locale","ucp") . '</a></li>';
-								if (neptune_get_permissions() >= 3) {
-									echo "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?acp"><div class="symbol">S</div> ' . $NeptuneCore->var_get("locale","acp") . '</a></li>';
-								}
-								echo '</ul></li>' . "\n";
-							} ?>
+						<span class="ie6-hide">
+							<?php
+								if (neptune_get_permissions() == 0) {
+									echo '<ul class="nav"><li id="menu_login"><a href="?login/' . implode("/",$NeptuneCore->var_get("system","query")) . '">' . $NeptuneCore->var_get("locale","login") . '</a></li>' . "\n" . '                            <li id="menu_register"><a href="?register/' . implode("/",$NeptuneCore->var_get("system","query")) . '">' . $NeptuneCore->var_get("locale","register") . '</a></li>' . "\n";
+								} else if (neptune_get_permissions() >= 1) {
+									echo '</ul><ul class="pull-right nav"><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">' . neptune_get_username() . ' <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="?logout/' . implode("/",$NeptuneCore->var_get("system","query")) . '"><div class="symbol">X</div> ' . $NeptuneCore->var_get("locale","logout") . '</a></li><li class="divider"></li><li><a href="?profile"><div class="symbol">p</div> ' . $NeptuneCore->var_get("locale","editprofile") . '</a></li><li><a href="?ucp"><div class="symbol">U</div> ' . $NeptuneCore->var_get("locale","ucp") . '</a></li>';
+									if (neptune_get_permissions() >= 3) {
+										echo "\n                                    " . '<li class="divider"></li>' . "\n                                    " . '<li><a href="?acp"><div class="symbol">S</div> ' . $NeptuneCore->var_get("locale","acp") . '</a></li>';
+									}
+									echo '</ul></li>' . "\n";
+								} ?>
+							</span>
                         </ul>
 					</div>
 				</div>
@@ -133,7 +123,7 @@
                 <!--<ul class="breadcrumb"></ul>-->
                 <?php
 					if ($NeptuneCore->var_get("theme","altlayout") == "layout_blog") {
-						echo $NeptuneCore->var_get("output","blog-body");
+						echo $NeptuneCore->var_get("output","blog-body") . $NeptuneCore->var_get("output","body");
 					} else {
 						echo '<div class="content-area">
                     <h2>';
@@ -146,9 +136,9 @@
 
 						echo '<hr>';
 						echo "\n" . $NeptuneCore->var_get("output","body") . "\n"; 
+						echo "                </div>";
 					}
 				?>
-                </div>
 	            <footer>
 	            	<hr>
 	                <div id="StormDEVLogo"></div><?php echo $NeptuneCore->var_get("output","footer2"); ?><p><small>Copyright © 2012 StormDEV, All Rights Reserved<br>Page generated in <?php $time = microtime(); $endtime=substr($time,11).substr($time,1,9); echo round($endtime - $starttime,3) * 1000; ?> ms with <?php echo $NeptuneCore->var_get("system","querycount"); if ($NeptuneCore->var_get("system","querycount") == 1) { echo " query "; } else { echo " queries "; } ?> and <?php $RAM["raw"] = memory_get_peak_usage();$unit=array('bytes','KiB','MiB','GiB','TiB','PiB');$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; echo $RAM["converted"]; ?> of RAM<br>Using the <?php echo NeptuneSQL::type(); ?> database engine<?php echo $NeptuneCore->var_get("output","footer"); ?></small></p>

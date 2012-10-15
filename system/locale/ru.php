@@ -14,7 +14,8 @@
 	$conf['locale']['mismatchedpass']	= "Пароли не совпадают.";
 	$conf['locale']['loginfailed']		= "Авторизоваться не удалось.";
 	$conf['locale']['baduserpass']		= "Неправильная пара логин-пароль.";
-	
+	$conf['locale']['ie6useraccounts']	= "User Accounts are not supported in Internet Explorer 6. Please update your web browser.";
+
 	// Dropdown menu stuff
 	$conf['locale']['editprofile']		= "Edit Profile";
 	$conf['locale']['ucp']				= "User Control Panel";

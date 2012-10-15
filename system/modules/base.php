@@ -126,17 +126,32 @@
 		
 		$NeptuneCore->var_set("theme","altlayout","layout_blog"); 
 		
+		$InitialQuery = $query;
 		if (!array_key_exists(1,$query)) {
-			$query[1] = "index";
+			$query[1] = 1;
 		}
 
-		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_blog` ORDER BY `id` DESC");
+		$PostsPerPage = 10;
+		$Offset = ( $query[1] * $PostsPerPage) - $PostsPerPage;
+		
+		$OffsetNext = $Offset + $PostsPerPage;
+		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_blog` ORDER BY `id` DESC LIMIT {$PostsPerPage} OFFSET {$OffsetNext} ");
+		if ($result = $NeptuneSQL->fetch_array($sql)) {
+			$MorePosts = true;
+		} else {
+			$MorePosts = false;
+		}
+		
+		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_blog` ORDER BY `id` DESC LIMIT {$PostsPerPage} OFFSET {$Offset}");
 
+
+		$Results = 0;
 		while ($result = $NeptuneSQL->fetch_array($sql)) {
+			$Results++;
 			$NeptuneCore->title($result["title"]);
 			
 			if (neptune_get_permissions() >= 3) {
-				$NeptuneCore->var_set("output","title_prepend","<a href='?acp/article/edit/" . $query[1] . "'><!--[if !IE]>--><img src='resources/img/edit.svg' class='editButton'><!--<![endif]--><!--[if IE]><img src='resources/img/edit.png' class='editButton'><![endif]--></a>");
+				$NeptuneCore->var_set("output","title_prepend","<a href='?acp/article/edit/" . $result["id"] . "'><!--[if !IE]>--><img src='resources/img/edit.svg' class='editButton'><!--<![endif]--><!--[if IE]><img src='resources/img/edit.png' class='editButton'><![endif]--></a>");
 			}
 			
 			if ($result["editor"]) {
@@ -160,8 +175,30 @@
 			require('theme/bootstrap/snippet_blog_article.php');
 		}
 		
-		$NeptuneCore->var_set("output","rawtitle",true);
-		$NeptuneCore->title($NeptuneCore->var_get("config","sitename"));
+		if ($Results == 0) {
+			$NeptuneCore->var_del("theme","altlayout");
+			$NeptuneCore->title("404 No Results Found");
+			$NeptuneCore->neptune_echo("No results were found for the requested query.");
+		} else {
+			if (!array_key_exists(1,$InitialQuery)) {
+				$NeptuneCore->var_set("output","rawtitle",true);
+				$NeptuneCore->title($NeptuneCore->var_get("config","sitename"));
+			} else {
+				$NeptuneCore->title("Page " . ($Offset + $PostsPerPage) / $PostsPerPage);
+			}
+		}
+		
+		if ($query[1] > 1 || $MorePosts) {
+			$NeptuneCore->neptune_echo("<hr>");
+		}
+		
+		if ($query[1] > 1) {
+			$NeptuneCore->neptune_echo("<a href='?blog/" . ($query[1] - 1) . "' class='float-right'>Newer posts »</a>");
+		}
+		if ($MorePosts) {
+			$NeptuneCore->neptune_echo("<a href='?blog/" . ($query[1] + 1) . "'>« Older posts</a>");
+		}
+		$NeptuneCore->neptune_echo("&nbsp;");
 	}
 	$NeptuneCore->hook_function("blog","core","blog");
 	

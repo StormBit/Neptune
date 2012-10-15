@@ -57,5 +57,18 @@
 			$string = str_replace("`","\cx",$string);
 			return $database->escapeString($string);
 		}
+		
+		// SQLite3 Row Count
+		function num_rows($sql) {
+			global $NeptuneCore;
+			global $Neptune;
+			global $database;
+
+			$numRows = 0;
+			while ($this->fetch_array($sql)) {
+				$numRows ++;
+			}
+			return ($numRows);
+		}
 	}
 ?>
