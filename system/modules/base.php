@@ -163,15 +163,15 @@
 			$NeptuneCore->subtitle("Page created by " . neptune_get_username_from_id($result["author"]) . " on" . date(" F jS, Y ", strtotime($result['created'])) . "at" . date(" g:i A", strtotime($result['created'])) . $EditedString);
 
 			if ($result["bbcode"] == 1) {
-				$NeptuneCore->neptune_echo_bbcode($result["content"]);
+				$NeptuneCore->neptune_echo_bbcode($result["content"],2000);
 			} else if ($result["bbcode"] == 2) {
-				$NeptuneCore->neptune_echo_markdown($result["content"]);
+				$NeptuneCore->neptune_echo_markdown($result["content"],true,2000);
 			} else if ($result["bbcode"] == 3) {
-				$NeptuneCore->neptune_echo_textile($result["content"],false);
+				$NeptuneCore->neptune_echo_textile($result["content"],false,2000);
 			} else {
-				$NeptuneCore->neptune_echo($result["content"]);
+				$NeptuneCore->neptune_echo(truncateHtml($result["content"],2000));
 			}
-			
+			$NeptuneCore->neptune_echo("<p><a href='?article/{$result["id"]}'>Read more...</a></p>");
 			require('theme/bootstrap/snippet_blog_article.php');
 		}
 		
