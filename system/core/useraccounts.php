@@ -9,43 +9,47 @@
 	function mod_core_register() {
 		global $NeptuneCore;
 		global $NeptuneSQL;
-			
-		if (isset($_POST["submit"])) {
-			// Create new SQL class if it doesn't already exist. 
-			if(!isset($NeptuneSQL)) {
-				$NeptuneSQL = new NeptuneSQL();
-			}
-			
-			$Username = strtolower($NeptuneSQL->escape_string($_POST["user"]));
-			$Displayname = $NeptuneSQL->escape_string($_POST["user"]);
-			$Password = $NeptuneSQL->escape_string($_POST["pass1"]);
-			$Email = $NeptuneSQL->escape_string($_POST["email"]);
-			
-			$Password = hash("sha256", $NeptuneCore->var_get("auth","key") . $Username . $Password);
-			
-			if($_POST["pass1"] == $_POST["pass2"]) {
-				$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username'");
-				if ($NeptuneSQL->fetch_array($sql)) {
-					$NeptuneCore->fatal_error($NeptuneCore->var_get("locale","usernametaken"));
-				} else {
-					$sql = $NeptuneSQL->query("INSERT INTO `neptune_users` VALUES('$Username','$Displayname','$Password','$Email','0','1','" . date ("Y-m-d H:i:s") . "','" . date ("Y-m-d H:i:s") . "','0','0','','')");
-					setcookie("NeptuneUser", $Username, 2147483647, "/");
-					setcookie("NeptunePass", $Password, 2147483647, "/");
+				
+		if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6') !== false)) {
+			$NeptuneCore->fatal_error($NeptuneCore->var_get("locale","ie6useraccounts"));
+		} else {
+			if (isset($_POST["submit"])) {
+				// Create new SQL class if it doesn't already exist. 
+				if(!isset($NeptuneSQL)) {
+					$NeptuneSQL = new NeptuneSQL();
+				}
+				
+				$Username = strtolower($NeptuneSQL->escape_string($_POST["user"]));
+				$Displayname = $NeptuneSQL->escape_string($_POST["user"]);
+				$Password = $NeptuneSQL->escape_string($_POST["pass1"]);
+				$Email = $NeptuneSQL->escape_string($_POST["email"]);
+				
+				$Password = hash("sha256", $NeptuneCore->var_get("auth","key") . $Username . $Password);
+				
+				if($_POST["pass1"] == $_POST["pass2"]) {
+					$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username'");
+					if ($NeptuneSQL->fetch_array($sql)) {
+						$NeptuneCore->fatal_error($NeptuneCore->var_get("locale","usernametaken"));
+					} else {
+						$sql = $NeptuneSQL->query("INSERT INTO `neptune_users` VALUES('$Username','$Displayname','$Password','$Email','0','1','" . date ("Y-m-d H:i:s") . "','" . date ("Y-m-d H:i:s") . "','0','0','','')");
+						setcookie("NeptuneUser", $Username, 2147483647, "/");
+						setcookie("NeptunePass", $Password, 2147483647, "/");
 
-					$QueryString = $NeptuneCore->var_get("system","query");
-					unset($QueryString[0]);
-					header("Location: ?" . implode("/",$QueryString));
+						$QueryString = $NeptuneCore->var_get("system","query");
+						unset($QueryString[0]);
+						header("Location: ?" . implode("/",$QueryString));
+					}
+				} else {
+					$NeptuneCore->fatal_error($NeptuneCore->var_get("locale","mismatchedpass"));
 				}
 			} else {
-				$NeptuneCore->fatal_error($NeptuneCore->var_get("locale","mismatchedpass"));
+				$QueryString = $NeptuneCore->var_get("system","query");
+				unset($QueryString[0]);
+				
+				$NeptuneCore->title($NeptuneCore->var_get("locale","createaccount"));
+				$NeptuneCore->neptune_echo('<form action="?register/' . implode("/",$QueryString) . '" method="POST"><div class="clearfix"><input class="large" type="text" placeholder="' . $NeptuneCore->var_get("locale","username") . '" name="user" /></div><div class="clearfix"><input class="large" type="password" placeholder="' . $NeptuneCore->var_get("locale","password") . '" name="pass1" /></div><div class="clearfix"><input class="large" type="password" placeholder="' . $NeptuneCore->var_get("locale","passwordconfirm") . '" name="pass2" /></div><div class="clearfix"><input class="large" type="text" placeholder="' . $NeptuneCore->var_get("locale","emailoptional") . '" name="email" /></div><div class="clearfix"><button class="btn btn-primary" type="submit" name="submit">' . $NeptuneCore->var_get("locale","register") . '</button></div></form>');
+				$NeptuneCore->neptune_active("register-button");			
 			}
-		} else {
-			$QueryString = $NeptuneCore->var_get("system","query");
-			unset($QueryString[0]);
-			
-			$NeptuneCore->title($NeptuneCore->var_get("locale","createaccount"));
-			$NeptuneCore->neptune_echo('<form action="?register/' . implode("/",$QueryString) . '" method="POST"><div class="clearfix"><input class="large" type="text" placeholder="' . $NeptuneCore->var_get("locale","username") . '" name="user" /></div><div class="clearfix"><input class="large" type="password" placeholder="' . $NeptuneCore->var_get("locale","password") . '" name="pass1" /></div><div class="clearfix"><input class="large" type="password" placeholder="' . $NeptuneCore->var_get("locale","passwordconfirm") . '" name="pass2" /></div><div class="clearfix"><input class="large" type="text" placeholder="' . $NeptuneCore->var_get("locale","emailoptional") . '" name="email" /></div><div class="clearfix"><button class="btn btn-primary" type="submit" name="submit">' . $NeptuneCore->var_get("locale","register") . '</button></div></form>');
-			$NeptuneCore->neptune_active("register-button");			
 		}
 	}
 	$this->hook_function("register","core","register");
@@ -53,37 +57,41 @@
 	function mod_core_login() {
 		global $NeptuneCore;
 		global $NeptuneSQL;
-			
-		if (isset($_POST["submit"])) {
-			// Create new SQL class if it doesn't already exist. 
-			if(!isset($NeptuneSQL)) {
-				$NeptuneSQL = new NeptuneSQL();
-			}
 		
-			$Username = strtolower($NeptuneSQL->escape_string($_POST["user"]));
-			$Password = $NeptuneSQL->escape_string($_POST["pass"]);
+		if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6') !== false)) {
+			$NeptuneCore->fatal_error($NeptuneCore->var_get("locale","ie6useraccounts"));
+		} else {
+			if (isset($_POST["submit"])) {
+				// Create new SQL class if it doesn't already exist. 
+				if(!isset($NeptuneSQL)) {
+					$NeptuneSQL = new NeptuneSQL();
+				}
 			
-			$Password = hash("sha256", $NeptuneCore->var_get("auth","key") . $Username . $Password);
-			
-			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username' AND `password` = '$Password'");
-			if ($NeptuneSQL->fetch_array($sql)) {
-				setcookie("NeptuneUser", $Username, 2147483647, "/");
-				setcookie("NeptunePass", $Password, 2147483647, "/");
+				$Username = strtolower($NeptuneSQL->escape_string($_POST["user"]));
+				$Password = $NeptuneSQL->escape_string($_POST["pass"]);
 				
+				$Password = hash("sha256", $NeptuneCore->var_get("auth","key") . $Username . $Password);
+				
+				$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username' AND `password` = '$Password'");
+				if ($NeptuneSQL->fetch_array($sql)) {
+					setcookie("NeptuneUser", $Username, 2147483647, "/");
+					setcookie("NeptunePass", $Password, 2147483647, "/");
+					
+					$QueryString = $NeptuneCore->var_get("system","query");
+					unset($QueryString[0]);
+					header("Location: ?" . implode("/",$QueryString));
+				} else {
+					$NeptuneCore->title($NeptuneCore->var_get("locale","loginfailed"));
+					$NeptuneCore->neptune_echo($NeptuneCore->var_get("locale","baduserpass"));
+				}
+			} else {
 				$QueryString = $NeptuneCore->var_get("system","query");
 				unset($QueryString[0]);
-				header("Location: ?" . implode("/",$QueryString));
-			} else {
-				$NeptuneCore->title($NeptuneCore->var_get("locale","loginfailed"));
-				$NeptuneCore->neptune_echo($NeptuneCore->var_get("locale","baduserpass"));
+				
+				$NeptuneCore->title($NeptuneCore->var_get("locale","login"));
+				$NeptuneCore->neptune_echo('<form action="?login/' . implode("/",$QueryString) . '" method="POST"><div class="clearfix"><input class="large" type="text" placeholder="' . $NeptuneCore->var_get("locale","username") . '" name="user" /></div><div class="clearfix"><input class="large" type="password" placeholder="' . $NeptuneCore->var_get("locale","password") . '" name="pass" /></div><div class="clearfix"><button class="btn btn-primary" type="submit" name="submit">' . $NeptuneCore->var_get("locale","login") . '</button></div></form>');
+				$NeptuneCore->neptune_active("login-button");
 			}
-		} else {
-			$QueryString = $NeptuneCore->var_get("system","query");
-			unset($QueryString[0]);
-			
-			$NeptuneCore->title($NeptuneCore->var_get("locale","login"));
-			$NeptuneCore->neptune_echo('<form action="?login/' . implode("/",$QueryString) . '" method="POST"><div class="clearfix"><input class="large" type="text" placeholder="' . $NeptuneCore->var_get("locale","username") . '" name="user" /></div><div class="clearfix"><input class="large" type="password" placeholder="' . $NeptuneCore->var_get("locale","password") . '" name="pass" /></div><div class="clearfix"><button class="btn btn-primary" type="submit" name="submit">' . $NeptuneCore->var_get("locale","login") . '</button></div></form>');
-			$NeptuneCore->neptune_active("login-button");
 		}
 	}
 	$this->hook_function("login","core","login");
@@ -91,13 +99,16 @@
 	function mod_core_logout() {
 		global $NeptuneCore;
 
-		setcookie("NeptuneUser", "", 2147483647, "/");
-		setcookie("NeptunePass", "", 2147483647, "/");
-			
-		$QueryString = $NeptuneCore->var_get("system","query");
-		unset($QueryString[0]);
-		header("Location: ?" . implode("/",$QueryString));
-
+		if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6') !== false)) {
+			$NeptuneCore->fatal_error($NeptuneCore->var_get("locale","ie6useraccounts"));
+		} else {
+			setcookie("NeptuneUser", "", 2147483647, "/");
+			setcookie("NeptunePass", "", 2147483647, "/");
+				
+			$QueryString = $NeptuneCore->var_get("system","query");
+			unset($QueryString[0]);
+			header("Location: ?" . implode("/",$QueryString));
+		}
 	}
 	$this->hook_function("logout","core","logout");
 	

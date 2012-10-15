@@ -62,6 +62,14 @@
 			return 0;
 		}
 		
+		function var_del($group,$variable) {
+			global $Neptune;
+						
+			unset($Neptune["stack"][$group][$variable]);
+
+			return 0;
+		}
+		
 		// Variable append: Does the same as the above, but appends.
 		function var_append($group,$variable,$data) {
 			global $Neptune;

@@ -1,5 +1,9 @@
 body {background:#ffffff;background-image:none; padding:0}
-               
+
+.ie6-hide {
+	display: none;
+}   
+
 /* Original hacks by Jonathon Joyce (edited) */
 .row {margin:0;margin-left:-20px}
 .span1, .span2, .span3, .span4, .span5, .span6, .span7, .span8, .span9, .span10, .span11, .span12  {float:left;display:inline}
@@ -12,11 +16,12 @@ body {background:#ffffff;background-image:none; padding:0}
 .navbar .nav .active  a, .navbar .nav .active  a:hover {background-color:#000;color:#ffffff;text-decoration: none}
     .navbar .nav li {display:block;float:left}
         .navbar .nav li a {float:none;line-height:19px;padding:10px 10px 11px;color:#aaaaaa}
-		.navbar .brand:hover {color:#ffffff;text-decoration:none}
-        .navbar .nav li a:hover {background-color:transparent;color:#ffffff;text-decoration:none}
-
-        .navbar .nav .active a, 
-            .navbar .nav .active a:hover {color:#ffffff;text-decoration:none;background-color:#222222;background-color:#000}
+		.navbar .brand:hover {text-decoration:none}
+        .navbar .nav li a:hover {background-color:transparent;text-decoration:none}
+		
+		.navbar .nav .active a, 
+            .navbar .nav .active a:hover {text-decoration:none;}
+			
         .navbar .nav .open .dropdown-toggle, 
             .navbar .nav .active .dropdown-toggle,
             .navbar .nav .open.active .dropdown-toggle{background-color:transparent}
@@ -25,14 +30,14 @@ body {background:#ffffff;background-image:none; padding:0}
 
     .dropdown .dropdown-toggle {margin-bottom:1px;position:relative;top:2px;left:0px;}
     .navbar .nav li ul a, .navbar .nav li ul a:hover {color:black}
-	.dropdown-menu {width:160px}
+	.dropdown-menu {width:180px}
     .dropdown-menu li {width:100%}
         .dropdown-menu li a {width:100%;padding:3px 0px 3px 5px}
         .dropdown-menu li a:hover, 
         .dropdown-menu .active a, 
         .dropdown-menu .active a:hover {background-color:#0088CC;color:#FFFFFF;text-decoration:none}
 	.divider {width:100%;position:relative;left:10px;border-bottom: 1px solid;}
-		
+	
 /* Tabs */
 .nav-tabs li {float:left;display:inline;margin-bottom:-2px}
     .nav-tabs li a {padding: 9px 12px;line-height:14px;margin-right:2px}
@@ -110,13 +115,9 @@ ul.thumbnails {margin-left:-20px;float:none;display:inline-block;zoom:1;clear:bo
 .modal {position:relative;filter:alpha(opacity=99);top: 55%}
     .modal-header a.close {cursor: pointer}
 
-.ie6-hide {
-	display: none;
-}
-
 .content-ie6 {
 	position: absolute;
-	top: 64px;	
+	top: 65px;	
 }
 
 hr {

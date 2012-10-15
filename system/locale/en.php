@@ -14,6 +14,7 @@
 	$conf['locale']['mismatchedpass']	= "Passwords do not match.";
 	$conf['locale']['loginfailed']		= "Login Failed";
 	$conf['locale']['baduserpass']		= "Incorrect username and/or password.";
+	$conf['locale']['ie6useraccounts']	= "User Accounts are not supported in Internet Explorer 6. Please update your web browser.";
 	
 	// Dropdown menu stuff
 	$conf['locale']['editprofile']		= "Edit Profile";
