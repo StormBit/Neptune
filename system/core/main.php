@@ -10,8 +10,18 @@
 	
 	class NeptuneCore {
 		function __construct() {
-			global $NeptuneCore;
+			global $starttime;
 			
+			$time=microtime();
+			$starttime=substr($time,11).substr($time,1,9);
+			
+			date_default_timezone_set('UTC');
+			
+			// Create the global arrays that will be used in many system functions to
+			// store state data.
+			global $Neptune, $NeptuneCore, $NeptuneSQL, $NeptuneAdmin;
+			$NeptuneCore = $this;
+
 			$this->register_module("neptune_core");
 			
 			$this->var_set("system","querycount",0);
@@ -42,6 +52,43 @@
 				// If there is no query string, use the default function hook instead.
 				$this->var_set("system","query",array($this->var_get("config","defaultact")));
 			}
+
+			// Load up the database driver. If there is no driver specified, or the driver
+			// cannot be found, instead load the Null database driver, which will redirect
+			// the user to the Neptune Installer.
+			if (file_exists("system/drivers/" . $this->var_get("database","type") . ".php")) {
+				require_once("system/drivers/" . $this->var_get("database","type") . ".php");
+
+			} else {
+				require_once("system/drivers/null.php");
+			}			
+
+			// Initialize Neptune's ACP (Administrator Control Panel)
+			require_once('system/core/acpcore.php');
+			if (!isset($NeptuneAdmin)) {
+					$NeptuneAdmin = new NeptuneAdmin();
+			}
+
+			// Load essential system modules...
+			if ($handle = opendir('system/modules')) { 
+				while (false !== ($file = readdir($handle))) { 
+					if ($file != "." && $file != ".." && !is_dir("system/modules/" . $file)) { 
+						include_once("system/modules/$file"); 
+					} 
+				} 
+				closedir($handle); 
+			}	
+			// ...followed by loading user modules.
+			if ($handle = opendir('modules')) { 
+				while (false !== ($file = readdir($handle))) { 
+					if ($file != "." && $file != ".." && !is_dir("modules/" . $file)) { 
+						include_once("modules/$file"); 
+					} 
+				} 
+				closedir($handle); 
+			}
+
+			$this->run();
 		}
 		
 		// Variable setting function: This allows functions to store variables that
@@ -260,9 +307,12 @@
 			return $NeptuneMenu;
 		}
 		
-		function display() {
+		function run() {
 			global $NeptuneCore, $starttime;
-			
+
+			// Run whatever function is hooked to the current request.
+			$NeptuneCore->hook_run($NeptuneCore->var_get("system","query"));
+	
 			$this->footer("Modules loaded: " . $this->var_get("footer","modules"));
 		
 			if (file_exists("theme/" . $this->var_get("config","theme") . "/config.php")) {
@@ -273,10 +323,11 @@
 			} else {
 				require("theme/" . $this->var_get("config","theme") . "/layout.php");
 			}
-		
+
 			exit;
 		}
 	}
 	
-
+	// Initialize a new instance of the class. The constructor function will taje it from there.
+	new NeptuneCore();
 ?>
