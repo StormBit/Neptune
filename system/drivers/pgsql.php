@@ -38,6 +38,7 @@
 			
 			$query = str_replace("`","",$query);
 			$query = str_replace("\cx","`",$query);
+			$query = str_replace("NULL","DEFAULT",$query);
 			
 			$NeptuneCore->var_set("system","querycount",$NeptuneCore->var_get("system","querycount") + 1);
 			

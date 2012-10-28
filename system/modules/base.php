@@ -194,11 +194,11 @@
 		
 		if ($query[1] > 1) {
 			$NeptuneCore->neptune_echo("<a href='?blog/" . ($query[1] - 1) . "' class='float-right'>Newer posts »</a>");
+			$NeptuneCore->neptune_echo("&nbsp;");
 		}
 		if ($MorePosts) {
 			$NeptuneCore->neptune_echo("<a href='?blog/" . ($query[1] + 1) . "'>« Older posts</a>");
 		}
-		$NeptuneCore->neptune_echo("&nbsp;");
 	}
 	$NeptuneCore->hook_function("blog","core","blog");
 	
