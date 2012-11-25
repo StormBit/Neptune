@@ -18,7 +18,7 @@ Team
 Neptune is currently developed and maintained by several members of the StormBit Development Team ([StormDEV](http://dev.stormbit.net)), these are:
 
 1. Alex "_[ReimuHakurei](http://reimuhakurei.net)_" Ingram — Project Manager and Lead Developer.
-2. Kevin "_[angelXwind](http://angelxwind.net)_" Tsai — Developer and Tester.
+2. _[angelXwind](http://angelxwind.net)_ — Developer and Tester.
 3. Alex "_[Antoligy](http://antoligy.com)_" Wilson — Developer and Tester.
 4. Alex "_[ArghArgh200](http://arghargh200.net)_" Mitchel — Module Developer and Tester.
 
