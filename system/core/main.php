@@ -328,6 +328,6 @@
 		}
 	}
 	
-	// Initialize a new instance of the class. The constructor function will taje it from there.
+	// Initialize a new instance of the class. The constructor function will take it from there.
 	new NeptuneCore();
 ?>

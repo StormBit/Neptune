@@ -6,7 +6,7 @@
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><![endif]-->
 		
 		<?php
 			if ($NeptuneCore->var_get("config","favicon")) {
@@ -136,7 +136,7 @@
 				?>
 				<footer>
 					<hr>
-					<div id="StormDEVLogo"></div><?php echo $NeptuneCore->var_get("output","footer2"); ?><p><small>Copyright © 2012 StormDEV, All Rights Reserved<br>Page generated in <?php $time = microtime(); $endtime=substr($time,11).substr($time,1,9); echo round($endtime - $starttime,3) * 1000; ?> ms with <?php echo $NeptuneCore->var_get("system","querycount"); if ($NeptuneCore->var_get("system","querycount") == 1) { echo " query "; } else { echo " queries "; } ?> and <?php $RAM["raw"] = memory_get_peak_usage();$unit=array('bytes','KiB','MiB','GiB','TiB','PiB');$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; echo $RAM["converted"]; ?> of RAM<br>Using the <?php echo NeptuneSQL::type(); ?> database engine<?php echo $NeptuneCore->var_get("output","footer"); ?></small></p>
+					<div id="StormDEVLogo"></div><?php echo $NeptuneCore->var_get("output","footer2"); ?><p><small>Copyright © 2012-<?php if (date("Y") < 2013) { echo "2013"; } else { echo date("Y"); } ?> StormDEV, All Rights Reserved.<br>Page generated in <?php $time = microtime(); $endtime=substr($time,11).substr($time,1,9); echo round($endtime - $starttime,3) * 1000; ?> ms with <?php echo $NeptuneCore->var_get("system","querycount"); if ($NeptuneCore->var_get("system","querycount") == 1) { echo " query "; } else { echo " queries "; } ?> and <?php $RAM["raw"] = memory_get_peak_usage();$unit=array('bytes','KiB','MiB','GiB','TiB','PiB');$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; echo $RAM["converted"]; ?> of RAM<br>Using the <?php echo NeptuneSQL::type(); ?> database engine<?php echo $NeptuneCore->var_get("output","footer"); ?></small></p>
 				</footer>
 			</div>
 		</div>
