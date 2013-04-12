@@ -36,7 +36,7 @@
 					if(("placeholder" in input)==false) { 
 						$("[placeholder]").focus(function() {
 							var i = $(this);
-							if(i.val() == i.attr("placeholder")) {
+							if(i.val() == i.attr("placeholder")) { 
 								i.val("").removeClass("placeholder");
 								if(i.hasClass("password")) {
 									i.removeClass("password");
@@ -130,6 +130,7 @@
 						}
 
 						echo '					<hr>';
+						echo $NeptuneCore->var_get("output","alert");
 						echo "\n					" . $NeptuneCore->var_get("output","body") . "\n"; 
 						echo "				</div>\n";
 					}
