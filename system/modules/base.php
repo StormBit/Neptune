@@ -21,6 +21,8 @@
 
 		if (!array_key_exists(1,$query)) {
 			$query[1] = "index";
+		} else if ($query[1] == "") {
+			$query[1] = "index"; 
 		}
 
 		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_pages` WHERE `pid` = '" . $NeptuneSQL->escape_string($query[1]) . "'");
@@ -51,7 +53,12 @@
 			}
 		} else {
 			$NeptuneCore->title("404 Page Not Found");
-			$NeptuneCore->neptune_echo("Your request could not be processed, because the specified page does not exist.");
+			$NeptuneCore->subtitle("That's an error.");
+			$NeptuneCore->neptune_echo("<p>Our server was unable to locate the page you requested.</p><p>This is usually caused by one of the following:</p><ul><li>The page was moved, renamed, or deleted</li><li>You, or someone else, mistyped the URL</li><li>You bookmarked a page, then time traveled into the past before the page existed</li></ul>");
+			if (neptune_get_permissions() >= 3) {
+				$NeptuneCore->neptune_echo("If you want, you can <a href='?acp/page/new/" . $query[1] . "'>create this page</a>.");
+			}
+				
 		}
 	}
 	$NeptuneCore->hook_function("page","core","page");
@@ -66,6 +73,12 @@
 		}
 
 		$query = $NeptuneCore->var_get("system","query");
+
+		// Just in case someone types "post" instead of "article", redirect them to what they were looking for. 
+		if ($query[0] == "post") {
+			$query[0] = "article";
+			@header("Location: ?" . implode($query,"/"));
+		}
 
 		if (!array_key_exists(1,$query)) {
 			$query[1] = "index";
@@ -107,11 +120,14 @@
 				$NeptuneCore->neptune_echo($result["content"]);
 			}
 		} else {
-			$NeptuneCore->title("404 Page Not Found");
-			$NeptuneCore->neptune_echo("Your request could not be processed, because the specified page does not exist.");
+			$NeptuneCore->title("404 Post Not Found");
+			$NeptuneCore->subtitle("That's an error.");
+			$NeptuneCore->neptune_echo("<p>Our server was unable to locate the post you requested. Please check and make sure you did not make any mistakes when typing out the URL.</p>");
 		}
 	}
 	$NeptuneCore->hook_function("article","core","article");
+	$NeptuneCore->hook_function("post","core","article"); // We bind this function to two hooks just in case someone types post instead of article. 
+
 
 	function mod_core_blog() {
 		global $NeptuneCore;
@@ -328,8 +344,14 @@
 
 			header("Location: ?page/$PageID");
 		} else {
+			$query = $NeptuneCore->var_get("system","query");
+
+			if (array_key_exists(3,$query)) {
+				$PageID = $query[3];
+			}
+
 			$NeptuneCore->title("New Page");
-			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/new' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' /></div>\n<div class='clearfix'><textarea name='pagecontent'></textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Create'/></span></div></form>");
+			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/new' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' value='" . $PageID . "' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' /></div>\n<div class='clearfix'><textarea name='pagecontent'></textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Create'/></span></div></form>");
 		}
 	}
 	$NeptuneAdmin->add_hook("Pages","page/new","New Page","Create a new page");
