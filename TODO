@@ -8,16 +8,10 @@ Layout:
 - Add breadcrumbs
 
 Editor:
-- Add support for Markdown - potentially supporting PHPMarkdown's binds, to allow replacements
-- Add support for Textile - potentially supporting the official Textile module's binds, to allow replacements
-- Investigate HTML whitelisting
 - Add a selector between raw HTML / Markdown / Textile / BBCode modes
 
 Blog Module:
-- Individual article view
-- Pagination in index (potentially implementable into template syntax, should be optional)
-- Article creation
-- Article editing
+- Pagination in index (potentially implementable into template syntax, should be optional) - partially complete
 - Port article database tables to other databases
 
 Optimization:
