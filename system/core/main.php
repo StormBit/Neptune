@@ -151,7 +151,10 @@
 			}
 		}
 
-		
+		function alert($text,$type) {
+			$this->var_append("output","alert","<div class=\"alert alert-" . $type . "\">\n" . $text . "\n</div>");
+		}
+
 		function neptune_echo($text) {
 			$this->var_append("output","body",$text);
 		}

@@ -40,9 +40,12 @@
 						header("Location: ?" . implode("/",$QueryString));
 					}
 				} else {
-					$NeptuneCore->fatal_error($NeptuneCore->var_get("locale","mismatchedpass"));
+					$NeptuneCore->alert($NeptuneCore->var_get("locale","mismatchedpass"),"error");
+					goto displayregister;
 				}
 			} else {
+				displayregister:
+
 				$QueryString = $NeptuneCore->var_get("system","query");
 				unset($QueryString[0]);
 				
@@ -81,10 +84,12 @@
 					unset($QueryString[0]);
 					header("Location: ?" . implode("/",$QueryString));
 				} else {
-					$NeptuneCore->title($NeptuneCore->var_get("locale","loginfailed"));
-					$NeptuneCore->neptune_echo($NeptuneCore->var_get("locale","baduserpass"));
+					$NeptuneCore->alert($NeptuneCore->var_get("locale","baduserpass"),"error");
+					goto displaylogin;
 				}
 			} else {
+				displaylogin:
+
 				$QueryString = $NeptuneCore->var_get("system","query");
 				unset($QueryString[0]);
 				
