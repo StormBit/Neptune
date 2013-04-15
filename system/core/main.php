@@ -316,6 +316,11 @@
 			// Run whatever function is hooked to the current request.
 			$NeptuneCore->hook_run($NeptuneCore->var_get("system","query"));
 	
+			if ($NeptuneCore->var_get("output","raw") == true) {
+				echo $NeptuneCore->var_get("output","body");
+				exit();
+			}
+			
 			$this->footer("Modules loaded: " . $this->var_get("footer","modules"));
 		
 			if (file_exists("theme/" . $this->var_get("config","theme") . "/config.php")) {
