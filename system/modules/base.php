@@ -448,28 +448,53 @@
 			$NeptuneSQL = new NeptuneSQL();
 		}
 		
-		$NeptuneCore->title("Edit Menu");
-		$NeptuneCore->subtitle("Edit the list of links in the navigation bar.");
-				
-		$NeptuneCore->neptune_echo('<table class="table table-striped small-table" id="menuedit"><thead><tr><th></th><th>Location</th><th>Label</th><th>Type</th></tr></thead><tbody>');
-		
-		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu`");
-		
-		$ItemNumber = 0;
-		
-		while ($result = $NeptuneSQL->fetch_array($sql)) {
-			$location = "";
-			$location =  $result["path"];
-			if ($result["type"] == 0) {
-				$type = "Internal";
-			} else {
-				$type = "External";
+		if ($_SERVER['REQUEST_METHOD'] == "POST") {
+			if ($_POST["action"] == "delete" && $_POST["id"] != "") {
+				$id = $NeptuneSQL->escape_string($_POST["id"]);
+
+				$NeptuneSQL->query("DELETE FROM `neptune_menu` WHERE `id` = '" . $id . "'");
+			} else if ($_POST["action"] == "add") {
+				if ($_POST["type"] == "internal") $type = 0;
+				else if ($_POST["type"] == "external") $type = 1;
+				else die("Invalid type.");
+
+				$name = $NeptuneSQL->escape_string($_POST["name"]);
+				$path = $NeptuneSQL->escape_string($_POST["path"]);
+				$NeptuneSQL->query("INSERT INTO `neptune_menu`(`id`, `position`, `path`, `name`, `type`) VALUES (NULL,'0','$path','$name','$type')");
 			}
-			$ItemNumber++;
-			$NeptuneCore->neptune_echo('<tr id="menuedit-num-' . $ItemNumber . '"><td style="width: 64px;"><div class="btn-group"><a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="javascript:;">Actions <span class="caret ie6-hide"></span></a><ul class="dropdown-menu"><li><a href="javascript:;"><i class="icon-edit"></i> Rename</a></li><li><a href="javascript:;" onclick="$(\'#menuedit-num-' . $ItemNumber . '\').hide(500, function(){$(\'#menuedit-num-' . $ItemNumber . '\').remove();});"><i class="icon-remove"></i> Delete</a></li></ul></div></td><td style="width: 160px;" class="item">' . $location . "</td><td class='item'>" . $result["name"] . "</td><td>" . $type . "</td></tr>");
+
+			$NeptuneCore->var_set("output","raw",true);
+			$RawData = true;
+			goto menuoutput;
+		} else {
+			$NeptuneCore->title("Edit Menu");
+			$NeptuneCore->subtitle("Edit the list of links in the navigation bar.");
+			
+			$RawData = false;
+
+			menuoutput:
+
+			$NeptuneCore->neptune_echo('<div id="menu-container"><table class="table table-striped small-table" id="menuedit"><thead><tr><th></th><th>Location</th><th>Label</th><th>Type</th></tr></thead><tbody>');
+			
+			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu`");
+			
+			while ($result = $NeptuneSQL->fetch_array($sql)) {
+				$location = "";
+				$location =  $result["path"];
+				if ($result["type"] == 0) {
+					$type = "Internal";
+				} else {
+					$type = "External";
+				}
+				
+				$ItemNumber = $result["id"];
+
+				$NeptuneCore->neptune_echo('<tr id="menuedit-num-' . $ItemNumber . '"><td style="width: 64px;"><div class="btn-group"><a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="javascript:;">Actions <span class="caret ie6-hide"></span></a><ul class="dropdown-menu"><li><a href="javascript:;"><i class="icon-edit"></i> Edit</a></li><li><a href="javascript:;" onclick="$(\'#menuedit-num-' . $ItemNumber . '\').hide(500, function(){$(\'#menuedit-num-' . $ItemNumber . '\').remove();});$.post(\'?acp/menu/edit\', success: function(data) { $(\'#menu-container\').html(data); } ,{ action: \'delete\', id: \'' . $ItemNumber . '\' } );"><i class="icon-remove"></i> Delete</a></li></ul></div></td><td style="width: 160px;" class="item">' . $location . "</td><td class='item'>" . $result["name"] . "</td><td>" . $type . "</td></tr>");
+			}
+			
+			$NeptuneCore->neptune_echo('</tbody></table><hr><input type="text" placeholder="Location" id="add_location"><br><input type="text" placeholder="Link Title" id="add_title"><br><div class="btn-group"><button class="btn btn-primary" onclick="$.post(\'?acp/menu/edit\', { action: \'add\', type: \'internal\', path: $(\'#add_location\').val(), name: $(\'#add_title\').val() } );">Add Internal</button><button class="btn" onclick="$.post(\'?acp/menu/edit\', { action: \'add\', type: \'external\', path: $(\'#add_location\').val(), name: $(\'#add_title\').val() } );">Add External</button></div><script type="text/javascript">var fixHelper = function(e, ui){ui.children().each(function() {$(this).width($(this).width());});return ui;}; $("#menuedit tbody").sortable({helper: fixHelper}); $("#menuedit tbody tr td.item").disableSelection();</script>');
+			if (!$RawData) $NeptuneCore->neptune_echo("</div>");
 		}
-		
-		$NeptuneCore->neptune_echo('</tbody></table><hr><input type="text" placeholder="Location" id="add_location"><br><input type="text" placeholder="Link Title" id="add_title"><div class="btn-group"><button class="btn btn-primary" onclick="addInternal();">Add Internal</button><button class="btn">Add External</button></div><script type="text/javascript">var fixHelper = function(e, ui){ui.children().each(function() {$(this).width($(this).width());});return ui;}; $("#menuedit tbody").sortable({helper: fixHelper}); $("#menuedit tbody tr td.item").disableSelection();var ItemNumber = ' . $ItemNumber . ';</script>');
 	}
 	$NeptuneAdmin->add_hook("Core","menu/edit","Edit Menu","Edit the list of links in the navigation bar.");
 ?>
