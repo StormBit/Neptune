@@ -11,6 +11,7 @@
 	$conf['locale']['passwordconfirm']	= "Password (confirm)";
 	$conf['locale']['emailoptional']	= "Email (optional)";
 	$conf['locale']['usernametaken']	= "Username already taken.";
+	$conf['locale']['usernameempty']	= "No username specified.";
 	$conf['locale']['mismatchedpass']	= "Passwords do not match.";
 	$conf['locale']['loginfailed']		= "Login Failed";
 	$conf['locale']['baduserpass']		= "Incorrect username and/or password.";
