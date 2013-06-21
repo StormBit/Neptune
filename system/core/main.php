@@ -83,7 +83,16 @@
 				while (false !== ($file = readdir($handle))) { 
 					if ($file != "." && $file != ".." && !is_dir("modules/" . $file)) { 
 						include_once("modules/$file"); 
-					} 
+					} else if ($file != "." && $file != ".." && is_dir("modules/" . $file)) {
+						if ($subhandle = opendir("modules/$file")) { 
+							while (false !== ($subfile = readdir($subhandle))) { 
+								if ($subfile != "." && $subfile != ".." && is_dir("modules/" . $file . "/" . $subfile)) {
+									include_once("modules/$file/$subfile/module.php");
+								}
+							}
+							closedir($subhandle);
+						}
+					}
 				} 
 				closedir($handle); 
 			}
