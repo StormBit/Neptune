@@ -302,6 +302,8 @@
 		function generate_menu() {
 			global $NeptuneCore, $NeptuneSQL, $NeptuneAdmin;
 		
+			return array();
+			
 			// Create new SQL class if it doesn't already exist. 
 			if( !isset($NeptuneSQL)) {
 				$NeptuneSQL = new NeptuneSQL();
