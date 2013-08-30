@@ -137,7 +137,43 @@
 				?>
 				<footer>
 					<hr>
-					<div id="StormDEVLogo"></div><?php echo $NeptuneCore->var_get("output","footer2"); ?><p><small>Copyright © 2012-<?php if (date("Y") < 2013) { echo "2013"; } else { echo date("Y"); } ?> StormDEV, All Rights Reserved.<br>Page generated in <?php $time = microtime(); $endtime=substr($time,11).substr($time,1,9); echo round($endtime - $starttime,3) * 1000; ?> ms with <?php echo $NeptuneCore->var_get("system","querycount"); if ($NeptuneCore->var_get("system","querycount") == 1) { echo " query "; } else { echo " queries "; } ?> and <?php $RAM["raw"] = memory_get_peak_usage();$unit=array('bytes','KiB','MiB','GiB','TiB','PiB');$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; echo $RAM["converted"]; ?> of RAM<br>Using the <?php echo NeptuneSQL::type(); ?> database engine<?php echo $NeptuneCore->var_get("output","footer"); ?></small></p>
+					<?php 
+						echo $NeptuneCore->var_get("output","footer2");
+					?>
+					
+					<p><small><?php
+						
+						if (date("Y") < 2013) { // Check if the server's clock is way behind. If it is, correct the copyright year. 
+							$year = "2013";
+						} else {
+							$year = date("Y");
+						}
+						
+						if (!$NeptuneCore->var_get("config","hide-stormdev")) {
+							echo "Powered by StormDEV Neptune CMS. Neptune CMS is &copy; 2012-" . $year . " StormDEV, All Rights Reserved.";
+						}
+						
+						if ($NeptuneCore->var_get("config","site-copyright")) {
+							echo $NeptuneCore->var_get("config","site-copyright");
+						}
+					
+						if (!$NeptuneCore->var_get("config","quiet-footer")) {
+							$time = microtime(); 
+							$endtime=substr($time,11).substr($time,1,9); 
+							
+							if ($NeptuneCore->var_get("system","querycount") == 1) {
+								$querytext = " query ";
+							} else { 
+								$querytext = " queries ";
+							}
+							
+							$RAM["raw"] = memory_get_peak_usage();
+							$unit = array('bytes','KiB','MiB','GiB','TiB','PiB');
+							$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i];
+							
+							echo "<br>Page generated in " . round($endtime - $starttime,3) * 1000 .  "ms with " . $NeptuneCore->var_get("system","querycount") . $querytext . " and " . $RAM["converted"] . " of RAM<br>Using the " .  NeptuneSQL::type() . "database engine" . $NeptuneCore->var_get("output","footer");
+						}
+					?></small></p>
 				</footer>
 			</div>
 		</div>
