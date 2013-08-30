@@ -22,7 +22,7 @@
 		<link href="resources/css/bbcode.css" rel="stylesheet">
 		<link href="resources/css/bootstrap.css" rel="stylesheet">
 		<link href="resources/css/bootstrap-responsive.css" rel="stylesheet">
-		<link href="resources/css/main.css" rel="stylesheet">
+		<link href="theme/bootstrap/style.css" rel="stylesheet">
 
 		<script type="text/javascript" src="resources/js/jquery.js"></script>
 		<script type="text/javascript" src="resources/js/jquery-ui-1.8.20.custom.min.js"></script>

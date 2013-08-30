@@ -1,10 +1,21 @@
+# Ignore config files. We have example ones, and if we leave these in, someone
+# is bound to accidentily commit their passwords and stuff. 
 system/config/mysql.php
 system/config/pgsql.php
 system/config/core.php
+
+# Ignore user modules. Again, someone is bound to accidentily commit modules
+# not intended for anyone but themselves, possibly containing passwords.
 modules/*
 modules-disabled/*
+
+# Ignore .bak files, and favicons. 
 *.bak
 resources/icon/*.png
 resources/icon/*.ico
 resources/icon/*.gif
 resources/icon/*.jpg
+
+# Ignore all themes other than the stock one. 
+theme/*
+!theme/bootstrap
