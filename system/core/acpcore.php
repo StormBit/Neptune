@@ -48,7 +48,7 @@
 			global $AdminHooks;
 			$AdminHooks = array();
 			
-			$AdminHooks["Core"] = array(); // Force the Core section to be at the top of the Admin Control Panel.
+			if (!$NeptuneCore->var_get("config","blacklist-system-modules")) $AdminHooks["Core"] = array(); // Force the Core section to be at the top of the Admin Control Panel, but only if blacklist-system-modules is false.
 		}
 		
 		function run() {

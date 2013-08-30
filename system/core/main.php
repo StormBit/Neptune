@@ -70,14 +70,16 @@
 			}
 
 			// Load essential system modules...
-			if ($handle = opendir('system/modules')) { 
-				while (false !== ($file = readdir($handle))) { 
-					if ($file != "." && $file != ".." && !is_dir("system/modules/" . $file)) { 
-						include_once("system/modules/$file"); 
+			if (!$NeptuneCore->var_get("config","blacklist-system-modules")) {	
+				if ($handle = opendir('system/modules')) { 
+					while (false !== ($file = readdir($handle))) { 
+						if ($file != "." && $file != ".." && !is_dir("system/modules/" . $file)) { 
+							include_once("system/modules/$file"); 
+						} 
 					} 
-				} 
-				closedir($handle); 
-			}	
+					closedir($handle); 
+				}	
+			}
 			// ...followed by loading user modules.
 			if ($handle = opendir('modules')) { 
 				while (false !== ($file = readdir($handle))) { 

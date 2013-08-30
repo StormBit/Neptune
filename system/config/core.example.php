@@ -20,6 +20,8 @@
 	$conf['config']['hide-stormdev'] = false;
 	$conf['config']['site-copyright'] = "&copy; 2013 My Amazing Website";
 
+	$conf['config']['blacklist-system-modules'] = false; // Disables the stock modules. Useful if you are building a site using fully customized modules.
+	
 	// $conf['cache']['type'] = 'apc';
 	// $conf['cache']['expire'] = 10;
 	$conf['cache']['type'] = 'none';
