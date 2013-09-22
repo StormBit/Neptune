@@ -1,9 +1,9 @@
 <?php
 	/*
 		Neptune Content Management System
-		MySQL Config - /system/config/mysql.php
+		PostgresSQL Config - /system/config/pgsql.php
 
-		Stores MySQL configuration.
+		Stores PostgresSQL configuration.
 	*/
 
 	$conf['database']['host'] = 'localhost';
