@@ -22,7 +22,6 @@ Neptune is currently developed and maintained by several members of the StormBit
 3. Alex _"[Antoligy](http://antoligy.com)"_ Wilson — Developer and Tester.
 4. Alex _"[ArghArgh200](http://arghargh200.net)"_ Mitchel — Module Developer and Tester.
 
-Our official development repo is hosted with [BitBucket](https://bitbucket.org/StormDEV/neptune/), however we also run a mirror repo on [Github](https://github.com/StormBit/Neptune). Both accept patches.
 
 Neptune's official development IRC channel is [#Neptune](irc://irc.stormbit.net/Neptune) on the [StormBit IRC Network](http://stormbit.net). The network also provides webchat which can be accessed [here](http://iris.stormbit.net/?channels=Neptune). New commits are broadcast to the channel via [Notifico](http://n.tkte.ch/antoligy/Neptune).
 
