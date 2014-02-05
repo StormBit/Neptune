@@ -7,7 +7,7 @@
 		rest of the Neptune CMS. It contains code for printing output, setting
 		and retrieving variables, and other core operations.
 	*/
-	
+  
 	class NeptuneCore {
 		function __construct() {
 			global $starttime;
@@ -280,12 +280,18 @@
 					unset($variable);
 				}
 				unset($conf);
-			}
+			} else {
+        $this->fatal_error("A core function or module attempted to load the configuration file " . $config . ", but the file does not exist.");
+      }
 		}
 		
 		function fatal_error($error) {
 			$this->title("Error");
 			$this->neptune_echo($error);
+			
+			require("system/theme/fallback.php");
+			
+			exit;
 		}
 		
 		function footer_timer() {
@@ -341,8 +347,10 @@
 			}
 			if ($this->var_get("theme","altlayout") && file_exists("theme/" . $this->var_get("config","theme") . "/" . $this->var_get("theme","altlayout") . ".php")) {
 				require("theme/" . $this->var_get("config","theme") . "/" . $this->var_get("theme","altlayout") . ".php");
-			} else {
+			} else if (file_exists("theme/" . $this->var_get("config","theme") . "/layout.php")) {
 				require("theme/" . $this->var_get("config","theme") . "/layout.php");
+			} else {
+        $this->fatal_error("The theme file specified in the system configuration is missing.");
 			}
 
 			exit;
