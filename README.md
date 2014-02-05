@@ -1,4 +1,7 @@
-#Neptune is a fast, lightweight, easy-to-use content management system written in PHP.#
+Neptune
+=======
+
+Neptune is a fast, lightweight, easy-to-use content management system written in PHP.
 
 About
 ------------
