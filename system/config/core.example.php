@@ -18,7 +18,7 @@
 	
 	$conf['config']['quiet-footer'] = false;
 	$conf['config']['hide-stormdev'] = false;
-	$conf['config']['site-copyright'] = "&copy; 2013 My Amazing Website";
+	$conf['config']['site-copyright'] = "Copyright &copy; " . date("Y") . " My Amazing Website, All Rights Reserved.";
 
 	$conf['config']['blacklist-system-modules'] = false; // Disables the stock modules. Useful if you are building a site using fully customized modules.
 	

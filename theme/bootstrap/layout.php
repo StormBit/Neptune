@@ -156,7 +156,7 @@
 						}
 						
 						if ($NeptuneCore->var_get("config","site-copyright")) {
-							echo $NeptuneCore->var_get("config","site-copyright");
+							echo "<br>" . $NeptuneCore->var_get("config","site-copyright");
 						}
 					
 						if (!$NeptuneCore->var_get("config","quiet-footer")) {
@@ -173,7 +173,7 @@
 							$unit = array('bytes','KiB','MiB','GiB','TiB','PiB');
 							$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i];
 							
-							echo "<br>Page generated in " . round($endtime - $starttime,3) * 1000 .  "ms with " . $NeptuneCore->var_get("system","querycount") . $querytext . " and " . $RAM["converted"] . " of RAM<br>Using the " .  NeptuneSQL::type() . "database engine" . $NeptuneCore->var_get("output","footer");
+							echo "<br>Page generated in " . round($endtime - $starttime,3) * 1000 .  "ms with " . $NeptuneCore->var_get("system","querycount") . $querytext . " and " . $RAM["converted"] . " of RAM<br>Using the " .  NeptuneSQL::type() . " database engine" . $NeptuneCore->var_get("output","footer");
 						}
 					?></small></p>
 				</footer>
