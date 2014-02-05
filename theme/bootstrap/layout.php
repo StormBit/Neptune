@@ -125,8 +125,10 @@
 						echo $NeptuneCore->var_get("output","title_prepend") . $NeptuneCore->var_get("output","title") . $NeptuneCore->var_get("output","title_append");
 						echo "</h2>\n";
 
-						if ($NeptuneCore->var_get("output","subtitle") != "") {
-							echo "					<p><small>" . $NeptuneCore->var_get("output","subtitle") . "</small></p>\n";
+						if ($NeptuneCore->var_get('theme','subtitle')) {
+							if ($NeptuneCore->var_get("output","subtitle") != "") {
+								echo "					<p><small>" . $NeptuneCore->var_get("output","subtitle") . "</small></p>\n";
+							}
 						}
 
 						echo '					<hr>';
