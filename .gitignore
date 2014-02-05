@@ -6,8 +6,9 @@ system/config/core.php
 
 # Ignore user modules. Again, someone is bound to accidentily commit modules
 # not intended for anyone but themselves, possibly containing passwords.
-modules/*
 modules-disabled/*
+!modules/.gitignore
+
 
 # Ignore .bak files, and favicons. 
 *.bak
