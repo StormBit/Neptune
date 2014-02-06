@@ -88,12 +88,22 @@
 									
 								$queryPath = "?" . implode("/",$query);
 
-								foreach ($Menu as $key => $value) {	
-									if ($key == $queryPath) {
-									echo "							<li class=\"active\"><a href=\"$key\">$value</a></li>\n";
-									} else {
-										echo "							<li><a href=\"$key\">$value</a></li>\n";
-									}
+								foreach ($Menu as $key => $value) {
+                  if (is_array($value)) {
+                    echo "							<li class=\"dropdown\">\n								<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">$key <b class=\"caret\"></b></a>\n								<ul class=\"dropdown-menu\">\n";
+                    
+                    foreach ($value as $key2 => $value2) {
+                      echo "								<li><a href=\"$key2\">$value2</a></li>\n";
+                    } 
+                    
+                    echo "								</ul>\n							</li>\n";
+                  } else {
+                    if ($key == $queryPath) {
+                    echo "							<li class=\"active\"><a href=\"$key\">$value</a></li>\n";
+                    } else {
+                      echo "							<li><a href=\"$key\">$value</a></li>\n";
+                    }
+                  }
 								}
 							?>
 						</ul>

@@ -315,20 +315,27 @@
 		function generate_menu() {
 			global $NeptuneCore, $NeptuneSQL, $NeptuneAdmin;
 		
-			return array();
+			//return array();
 			
 			// Create new SQL class if it doesn't already exist. 
 			if( !isset($NeptuneSQL)) {
 				$NeptuneSQL = new NeptuneSQL();
 			}
 			
-			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu` ORDER BY `position` ASC");
+			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu` WHERE `parent` = '[root]' ORDER BY `position` ASC");
 			$NeptuneMenu = array();
 			while ($result = $NeptuneSQL->fetch_array($sql)) {
-				if ($result["type"] == 0) {
-					$result["path"] = "?" . $result["path"];
-				}
-				$NeptuneMenu[$result["path"]] = $result["name"];
+			
+        $sql2 = $NeptuneSQL->query("SELECT * FROM `neptune_menu` WHERE `parent` = '" . $result["id"] . "' ORDER BY `position` ASC");
+        if ($NeptuneSQL->num_rows($sql2)) {
+          $NeptuneMenu[$result["name"]] = array();
+          
+          while ($result2 = $NeptuneSQL->fetch_array($sql2)) {
+            $NeptuneMenu[$result["name"]][$result2["path"]] = $result2["name"];
+          }
+        } else {
+          $NeptuneMenu[$result["path"]] = $result["name"];
+        }
 			}
 			
 			return $NeptuneMenu;
