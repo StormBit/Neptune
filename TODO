@@ -17,9 +17,3 @@ Blog Module:
 
 Menu:
 - Fix menu, fix menu editor.
-
-Optimization:
-- Re-implement support for various opcode caches such as eAccelerator, APC or Memcached
-- Attempt to add special support for reverse caches such as Cloudflare, Polipo or Varnish
-- Investigate automagic minification of content served
-- [Continuous] Refactor wherever possible to maintain minimum memory footprint and execution time
