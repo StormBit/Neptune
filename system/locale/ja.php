@@ -35,7 +35,7 @@
 	$conf['locale']['modulesloaded']			= "現在ロードされたモジュール：";
 	$conf['locale']['footergentime']			= "ページは";
 	$conf['locale']['footergentime2']			= "ミリ秒で作成、";
-	$conf['locale']['footersql']				= " クエリを使用と";
+	$conf['locale']['footersql']				= "クエリを使用と";
 	$conf['locale']['footerram']				= " RAM";
 
 	// Drop-down Menu
