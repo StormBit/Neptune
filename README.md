@@ -29,4 +29,4 @@ Neptune is currently developed and maintained by several members of the StormBit
 Neptune's official development IRC channel is [#Neptune](irc://irc.stormbit.net/Neptune) on the [StormBit IRC Network](http://stormbit.net). The network also provides webchat which can be accessed [here](http://iris.stormbit.net/?channels=Neptune). New commits are broadcast to the channel via [Notifico](http://n.tkte.ch/antoligy/Neptune).
 
 
-![StormDev Neptune CMS](http://i.imgur.com/DlDy1.png "Neptune CMS")
+![StormDEV Neptune CMS](http://i.imgur.com/vWvPZai.png "StormDEV Neptune CMS")
