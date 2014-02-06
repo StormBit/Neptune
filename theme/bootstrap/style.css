@@ -181,3 +181,7 @@ form.acp input[type="text"] {
 .blog-article > h2 > a {
 	color: black;
 }
+
+#admin-ttmode {
+  width: 494px;
+}

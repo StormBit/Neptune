@@ -229,14 +229,15 @@
 			$PostTitle = $NeptuneSQL->escape_string($_POST["posttitle"]);
 			$PostContent = $NeptuneSQL->escape_string($_POST["postcontent"]);
 			$Username = $NeptuneSQL->escape_string(strtolower(neptune_get_username()));
-
+      $TextTransform = $NeptuneSQL->escape_string($_POST["ttmode"]);
+      
 			$Time = date ("Y-m-d H:i:s",time());
 
-			$NeptuneSQL->query("INSERT INTO `neptune_blog` VALUES(NULL,'$PostTitle','$PostContent','$Username','$Time','$Username','$Time','1','1','0')");
+			$NeptuneSQL->query("INSERT INTO `neptune_blog` VALUES(NULL,'$PostTitle','$PostContent','$Username','$Time','$Username','$Time','$TextTransform','1','0')");
 			header("Location: ?article/latest");
 		} else {
 			$NeptuneCore->title("New Article");
-			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/article/new' method='POST'><div class='clearfix'><input type='text' placeholder='Post Name' name='posttitle' /></div>\n<div class='clearfix'><textarea name='postcontent'></textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Create'/></span></div></form>");
+			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/article/new' method='POST'><div class='clearfix'><input type='text' placeholder='Post Name' name='posttitle' /></div>\n<div class='clearfix'><select name='ttmode' id='admin-ttmode'><option value='0'>Raw HTML</option><option value='1'>Forum BBCode</option><option value='2'>Markdown</option><option value='3'>Textile</option></select></div>\n<div class='clearfix'><textarea name='postcontent'></textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Create'/></span></div></form>");
 		}
 	}
 	$NeptuneAdmin->add_hook("Blog","article/new","New Article","Create a new blog post");
@@ -308,10 +309,11 @@
 			$PostTitle = $NeptuneSQL->escape_string($_POST["posttitle"]);
 			$PostContent = $NeptuneSQL->escape_string($_POST["postcontent"]);
 			$Username = $NeptuneSQL->escape_string(strtolower(neptune_get_username()));
-
+      $TextTransform = $NeptuneSQL->escape_string($_POST["ttmode"]);
+      
 			$Time = date ("Y-m-d H:i:s",time());
 
-			$NeptuneSQL->query("UPDATE `neptune_blog` SET `title` = '$PostTitle', `content` = '$PostContent', `editor` = '$Username', `edited` = '$Time' WHERE `id` = '" . $NeptuneSQL->escape_string($query[3]) . "'");
+			$NeptuneSQL->query("UPDATE `neptune_blog` SET `title` = '$PostTitle', `content` = '$PostContent', `editor` = '$Username', `edited` = '$Time', `bbcode` = '$TextTransform'  WHERE `id` = '" . $NeptuneSQL->escape_string($query[3]) . "'");
 
 			header("Location: ?article/{$query[3]}");
 		} else { 
@@ -320,7 +322,7 @@
 			$result = $NeptuneSQL->fetch_array($sql);
 					
 			$NeptuneCore->title("Editing " . $result["title"]);
-			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/article/edit/" . $query[3] . "' method='POST'><div class='clearfix'><input type='text' placeholder='Post Name' name='posttitle' value='" . $result["title"] . "' /></div>\n<div class='clearfix'><textarea name='postcontent'>" . $result["content"] . "</textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Save'/></span></div></form>");
+			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/article/edit/" . $query[3] . "' method='POST'><div class='clearfix'><input type='text' placeholder='Post Name' name='posttitle' value='" . $result["title"] . "' /></div>\n<div class='clearfix'><select name='ttmode' id='admin-ttmode'><option value='0'>Raw HTML</option><option value='1'>Forum BBCode</option><option value='2'>Markdown</option><option value='3'>Textile</option></select></div>\n<div class='clearfix'><textarea name='postcontent'>" . $result["content"] . "</textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Save'/></span></div></form>");
 			$NeptuneCore->var_set("output","notidy", true);
 		}
 	}
@@ -337,10 +339,10 @@
 			$PageTitle = $NeptuneSQL->escape_string($_POST["pagetitle"]);
 			$PageContent = $NeptuneSQL->escape_string($_POST["pagecontent"]);
 			$Username = $NeptuneSQL->escape_string(strtolower(neptune_get_username()));
-
+      $TextTransform = $NeptuneSQL->escape_string($_POST["ttmode"]);
 			$Time = date ("Y-m-d H:i:s",time());
 
-			$NeptuneSQL->query("INSERT INTO `neptune_pages` VALUES('$PageID','$PageTitle','$PageContent','$Username','$Time','$Username','$Time','1','1')");
+			$NeptuneSQL->query("INSERT INTO `neptune_pages` VALUES('$PageID','$PageTitle','$PageContent','$Username','$Time','$Username','$Time','$TextTransform','1')");
 
 			header("Location: ?page/$PageID");
 		} else {
@@ -348,10 +350,12 @@
 
 			if (array_key_exists(3,$query)) {
 				$PageID = $query[3];
+			} else {
+        $PageID = "";
 			}
 
 			$NeptuneCore->title("New Page");
-			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/new' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' value='" . $PageID . "' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' /></div>\n<div class='clearfix'><textarea name='pagecontent'></textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Create'/></span></div></form>");
+			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/new' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' value='" . $PageID . "' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' /></div>\n<div class='clearfix'><select name='ttmode' id='admin-ttmode'><option value='0'>Raw HTML</option><option value='1'>Forum BBCode</option><option value='2'>Markdown</option><option value='3'>Textile</option></select></div>\n<div class='clearfix'><textarea name='pagecontent'></textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Create'/></span></div></form>");
 		}
 	}
 	$NeptuneAdmin->add_hook("Pages","page/new","New Page","Create a new page");
@@ -423,10 +427,12 @@
 			$PageTitle = $NeptuneSQL->escape_string($_POST["pagetitle"]);
 			$PageContent = $NeptuneSQL->escape_string($_POST["pagecontent"]);
 			$Username = $NeptuneSQL->escape_string(strtolower(neptune_get_username()));
+			$TextTransform = $NeptuneSQL->escape_string($_POST["ttmode"]);
+			
 
 			$Time = date ("Y-m-d H:i:s",time());
 
-			$NeptuneSQL->query("UPDATE `neptune_pages` SET `pid` = '$PageID', `name` = '$PageTitle', `content` = '$PageContent', `editor` = '$Username', `edited` = '$Time' WHERE `pid` = '" . $NeptuneSQL->escape_string($query[3]) . "'");
+			$NeptuneSQL->query("UPDATE `neptune_pages` SET `pid` = '$PageID', `name` = '$PageTitle', `content` = '$PageContent', `editor` = '$Username', `edited` = '$Time', `bbcode` = '$TextTransform' WHERE `pid` = '" . $NeptuneSQL->escape_string($query[3]) . "'");
 
 			header("Location: ?page/$PageID");
 		} else { 
@@ -435,7 +441,7 @@
 			$result = $NeptuneSQL->fetch_array($sql);
 					
 			$NeptuneCore->title("Editing " . $result["name"]);
-			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/edit/" . $query[3] . "' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' value='" . $query[3] . "' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' value='" . $result["name"] . "' /></div>\n<div class='clearfix'><textarea name='pagecontent'>" . $result["content"] . "</textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Save'/></span></div></form>");
+			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/edit/" . $query[3] . "' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' value='" . $query[3] . "' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' value='" . $result["name"] . "' /></div>\n<div class='clearfix'><select name='ttmode' id='admin-ttmode'><option value='0'>Raw HTML</option><option value='1'>Forum BBCode</option><option value='2'>Markdown</option><option value='3'>Textile</option></select></div>\n<div class='clearfix'><textarea name='pagecontent'>" . $result["content"] . "</textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Save'/></span></div></form>");
 			$NeptuneCore->var_set("output","notidy", true);
 		}
 	}
