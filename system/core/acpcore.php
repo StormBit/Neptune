@@ -32,8 +32,8 @@
 				$NeptuneAdmin->run();
 			}
 		} else {
-			$NeptuneCore->title("Access Denied");
-			$NeptuneCore->neptune_echo("<p>You do not have permission to view this page.</p>");
+			$NeptuneCore->title($NeptuneCore->var_get("locale","accessdenied"));
+			$NeptuneCore->neptune_echo("<p>" . $NeptuneCore->var_get("locale","nopermission") . "</p>");
 			
 			header("HTTP/1.1 403 Forbidden");
 		}
@@ -60,7 +60,7 @@
 			global $NeptuneSQL;
 			global $AdminHooks;
 			
-			$NeptuneCore->title("Admin Control Panel");
+			$NeptuneCore->title($NeptuneCore->var_get("locale","acp"));
 			
 			$NeptuneCore->neptune_echo("<div class='container'>");
 

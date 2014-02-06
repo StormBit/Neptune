@@ -189,7 +189,7 @@
 			if ($result["email"] != "") {
 				$email = $result["email"];
 			} else {
-				$email = "None Entered";
+				$email = $NeptuneCore->var_get("locale","noemail");
 			}
 			return $email;
 		} else {

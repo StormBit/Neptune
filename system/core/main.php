@@ -265,8 +265,8 @@
 				$Function();
 			} else {
 				//$this->fatal_error("Invalid function");
-				$this->title("404 Module Not Found");
-				$this->neptune_echo("Your request could not be processed, because the specified module does not exist.");
+				$this->title($NeptuneCore->var_get("locale","404module"));
+				$this->neptune_echo($NeptuneCore->var_get("locale","404moduletext"));
 			}
 		}
 		
@@ -285,7 +285,7 @@
 				}
 				unset($conf);
 			} else {
-        $this->fatal_error("A core function or module attempted to load the configuration file " . $config . ", but the file does not exist.");
+        $this->fatal_error($NeptuneCore->var_get("locale","attemptedtoloadconfig") . $config . $NeptuneCore->var_get("locale","attemptedtoloadconfig2"));
       }
 		}
 		
@@ -309,7 +309,7 @@
 			$unit=array('bytes','KiB','MiB','GiB','TiB','PiB');
 			$RAM["converted"] = @round($RAM["raw"]/pow(1024,($i=floor(log($RAM["raw"],1024)))),2).' '.$unit[$i]; 
 			
-			return "Page generated in " . round($endtime - $starttime,3) * 1000 . " ms with " . $this->var_get("system","querycount") . " queries and " . $RAM["converted"] . " of RAM";
+			return $NeptuneCore->var_get("locale","footergentime") . round($endtime - $starttime,3) * 1000 . $NeptuneCore->var_get("locale","footergentime2") . $this->var_get("system","querycount") . $NeptuneCore->var_get("locale","footersql") . $RAM["converted"] . $NeptuneCore->var_get("locale","footerram");
 		}
 		
 		function generate_menu() {
@@ -352,7 +352,7 @@
 				exit();
 			}
 			
-			$this->footer("Modules loaded: " . $this->var_get("footer","modules"));
+			$this->footer($NeptuneCore->var_get("locale","modulesloaded") . $this->var_get("footer","modules"));
 		
 			if (file_exists("theme/" . $this->var_get("config","theme") . "/config.php")) {
 				$this->parseconf("theme/" . $this->var_get("config","theme") . "/config.php");
@@ -362,7 +362,7 @@
 			} else if (file_exists("theme/" . $this->var_get("config","theme") . "/layout.php")) {
 				require("theme/" . $this->var_get("config","theme") . "/layout.php");
 			} else {
-        $this->fatal_error("The theme file specified in the system configuration is missing.");
+        $this->fatal_error($NeptuneCore->var_get("locale","missingtheme"));
 			}
 
 			exit;
