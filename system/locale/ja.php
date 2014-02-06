@@ -15,28 +15,28 @@
 	$conf['locale']['passwordconfirm']			= "パスワード（確認）"; 
 	$conf['locale']['emailoptional']			= "メール（任意）"; 
 	$conf['locale']['usernametaken']			= "ユーザ名はすでに使用されています。"; 
-	$conf['locale']['usernameempty']			= "No username specified."; // Needs translation.
+	$conf['locale']['usernameempty']			= "ユーザー名が入力されていません。";
 	$conf['locale']['mismatchedpass']			= "パスワードが一致しません。"; 
 	$conf['locale']['loginfailed']				= "ログインに失敗しました"; 
 	$conf['locale']['baduserpass']				= "ユーザー名またはパスワードが正しくありません。"; 
 	$conf['locale']['ie6useraccounts']			= "ユーザーアカウントはInternet Explorer 6ではサポートされていません。ブラウザをアップデートしてくださ。";
-	$conf['locale']['noemail']					= "No Email address entered."; // Needs translation.
+	$conf['locale']['noemail']					= "メールアドレスが入力されていません。";
 	
 	// Various errors
-	$conf['locale']['accessdenied']				= "Access Denied"; // Needs translation.
-	$conf['locale']['nopermission']				= "You do not have permission to view this page."; // Needs translation.
-	$conf['locale']['404module']				= "404 Module Not Found"; // Needs translation.
-	$conf['locale']['404moduletext']			= "Your request could not be processed, because the specified module does not exist."; // Needs translation.
-	$conf['locale']['attemptedtoloadconfig']	= "A core function or module attempted to load the configuration file "; // Needs translation. The filename of the config file will appear after that space
-	$conf['locale']['attemptedtoloadconfig2']	= ", but the file does not exist."; // Needs translation. The filename of the config file will appear before that comma
-	$conf['locale']['missingtheme']				= "The theme file specified in the system configuration is missing."; // Needs translation.
+	$conf['locale']['accessdenied']				= "アクセス拒否";
+	$conf['locale']['nopermission']				= "あなたはこのページを表示する権限がありません。";
+	$conf['locale']['404module']				= "404モジュールが見つかりません";
+	$conf['locale']['404moduletext']			= "あなたのリクエストは処理できませんでした。モジュールが存在しません。";
+	$conf['locale']['attemptedtoloadconfig']	= "モジュールは、このファイルをロードしようとしました：";
+	$conf['locale']['attemptedtoloadconfig2']	= "そのファイルが存在しません。";
+	$conf['locale']['missingtheme']				= "システム構成のテーマファイルは存在しません。";
 
 	// Footer!
-	$conf['locale']['modulesloaded']			= "Modules loaded: "; // Needs translation.
-	$conf['locale']['footergentime']			= "Page generated in "; // Needs translation.
-	$conf['locale']['footergentime2']			= " ms with "; // Needs translation.
-	$conf['locale']['footersql']				= " queries and "; // Needs translation.
-	$conf['locale']['footerram']				= " of RAM"; // Needs translation.
+	$conf['locale']['modulesloaded']			= "現在ロードされたモジュール：";
+	$conf['locale']['footergentime']			= "ページは";
+	$conf['locale']['footergentime2']			= "ミリ秒で作成、";
+	$conf['locale']['footersql']				= " クエリを使用と";
+	$conf['locale']['footerram']				= " RAM";
 
 	// Drop-down Menu
 	// ドロップダウンメニュー
