@@ -14,6 +14,8 @@
 			global $NeptuneSQL;
 			
 			$this->connect($NeptuneCore->var_get("database","host"),$NeptuneCore->var_get("database","user"),$NeptuneCore->var_get("database","pass"),$NeptuneCore->var_get("database","db"));
+		
+      $NeptuneCore->var_set("database","lasterror","");
 		}
 		
 		static function type() {
@@ -25,9 +27,19 @@
 			global $NeptuneCore;
 			global $Neptune;
 			
-			mysql_connect($host,$user,$pass);
 			
-			mysql_select_db($database);
+			
+			$status = @mysql_connect($host,$user,$pass);
+			
+			if (!$status) {
+        $NeptuneCore->fatal_error("Could not connect to the database because the following error occurred:</p><p style='font-family:monospace;'>" . mysql_error());
+      }
+      
+			$status = mysql_select_db($database);
+			
+			if (!$status) {
+        $NeptuneCore->fatal_error("A database error occurred:</p><p style='font-family:monospace;'>" . mysql_error());
+      }
 			
 			return 0;
 		}
@@ -40,7 +52,14 @@
 			
 			$NeptuneCore->var_set("system","querycount",$NeptuneCore->var_get("system","querycount") + 1);
 			
-			return mysql_query($query);
+			$sql = mysql_query($query);
+			
+			if (mysql_error() != "" && mysql_error() != $NeptuneCore->var_get("database","lasterror")) {
+        $NeptuneCore->alert("A database error occurred: " . mysql_error(), "warning");
+        $NeptuneCore->var_set("database","lasterror",mysql_error());
+			}
+			
+			return $sql;
 		}
 		
 		// MySQL Fetch Array
@@ -48,7 +67,14 @@
 			global $NeptuneCore;
 			global $Neptune;
 			
-			return mysql_fetch_array($sql);
+			$res = @mysql_fetch_array($sql);
+			
+			if (mysql_error() != "" && mysql_error() != $NeptuneCore->var_get("database","lasterror")) {
+        $NeptuneCore->alert("A database error occurred: " . mysql_error(), "warning");
+        $NeptuneCore->var_set("database","lasterror",mysql_error());
+			}
+			
+			return $res;
 		}
 		
 		// MySQL Real Escape String
@@ -56,7 +82,14 @@
 			global $NeptuneCore;
 			global $Neptune;
 			
-			return mysql_real_escape_string($string);
+			$result = mysql_real_escape_string($string);
+			
+			if (mysql_error() != "" && mysql_error() != $NeptuneCore->var_get("database","lasterror")) {
+        $NeptuneCore->alert("A database error occurred: " . mysql_error(), "warning");
+        $NeptuneCore->var_set("database","lasterror",mysql_error());
+			}
+			
+			return $result;
 		}
 		
 		// MySQL Row Count
@@ -64,7 +97,14 @@
 			global $NeptuneCore;
 			global $Neptune;
 			
-			return mysql_num_rows($sql);
+			$rows = mysql_num_rows($sql);
+			
+			if (mysql_error() != "" && mysql_error() != $NeptuneCore->var_get("database","lasterror")) {
+        $NeptuneCore->alert("A database error occurred: " . mysql_error(), "warning");
+        $NeptuneCore->var_set("database","lasterror",mysql_error());
+			}
+			
+			return $rows;
 		}
 	}
 ?>

@@ -7,11 +7,11 @@
 	*/
 
     font-family: 'WebSymbolsRegular';
-    src: url('../font/websymbols-regular-webfont.eot');
-    src: url('../font/websymbols-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/websymbols-regular-webfont.woff') format('woff'),
-         url('../font/websymbols-regular-webfont.ttf') format('truetype'),
-         url('../font/websymbols-regular-webfont.svg#WebSymbolsRegular') format('svg');
+    src: url('../../resources/font/websymbols-regular-webfont.eot');
+    src: url('../../resources/font/websymbols-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../resources/font/websymbols-regular-webfont.woff') format('woff'),
+         url('../../resources/font/websymbols-regular-webfont.ttf') format('truetype'),
+         url('../../resources/font/websymbols-regular-webfont.svg#WebSymbolsRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 }

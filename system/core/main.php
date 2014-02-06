@@ -166,6 +166,10 @@
 			$this->var_append("output","alert","<div class=\"alert alert-" . $type . "\">\n" . $text . "\n</div>");
 		}
 
+		function clear() {
+			$this->var_set("output","body","");
+		}
+
 		function neptune_echo($text) {
 			$this->var_append("output","body",$text);
 		}
@@ -287,6 +291,7 @@
 		
 		function fatal_error($error) {
 			$this->title("Error");
+			$this->clear();
 			$this->neptune_echo($error);
 			
 			require("system/theme/fallback.php");
