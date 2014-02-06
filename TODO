@@ -11,9 +11,10 @@ General:
 
 Layout:
 - Add breadcrumbs
+- Templating of some form. Current PHP-HTML Soup is a mess.
 
 Editor:
-- Add a selector between raw HTML / Markdown / Textile / BBCode modes
+- Make the page mode dropdown more intelligent (read the current page's mode from SQL)
 
 Blog Module:
 - Pagination in index (potentially implementable into template syntax, should be optional) - partially complete
