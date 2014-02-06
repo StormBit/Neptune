@@ -11,6 +11,7 @@ General:
 
 Layout:
 - Add breadcrumbs
+- Templating of some form. Current PHP-HTML Soup is a mess.
 
 Editor:
 - Make the page mode dropdown more intelligent (read the current page's mode from SQL)
