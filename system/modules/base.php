@@ -466,14 +466,24 @@
 		$NeptuneCore->title("Edit Menu");
 		$NeptuneCore->subtitle("Edit the list of links in the navigation bar.");
 	
-		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu`");
+		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu` WHERE `parent` = '[root]' ORDER BY `position` ASC");
 		 	
 		if ($NeptuneSQL->num_rows($sql) > 0) {
-			$NeptuneCore->neptune_echo('<table class="table table-striped"><tr><th></th><th>Label</th><th>Object</th><th>Type</th></tr>');
+			$NeptuneCore->neptune_echo('<div class="navbar"><div class="navbar-inner"><a class="brand" href="#">' . $NeptuneCore->var_get("config","sitename") . '</a><div class="container" style="width: auto; padding: 0 20px;"><ul class="nav">');
 			while ($result = $NeptuneSQL->fetch_array($sql)) {
-
+        $NeptuneCore->neptune_echo('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $result["name"] . ' <b class="caret"></b></a><ul class="dropdown-menu"><li class="nav-header">Menu Management</li><li><a href="#"><i class="icon-arrow-left"></i> Move this left</a></li><li><a href="#"><i class="icon-arrow-right"></i> Move this right</a></li><li><a href="#"><i class="icon-edit"></i> Edit item</a></li><li><a href="#"><i class="icon-remove"></i> Remove item</a></li>');
+        
+        $sql2 = $NeptuneSQL->query("SELECT * FROM `neptune_menu` WHERE `parent` = '" . $result["id"] . "' ORDER BY `position` ASC");
+        
+        if ($NeptuneSQL->num_rows($sql2) > 0) {
+          while ($result2 = $NeptuneSQL->fetch_array($sql2)) {
+            $NeptuneCore->neptune_echo('<li class="divider"></li><li class="dropdown-submenu"><a tabindex="-1" href="#">' . $result2["name"] . '</a><ul class="dropdown-menu"><li class="nav-header">Menu Management</li><li><a href="#"><i class="icon-arrow-up"></i> Move this up</a></li><li><a href="#"><i class="icon-arrow-down"></i> Move this down</a></li><li><a href="#"><i class="icon-edit"></i> Edit item</a></li><li><a href="#"><i class="icon-remove"></i> Remove item</a></li></ul></li>');
+          }
+        }
+        
+        $NeptuneCore->neptune_echo('</ul></li>');
 			}
-			$NeptuneCore->neptune_echo("</table>");
+			$NeptuneCore->neptune_echo("</ul></div></div></div>");
 		} else {
 			$NeptuneCore->neptune_echo("The menu is currently empty.");
 		}
