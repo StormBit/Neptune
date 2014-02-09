@@ -8,6 +8,7 @@ General:
 - Create an e-commerce module (low priority)
 - Localize
 - Global commenting
+- Fix SQLite and PGSQL tables.
 
 Layout:
 - Add breadcrumbs
