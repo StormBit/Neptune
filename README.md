@@ -5,7 +5,10 @@ Neptune is a fast, lightweight, easy-to-use content management system written in
 
 About
 ------------
-It's no secret that there are plenty of content management systems out there, and so you'd think that almost every need would be covered. Unfortunately we've found that this isn't the case, as many content management systems tend to cater to a specific niches — blogging, discussion or ecommerce, to name a few.
+It's no secret that there are plenty of content management systems out there, and so you'd think that almost every need would be covered.
+
+Unfortunately we've found that this isn't the case, as many content management systems tend to cater to a specific niches — blogging, discussion or ecommerce, to name a few.
+
 So to combat this oversaturation, we've developed Neptune as a multipurpose content management framework — meaning an end-user can do nearly anything without having to utilize "hacks" in their code, as other systems often require.
 
 Features
