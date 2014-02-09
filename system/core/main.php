@@ -257,7 +257,7 @@
 
 		// Hooked function run: This function runs a hooked function.
 		function hook_run($action) {
-			global $Neptune;
+			global $NeptuneCore;
 
 			$Function = $this->var_get("hooks",$action[0]);
 

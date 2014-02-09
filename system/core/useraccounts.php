@@ -209,8 +209,10 @@
 		$Username = strtolower($Username);
 						
 		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_users` WHERE `username` = '$Username'");
-		$result = $NeptuneSQL->fetch_array($sql);
-		
-		return $result["displayname"];
+		if ($result = $NeptuneSQL->fetch_array($sql)) {
+			return $result["displayname"];
+		} else {
+			return false;
+		}
 	}
 ?>

@@ -229,7 +229,7 @@
 			$PostTitle = $NeptuneSQL->escape_string($_POST["posttitle"]);
 			$PostContent = $NeptuneSQL->escape_string($_POST["postcontent"]);
 			$Username = $NeptuneSQL->escape_string(strtolower(neptune_get_username()));
-      $TextTransform = $NeptuneSQL->escape_string($_POST["ttmode"]);
+			$TextTransform = $NeptuneSQL->escape_string($_POST["ttmode"]);
       
 			$Time = date ("Y-m-d H:i:s",time());
 
