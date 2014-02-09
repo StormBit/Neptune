@@ -463,9 +463,6 @@
 				$sql = $NeptuneSQL->query("DELETE FROM `neptune_menu` WHERE `id` = '$ID'");
 
 				header("Location: ?acp/menu/edit");
-			} else if ($query[3] == "add") {
-				$Name = $NeptuneSQL->escape_string($_POST["name"]);
-				$Name = $NeptuneSQL->escape_string($_POST["name"]);
 			} else if ($query[3] == "edit") {
 				$NeptuneCore->alert("Edited menu item with ID " . $query[4],"info");
 			} else if ($query[3] == "move-forward") {
@@ -473,6 +470,19 @@
 			} else if ($query[3] == "move-backward") {
 				$NeptuneCore->alert("Moved menu item with ID " . $query[4],"info");
 			}  
+		} else if (array_key_exists(3,$query)) {
+			if ($query[3] == "add") {
+				$Name = $NeptuneSQL->escape_string($_POST["name"]);
+				$Path = $NeptuneSQL->escape_string($_POST["path"]);
+				$Parent = $NeptuneSQL->escape_string($_POST["parent"]);
+
+				$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu` WHERE `parent` = '[root]'");
+				$Position = $NeptuneSQL->num_rows($sql);
+				echo mysql_error();
+				$sql = $NeptuneSQL->query("INSERT INTO `neptune_menu` VALUES(NULL,'$Position','$Path','$Name','$Parent')");
+				echo mysql_error();
+				//header("Location: ?acp/menu/edit");
+			}
 		}
 
 		if (@$_REQUEST["action"] == "delete" && $_GET["id"] != "") {
@@ -487,26 +497,27 @@
 		$NeptuneCore->title("Edit Menu");
 		$NeptuneCore->subtitle("Edit the list of links in the navigation bar.");
 	
-		$NeptuneCore->neptune_echo('<form action="?acp/menu/edit/add" method="POST" id="addMenuItemForm"><div class="modal hide fade" id="addMenuItem"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-header"><h3>Add Menu Item</h3></div><div class="modal-body"><p><input type="text" name="name" placeholder="Menu Item Name"></p><p><input type="text" name="path" placeholder="Menu Item Path"></p><p><input type="text" name="parent" placeholder="Menu Item Parent"></p></div><div class="modal-footer"><button href="#" class="btn" type="reset" class="close" data-dismiss="modal" aria-hidden="true">Cancel</button><button type="submit" class="btn btn-primary">Add Item</button></div></div></form>');
+		$NeptuneCore->neptune_echo('<form action="?acp/menu/edit/add" method="POST" id="addMenuItemForm"><div class="modal hide fade" id="addMenuItem"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-header"><h3>Add Menu Item</h3></div><div class="modal-body"><p><input type="text" name="name" placeholder="Menu Item Name"></p><p><input type="text" name="path" placeholder="Menu Item Path"></p><p><input type="text" name="parent" id="menuParent" placeholder="Menu Item Parent"></p></div><div class="modal-footer"><button href="#" class="btn" type="reset" data-dismiss="modal" aria-hidden="true">Cancel</button><button type="submit" class="btn btn-primary">Add Item</button></div></div></form>');
 
 		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu` WHERE `parent` = '[root]' ORDER BY `position` ASC");
 		 	
 		//if ($NeptuneSQL->num_rows($sql) > 0) {
 			$NeptuneCore->neptune_echo('<div class="navbar"><div class="navbar-inner"><a class="brand" href="#">' . $NeptuneCore->var_get("config","sitename") . '</a><div class="container" style="width: auto; padding: 0 20px;"><a class="brand" id="InteractiveText" href="#">Interactive Menu Editor</a><ul class="nav">');
 			while ($result = $NeptuneSQL->fetch_array($sql)) {
-        $NeptuneCore->neptune_echo('<li class="divider-vertical"></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $result["name"] . ' <b class="caret"></b></a><ul class="dropdown-menu"><li class="nav-header">Menu Management</li><li><a href="?acp/menu/edit/move-backward/' . $result["id"] . '"><i class="icon-arrow-left"></i> Move this left</a></li><li><a href="?acp/menu/edit/move-forward/' . $result["id"] . '"><i class="icon-arrow-right"></i> Move this right</a></li><li><a href="?acp/menu/edit/edit/' . $result["id"] . '"><i class="icon-edit"></i> Edit item</a></li><li><a href="?acp/menu/edit/delete/' . $result["id"] . '"><i class="icon-remove"></i> Remove item</a></li>');
+        $NeptuneCore->neptune_echo('<li class="divider-vertical"></li><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $result["name"] . ' <b class="caret"></b></a><ul class="dropdown-menu"><li class="nav-header">Menu Management</li><li><a href="?acp/menu/edit/move-backward/' . $result["id"] . '"><i class="icon-arrow-left"></i> Move this left</a></li><li><a href="?acp/menu/edit/move-forward/' . $result["id"] . '"><i class="icon-arrow-right"></i> Move this right</a></li><li><a href="?acp/menu/edit/edit/' . $result["id"] . '"><i class="icon-edit"></i> Edit item</a></li><li><a href="?acp/menu/edit/delete/' . $result["id"] . '"><i class="icon-remove"></i> Remove item</a></li><li><a href="#addMenuItem" data-toggle="modal" onclick="$(\'#addMenuItemForm\').each (function(){this.reset();});$(\'#menuParent\').val(\'' . $result["id"] . '\');"><i class="icon-plus"></i> Add subitem</a></li>');
         
         $sql2 = $NeptuneSQL->query("SELECT * FROM `neptune_menu` WHERE `parent` = '" . $result["id"] . "' ORDER BY `position` ASC");
         
         if ($NeptuneSQL->num_rows($sql2) > 0) {
-          while ($result2 = $NeptuneSQL->fetch_array($sql2)) {
-            $NeptuneCore->neptune_echo('<li class="divider"></li><li class="dropdown-submenu"><a tabindex="-1" href="#">' . $result2["name"] . '</a><ul class="dropdown-menu"><li class="nav-header">Menu Management</li><li><a href="?acp/menu/edit/move-backward/' . $result2["id"] . '"><i class="icon-arrow-up"></i> Move this up</a></li><li><a href="?acp/menu/edit/move-forward/' . $result2["id"] . '"><i class="icon-arrow-down"></i> Move this down</a></li><li><a href="?acp/menu/edit/edit/' . $result2["id"] . '"><i class="icon-edit"></i> Edit item</a></li><li><a href="?acp/menu/edit/delete/' . $result2["id"] . '"><i class="icon-remove"></i> Remove item</a></li></ul></li>');
+        	$NeptuneCore->neptune_echo("<li class='divider'></li>");
+          	while ($result2 = $NeptuneSQL->fetch_array($sql2)) {
+            $NeptuneCore->neptune_echo('<li class="dropdown-submenu"><a tabindex="-1" href="#">' . $result2["name"] . '</a><ul class="dropdown-menu"><li class="nav-header">Menu Management</li><li><a href="?acp/menu/edit/move-backward/' . $result2["id"] . '"><i class="icon-arrow-up"></i> Move this up</a></li><li><a href="?acp/menu/edit/move-forward/' . $result2["id"] . '"><i class="icon-arrow-down"></i> Move this down</a></li><li><a href="?acp/menu/edit/edit/' . $result2["id"] . '"><i class="icon-edit"></i> Edit item</a></li><li><a href="?acp/menu/edit/delete/' . $result2["id"] . '"><i class="icon-remove"></i> Remove item</a></li></ul></li>');
           }
         }
         
         $NeptuneCore->neptune_echo('</ul></li>');
 			}
-			$NeptuneCore->neptune_echo('<li class="divider-vertical"></li><li><a class="brand" id="addMenuItemButton" href="#addMenuItem" role="button" data-toggle="modal">+</a></li></ul></div></div></div>');
+			$NeptuneCore->neptune_echo('<li class="divider-vertical"></li><li><a class="brand" id="addMenuItemButton" href="#addMenuItem" role="button" data-toggle="modal" onclick="$(\'#addMenuItemForm\').each (function(){this.reset();});$(\'#menuParent\').val(\'[root]\');">+</a></li></ul></div></div></div>');
 		//} else {
 		//	$NeptuneCore->neptune_echo("The menu is currently empty.");
 		//}
