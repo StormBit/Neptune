@@ -185,3 +185,30 @@ form.acp input[type="text"] {
 #admin-ttmode {
   width: 494px;
 }
+
+#InteractiveText {
+  padding-right: 0;
+  padding-left: 0;
+  position: relative;
+  left: 16px;
+  float: right;
+  font-weight: bold;
+  color: #AAA;
+  text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
+  -webkit-transition: all .2s linear;
+     -moz-transition: all .2s linear;
+          transition: all .2s linear;
+  cursor:initial;
+}
+
+#InteractiveText:hover {
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.4);
+  color: #000;
+}
+
+#addMenuItemButton {
+  text-decoration: none;
+  position: relative;
+  left: 16px;
+}

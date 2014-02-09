@@ -25,10 +25,9 @@
 		<link href="theme/bootstrap/style.css" rel="stylesheet">
 
 		<script type="text/javascript" src="resources/js/jquery.js"></script>
-		<script type="text/javascript" src="resources/js/jquery-ui-1.8.20.custom.min.js"></script>
-		<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>		  
+		<script type="text/javascript" src="resources/js/bootstrap.js"></script>		  
 		<script type="text/javascript" src="resources/js/html5.js"></script>
-		<!--[if gte IE 8]><!--><script type="text/javascript" src="resources/js/respond.min.js"></script><!--<![endif]--><?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
+		<!--[if gte IE 8]><!--><script type="text/javascript" src="resources/js/respond.js"></script><!--<![endif]--><?php if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)) { echo '
 		<!--[if IE]>
 			<script type="text/javascript">
 				$(function() {
@@ -60,7 +59,7 @@
 					}
 				});
 			</script>
-			<script type="text/javascript" src="resources/js/selectivizr-min.js"></script>
+			<script type="text/javascript" src="resources/js/selectivizr.js"></script>
 		<![endif]-->
 		<!--[if lte IE 7]>
 			<link href="resources/css/ie7.css" rel="stylesheet">
