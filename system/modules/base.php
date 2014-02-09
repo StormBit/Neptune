@@ -478,26 +478,17 @@
 
 				$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu` WHERE `parent` = '[root]'");
 				$Position = $NeptuneSQL->num_rows($sql);
-				echo mysql_error();
+				
 				$sql = $NeptuneSQL->query("INSERT INTO `neptune_menu` VALUES(NULL,'$Position','$Path','$Name','$Parent')");
-				echo mysql_error();
-				//header("Location: ?acp/menu/edit");
+				
+				header("Location: ?acp/menu/edit");
 			}
-		}
-
-		if (@$_REQUEST["action"] == "delete" && $_GET["id"] != "") {
-			$id = $NeptuneSQL->escape_string($_GET["id"]);
-			$NeptuneSQL->query("DELETE FROM `neptune_menu` WHERE `id` = '" . $id . "'");
-		} else if (@$_REQUEST["action"] == "add") {
-			$name = $NeptuneSQL->escape_string($_POST["name"]);
-			$path = $NeptuneSQL->escape_string($_POST["path"]);
-			$NeptuneSQL->query("INSERT INTO `neptune_menu`(`id`, `position`, `path`, `name`, `type`) VALUES (NULL,'0','$path','$name','$type')");
 		}
 
 		$NeptuneCore->title("Edit Menu");
 		$NeptuneCore->subtitle("Edit the list of links in the navigation bar.");
 	
-		$NeptuneCore->neptune_echo('<form action="?acp/menu/edit/add" method="POST" id="addMenuItemForm"><div class="modal hide fade" id="addMenuItem"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-header"><h3>Add Menu Item</h3></div><div class="modal-body"><p><input type="text" name="name" placeholder="Menu Item Name"></p><p><input type="text" name="path" placeholder="Menu Item Path"></p><p><input type="text" name="parent" id="menuParent" placeholder="Menu Item Parent"></p></div><div class="modal-footer"><button href="#" class="btn" type="reset" data-dismiss="modal" aria-hidden="true">Cancel</button><button type="submit" class="btn btn-primary">Add Item</button></div></div></form>');
+		$NeptuneCore->neptune_echo('<form action="?acp/menu/edit/add" method="POST" id="addMenuItemForm"><div class="modal hide fade" id="addMenuItem"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-header"><h3>Add Menu Item</h3></div><div class="modal-body"><p><input type="text" name="name" placeholder="Menu Item Name"></p><p><input type="text" name="path" placeholder="Menu Item Path"></p><p><input type="hidden" name="parent" id="menuParent" placeholder="Menu Item Parent"></p></div><div class="modal-footer"><button href="#" class="btn" type="reset" data-dismiss="modal" aria-hidden="true">Cancel</button><button type="submit" class="btn btn-primary">Add Item</button></div></div></form>');
 
 		$sql = $NeptuneSQL->query("SELECT * FROM `neptune_menu` WHERE `parent` = '[root]' ORDER BY `position` ASC");
 		 	
