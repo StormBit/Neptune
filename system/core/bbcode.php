@@ -37,7 +37,7 @@
 		$text = preg_replace("(\[url\=([$urlsearchstring]*)\](.+?)\[/url\])", '<a href="$1">$2</a>', $text); 
 
 		$text = preg_replace("/\[urlnew\]([$urlsearchstring]*)\[\/urlnew\]/", '<a href="$1" target="_blank">$1</a>', $text);
-    	$text = preg_replace("(\[urlnew\=([$urlsearchstring]*)\](.+?)\[/urlnew\])", '<a href="$1" target="_blank">$2</a>', $text); 
+		$text = preg_replace("(\[urlnew\=([$urlsearchstring]*)\](.+?)\[/urlnew\])", '<a href="$1" target="_blank">$2</a>', $text); 
 		  
 		$text = preg_replace("(\[mail\]([$mailsearchstring]*)\[/mail\])", '<a href="mailto:$1">$1</a>', $text);
 		$text = preg_replace("/\[mail\=([$mailsearchstring]*)\](.+?)\[\/mail\]/", '<a href="mailto:$1">$2</a>', $text);
