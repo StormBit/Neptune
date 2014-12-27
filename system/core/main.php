@@ -271,6 +271,8 @@
 		}
 		
 		function parseconf($config) {
+      global $NeptuneCore;
+
 			if (file_exists($config)) {
 				include($config);
 				foreach($conf as $group => $variable) {

@@ -212,3 +212,8 @@ form.acp input[type="text"] {
   position: relative;
   left: 16px;
 }
+
+p small {
+  color: grey;
+  font-size: 10px;
+}

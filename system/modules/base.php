@@ -35,13 +35,11 @@
 			}
 			
 			if ($result["editor"]) {
-				$EditedString = ", and last edited by " . neptune_get_username_from_id($result["editor"]) . " on " . date(" F jS, Y ", strtotime($result['edited'])) . "at" . date(" g:i A", strtotime($result['edited']));
+				$NeptuneCore->subtitle("Last modified on " . date(" F jS, Y ", strtotime($result['edited'])) . " by " . neptune_get_username_from_id($result["editor"]));
 			} else {
-				$EditedString = "";
+				$NeptuneCore->subtitle("Last modified on " . date(" F jS, Y ", strtotime($result['created'])) . " by " . neptune_get_username_from_id($result["author"]));
 			}
 			
-			$NeptuneCore->subtitle("Page created by " . neptune_get_username_from_id($result["author"]) . " on" . date(" F jS, Y ", strtotime($result['created'])) . "at" . date(" g:i A", strtotime($result['created'])) . $EditedString);
-
 			if ($result["bbcode"] == 1) {
 				$NeptuneCore->neptune_echo_bbcode($result["content"]);
 			} else if ($result["bbcode"] == 2) {
@@ -103,13 +101,11 @@
 			}
 			
 			if ($result["editor"]) {
-				$EditedString = ", and last edited by " . neptune_get_username_from_id($result["editor"]) . " on " . date(" F jS, Y ", strtotime($result['edited'])) . "at" . date(" g:i A", strtotime($result['edited']));
+				$NeptuneCore->subtitle("Last modified on " . date(" F jS, Y ", strtotime($result['edited'])) . " by " . neptune_get_username_from_id($result["editor"]));
 			} else {
-				$EditedString = "";
+				$NeptuneCore->subtitle("Last modified on " . date(" F jS, Y ", strtotime($result['created'])) . " by " . neptune_get_username_from_id($result["author"]));
 			}
 			
-			$NeptuneCore->subtitle("Page created by " . neptune_get_username_from_id($result["author"]) . " on" . date(" F jS, Y ", strtotime($result['created'])) . "at" . date(" g:i A", strtotime($result['created'])) . $EditedString);
-
 			if ($result["bbcode"] == 1) {
 				$NeptuneCore->neptune_echo_bbcode($result["content"]);
 			} else if ($result["bbcode"] == 2) {
@@ -171,13 +167,11 @@
 			}
 			
 			if ($result["editor"]) {
-				$EditedString = ", and last edited by " . neptune_get_username_from_id($result["editor"]) . " on " . date(" F jS, Y ", strtotime($result['edited'])) . "at" . date(" g:i A", strtotime($result['edited']));
+				$NeptuneCore->subtitle("Last modified on " . date(" F jS, Y ", strtotime($result['edited'])) . " by " . neptune_get_username_from_id($result["editor"]));
 			} else {
-				$EditedString = "";
+				$NeptuneCore->subtitle("Last modified on " . date(" F jS, Y ", strtotime($result['created'])) . " by " . neptune_get_username_from_id($result["author"]));
 			}
 			
-			$NeptuneCore->subtitle("Page created by " . neptune_get_username_from_id($result["author"]) . " on" . date(" F jS, Y ", strtotime($result['created'])) . "at" . date(" g:i A", strtotime($result['created'])) . $EditedString);
-
 			if ($result["bbcode"] == 1) {
 				$NeptuneCore->neptune_echo_bbcode($result["content"],2000);
 			} else if ($result["bbcode"] == 2) {
