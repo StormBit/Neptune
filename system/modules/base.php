@@ -64,10 +64,13 @@
 	function mod_core_article() {
 		global $NeptuneCore;
 		global $NeptuneSQL;
-
-		// Create new SQL class if it doesn't already exist. 
-		if( !isset($NeptuneSQL)) {
-			$NeptuneSQL = new NeptuneSQL();
+    global $NeptuneComments;
+		
+		// Create new CommentEngine class if it doesn't already exist. 
+		// The CommentEngine will also create an SQL class so we don't
+		// need to worry about that.
+		if( !isset($NeptuneComments)) {
+			$NeptuneComments = new NeptuneComments();
 		}
 
 		$query = $NeptuneCore->var_get("system","query");
@@ -115,6 +118,10 @@
 			} else {
 				$NeptuneCore->neptune_echo($result["content"]);
 			}
+			
+			$ResourceString = implode($NeptuneCore->var_get("system","query"),"/");
+			
+			$NeptuneComments->render($ResourceString);
 		} else {
 			$NeptuneCore->title("404 Post Not Found");
 			$NeptuneCore->subtitle("That's an error.");
@@ -128,10 +135,13 @@
 	function mod_core_blog() {
 		global $NeptuneCore;
 		global $NeptuneSQL;
-
-		// Create new SQL class if it doesn't already exist. 
-		if( !isset($NeptuneSQL)) {
-			$NeptuneSQL = new NeptuneSQL();
+    global $NeptuneComments;
+		
+		// Create new CommentEngine class if it doesn't already exist. 
+		// The CommentEngine will also create an SQL class so we don't
+		// need to worry about that.
+		if( !isset($NeptuneComments)) {
+			$NeptuneComments = new NeptuneComments();
 		}
 
 		$query = $NeptuneCore->var_get("system","query");
@@ -181,7 +191,14 @@
 			} else {
 				$NeptuneCore->neptune_echo(truncateHtml($result["content"],2000));
 			}
-			$NeptuneCore->neptune_echo("<p><a href='?article/{$result["id"]}'>Read more...</a></p>");
+			
+			$ResourceString = "article/{$result["id"]}";
+			
+			$CommentData = $NeptuneComments->scan($ResourceString);
+			$numComments = $CommentData["comments"];
+			
+			$CommentString = "<p><i class='icon-pencil'></i>&nbsp;<a href='?article/{$result["id"]}'>There " . pluralize(" is "," are ",$numComments) . "<b>$numComments</b>" . pluralize(" comment"," comments",$numComments) . ".</a></p>";
+			$NeptuneCore->neptune_echo($CommentString);
 			require('theme/bootstrap/snippet_blog_article.php');
 		}
 		

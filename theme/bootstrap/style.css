@@ -217,3 +217,18 @@ p small {
   color: grey;
   font-size: 10px;
 }
+
+.table-comments > tbody > tr:first-child > td {
+    border: none;
+}
+
+.table-comments > tbody > tr:last-child > td {
+    border-bottom: 1px solid #DDD;
+}
+
+.commentTitle {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  !position: relative;
+  !top: 20px;
+}

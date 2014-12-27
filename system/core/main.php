@@ -69,6 +69,10 @@
 					$NeptuneAdmin = new NeptuneAdmin();
 			}
 
+      // Load the CommentEngine. Any modules which need it will initialize it themselves.
+			require_once('system/core/commentengine.php');
+
+
 			// Load essential system modules...
 			if (!$NeptuneCore->var_get("config","blacklist-system-modules")) {	
 				if ($handle = opendir('system/modules')) { 
@@ -369,6 +373,14 @@
 
 			exit;
 		}
+	}
+	
+	function pluralize($string_singular,$string_plural,$number) {
+    if ($number == 1) {
+      return $string_singular;
+    } else {
+      return $string_plural;
+    }
 	}
 	
 	// Initialize a new instance of the class. The constructor function will take it from there.
