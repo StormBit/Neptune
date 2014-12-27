@@ -54,7 +54,7 @@
 				$NeptuneCore->neptune_echo('</table>');
 
 			} else {
-				$NeptuneCore->neptune_echo("There are no comments.");
+				$NeptuneCore->neptune_echo("<br><p>There are no comments.</p>");
 			}
 			
 			
@@ -75,7 +75,7 @@
 						</div>
 					</form>');
 			} else {
-				$NeptuneCore->neptune_echo("You must be logged in to comment.");
+				$NeptuneCore->neptune_echo("<p>You must be logged in to comment.</p>");
 			}
 		}
 		
