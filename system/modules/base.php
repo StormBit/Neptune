@@ -314,9 +314,20 @@
 			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_blog` WHERE `id` = '" . $NeptuneSQL->escape_string($query[3]) . "'");
 
 			$result = $NeptuneSQL->fetch_array($sql);
+			
+			$html = ""; $bbcode = ""; $markdown = ""; $textile = "";
+			
+			if ($result["bbcode"] == 1)
+          $bbcode = "selected";
+      else if ($result["bbcode"] == 2)
+          $markdown = "selected";
+      else if ($result["bbcode"] == 3)
+          $textile = "selected";
+      else 
+          $html = "selected";
 					
 			$NeptuneCore->title("Editing " . $result["title"]);
-			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/article/edit/" . $query[3] . "' method='POST'><div class='clearfix'><input type='text' placeholder='Post Name' name='posttitle' value='" . $result["title"] . "' /></div>\n<div class='clearfix'><select name='ttmode' id='admin-ttmode'><option value='0'>Raw HTML</option><option value='1'>Forum BBCode</option><option value='2'>Markdown</option><option value='3'>Textile</option></select></div>\n<div class='clearfix'><textarea name='postcontent'>" . $result["content"] . "</textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Save'/></span></div></form>");
+			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/article/edit/" . $query[3] . "' method='POST'><div class='clearfix'><input type='text' placeholder='Post Name' name='posttitle' value='" . $result["title"] . "' /></div>\n<div class='clearfix'><select name='ttmode' id='admin-ttmode'><option value='0' $html>Raw HTML</option><option value='1' $bbcode>Forum BBCode</option><option value='2' $markdown>Markdown</option><option value='3' $textile>Textile</option></select></div>\n<div class='clearfix'><textarea name='postcontent'>" . $result["content"] . "</textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Save'/></span></div></form>");
 			$NeptuneCore->var_set("output","notidy", true);
 		}
 	}
@@ -433,9 +444,20 @@
 			$sql = $NeptuneSQL->query("SELECT * FROM `neptune_pages` WHERE `pid` = '" . $NeptuneSQL->escape_string($query[3]) . "'");
 
 			$result = $NeptuneSQL->fetch_array($sql);
-					
+			
+			$html = ""; $bbcode = ""; $markdown = ""; $textile = "";
+			
+			if ($result["bbcode"] == 1)
+          $bbcode = "selected";
+      else if ($result["bbcode"] == 2)
+          $markdown = "selected";
+      else if ($result["bbcode"] == 3)
+          $textile = "selected";
+      else 
+          $html = "selected";
+			
 			$NeptuneCore->title("Editing " . $result["name"]);
-			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/edit/" . $query[3] . "' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' value='" . $query[3] . "' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' value='" . $result["name"] . "' /></div>\n<div class='clearfix'><select name='ttmode' id='admin-ttmode'><option value='0'>Raw HTML</option><option value='1'>Forum BBCode</option><option value='2'>Markdown</option><option value='3'>Textile</option></select></div>\n<div class='clearfix'><textarea name='pagecontent'>" . $result["content"] . "</textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Save'/></span></div></form>");
+			$NeptuneCore->neptune_echo("<form class='acp' action='?acp/page/edit/" . $query[3] . "' method='POST'>\n<div class='clearfix'><input type='text' placeholder='Page ID' name='pageid' value='" . $query[3] . "' /></div><div class='clearfix'><input type='text' placeholder='Page Name' name='pagetitle' value='" . $result["name"] . "' /></div>\n<div class='clearfix'><select name='ttmode' id='admin-ttmode'><option value='0' $html>Raw HTML</option><option value='1' $bbcode>Forum BBCode</option><option value='2' $markdown>Markdown</option><option value='3' $textile>Textile</option></select></div>\n<div class='clearfix'><textarea name='pagecontent'>" . $result["content"] . "</textarea></div><div class='clearfix'><span><input type='submit' class='btn btn-primary' value='Save'/></span></div></form>");
 			$NeptuneCore->var_set("output","notidy", true);
 		}
 	}
