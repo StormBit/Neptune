@@ -20,3 +20,9 @@ resources/icon/*.jpg
 # Ignore all themes other than the stock one. 
 theme/*
 !theme/bootstrap
+
+# Ignore the stock theme configuration.
+theme/bootstrap/config.php
+
+# Ignore Sublime Text workspaces
+*.sublime-workspace
