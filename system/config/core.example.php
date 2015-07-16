@@ -16,8 +16,8 @@
 	// $conf['config']['favicon'] = 'resources/icon/favicon.ico';
 	// $conf['config']['apple-touch-icon'] = 'resources/icon/apple-touch-icon.png';
 	
-	$conf['config']['quiet-footer'] = false;
-	$conf['config']['hide-stormdev'] = false;
+	$conf['config']['quiet-footer'] = true; // If disabled, verbose information will be displayed in the page footer.
+	$conf['config']['hide-stormdev'] = false; // If enabled, StormDEV branding will be hidden in the page footer.
 	$conf['config']['site-copyright'] = "Copyright &copy; " . date("Y") . " Someone Who Doesn't Know How To Configure A Website, All Rights Reserved.";
 
 	$conf['config']['blacklist-system-modules'] = false; // Disables the stock modules. Useful if you are building a site using fully customized modules.
