@@ -14,8 +14,11 @@ Layout:
 - Add breadcrumbs
 - Templating of some form. Current PHP-HTML Soup is a mess.
 
+BBCode engine:
+- Due to the way in which we are replacing \n with <br>, if the user newlines after using a header, an extraneous <br> is added.
+
 Editor:
-- Make the page mode dropdown more intelligent (read the current page's mode from SQL)
+- Add ability to delete pages
 
 Blog Module:
 - Pagination in index (potentially implementable into template syntax, should be optional) - partially complete
