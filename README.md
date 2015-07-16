@@ -23,10 +23,10 @@ Team
 ------------
 Neptune is currently developed and maintained by several members of the StormBit Development Team ([StormDEV](http://dev.stormbit.net)), these are:
 
-1. Alex _"[ReimuHakurei](http://reimuhakurei.net)"_ Ingram — Project Manager and Lead Developer.
-2. Karen _"[angelXwind](http://angelxwind.net)"_ Tsai — Developer and Tester.
-3. Alex _"[Antoligy](http://antoligy.com)"_ Wilson — Developer and Tester.
-4. Alex _"[ArghArgh200](http://arghargh200.net)"_ Mitchel — Module Developer and Tester.
+1. Alex _"[ReimuHakurei](http://reimuhakurei.net/)"_ Ingram — Project Manager and Lead Developer.
+2. Karen _"[angelXwind](https://angelxwind.net/)"_ Tsai — Developer and Tester.
+3. Alex _"[Antoligy](https://ax.gy/)"_ Wilson — Developer and Tester.
+4. Alex _"[ArghArgh200](https://arghargh200.net/)"_ Mitchel — Module Developer and Tester.
 
 
-Neptune's official development IRC channel is [#Neptune](irc://irc.stormbit.net/Neptune) on the [StormBit IRC Network](http://stormbit.net). The network also provides webchat which can be accessed [here](http://iris.stormbit.net/?channels=Neptune). New commits are broadcast to the channel via [Notifico](http://n.tkte.ch/antoligy/Neptune).
+Neptune's official development IRC channel is [#Neptune](irc://irc.stormbit.net/Neptune) on the [StormBit IRC Network](https://stormbit.net/). The network also provides webchat which can be accessed [here](http://iris.stormbit.net/?channels=Neptune). New commits are broadcast to the channel via [Notifico](https://n.tkte.ch/antoligy/Neptune).
