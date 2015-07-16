@@ -164,11 +164,11 @@
 						}
 						
 						if (!$NeptuneCore->var_get("config","hide-stormdev")) {
-							echo "Powered by StormDEV Neptune CMS. Neptune CMS is &copy; 2012-" . $year . " StormDEV, All Rights Reserved. ";
+							echo "Powered by StormDEV Neptune CMS. Neptune CMS is &copy; 2012-" . $year . " StormDEV, All Rights Reserved.<br>";
 						}
 						
 						if ($NeptuneCore->var_get("config","site-copyright")) {
-							echo "<br>" . $NeptuneCore->var_get("config","site-copyright");
+							echo $NeptuneCore->var_get("config","site-copyright");
 						}
 					
 						if (!$NeptuneCore->var_get("config","quiet-footer")) {
