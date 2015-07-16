@@ -19,6 +19,20 @@
 		$text = str_replace("</o>", "[/o]", $text); 
 		$text = str_replace("<s>", "[s]", $text); 
 		$text = str_replace("</s>", "[/s]", $text); 
+
+		$text = str_replace("<h1>", "[h1]", $text); 
+		$text = str_replace("</h1>", "[/h1]", $text); 
+		$text = str_replace("<h2>", "[h2]", $text); 
+		$text = str_replace("</h2>", "[/h2]", $text); 
+		$text = str_replace("<h3>", "[h3]", $text); 
+		$text = str_replace("</h3>", "[/h3]", $text); 
+		$text = str_replace("<h4>", "[h4]", $text); 
+		$text = str_replace("</h4>", "[/h4]", $text); 
+		$text = str_replace("<h5>", "[h5]", $text); 
+		$text = str_replace("</h5>", "[/h5]", $text); 
+		$text = str_replace("<h6>", "[h6]", $text); 
+		$text = str_replace("</h6>", "[/h6]", $text); 
+
 		$text = str_replace("<", "&lt;", $text);
 		$text = str_replace(">", "&gt;", $text); 
 		
@@ -41,7 +55,14 @@
 		  
 		$text = preg_replace("(\[mail\]([$mailsearchstring]*)\[/mail\])", '<a href="mailto:$1">$1</a>', $text);
 		$text = preg_replace("/\[mail\=([$mailsearchstring]*)\](.+?)\[\/mail\]/", '<a href="mailto:$1">$2</a>', $text);
-			
+		
+		$text = preg_replace("(\[h1\](.+?)\[\/h1])is", '<h1>$1</h1>',$text);
+		$text = preg_replace("(\[h2\](.+?)\[\/h2])is", '<h2>$1</h2>',$text);
+		$text = preg_replace("(\[h3\](.+?)\[\/h3])is", '<h3>$1</h3>',$text);
+		$text = preg_replace("(\[h4\](.+?)\[\/h4])is", '<h4>$1</h4>',$text);
+		$text = preg_replace("(\[h5\](.+?)\[\/h5])is", '<h5>$1</h5>',$text);
+		$text = preg_replace("(\[h6\](.+?)\[\/h6])is", '<h6>$1</h6>',$text);
+
 		$text = preg_replace("(\[b\](.+?)\[\/b])is", '<span class="bold">$1</span>',$text);
 		$text = preg_replace("(\[i\](.+?)\[\/i\])is", '<span class="italics">$1</span>',$text);
 		$text = preg_replace("(\[u\](.+?)\[\/u\])is", '<span class="underline">$1</span>',$text);
