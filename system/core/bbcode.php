@@ -5,36 +5,37 @@
 
 		Converts BBCode to HTML
 	*/
-	
-	function neptune_bbcode($text, $filter_html = true) {	
-	
-		// HTML Whitelist
-		$text = str_replace("<b>", "[b]", $text); 
-		$text = str_replace("</b>", "[/b]", $text); 
-		$text = str_replace("<i>", "[i]", $text); 
-		$text = str_replace("</i>", "[/i]", $text); 
-		$text = str_replace("<u>", "[u]", $text); 
-		$text = str_replace("</u>", "[/u]", $text); 
-		$text = str_replace("<o>", "&[o]", $text); 
-		$text = str_replace("</o>", "[/o]", $text); 
-		$text = str_replace("<s>", "[s]", $text); 
-		$text = str_replace("</s>", "[/s]", $text); 
 
-		$text = str_replace("<h1>", "[h1]", $text); 
-		$text = str_replace("</h1>", "[/h1]", $text); 
-		$text = str_replace("<h2>", "[h2]", $text); 
-		$text = str_replace("</h2>", "[/h2]", $text); 
-		$text = str_replace("<h3>", "[h3]", $text); 
-		$text = str_replace("</h3>", "[/h3]", $text); 
-		$text = str_replace("<h4>", "[h4]", $text); 
-		$text = str_replace("</h4>", "[/h4]", $text); 
-		$text = str_replace("<h5>", "[h5]", $text); 
-		$text = str_replace("</h5>", "[/h5]", $text); 
-		$text = str_replace("<h6>", "[h6]", $text); 
-		$text = str_replace("</h6>", "[/h6]", $text); 
+	function neptune_bbcode($text, $filter_html = true) {	
+		// HTML Whitelist
+		$text = str_replace("<b>", "[b]", $text);
+		$text = str_replace("</b>", "[/b]", $text);
+		$text = str_replace("<i>", "[i]", $text);
+		$text = str_replace("</i>", "[/i]", $text);
+		$text = str_replace("<u>", "[u]", $text);
+		$text = str_replace("</u>", "[/u]", $text);
+		$text = str_replace("<o>", "&[o]", $text);
+		$text = str_replace("</o>", "[/o]", $text);
+		$text = str_replace("<s>", "[s]", $text);
+		$text = str_replace("</s>", "[/s]", $text);
+		
+		$text = str_replace("<hr>", "[hr]", $text);
+
+		$text = str_replace("<h1>", "[h1]", $text);
+		$text = str_replace("</h1>", "[/h1]", $text);
+		$text = str_replace("<h2>", "[h2]", $text);
+		$text = str_replace("</h2>", "[/h2]", $text);
+		$text = str_replace("<h3>", "[h3]", $text);
+		$text = str_replace("</h3>", "[/h3]", $text);
+		$text = str_replace("<h4>", "[h4]", $text);
+		$text = str_replace("</h4>", "[/h4]", $text);
+		$text = str_replace("<h5>", "[h5]", $text);
+		$text = str_replace("</h5>", "[/h5]", $text);
+		$text = str_replace("<h6>", "[h6]", $text);
+		$text = str_replace("</h6>", "[/h6]", $text);
 
 		$text = str_replace("<", "&lt;", $text);
-		$text = str_replace(">", "&gt;", $text); 
+		$text = str_replace(">", "&gt;", $text);
 		
 		// Convert newlines to HTML newlines.
 		$text = str_replace("\r\n","\n",$text);
@@ -44,24 +45,26 @@
 			
 		$mailsearchstring = $urlsearchstring . " a-zA-Z0-9\.@";
 
-		$text = preg_replace("(\[url\=([$urlsearchstring]*)\ type=button](.+?)\[/url\])", '<a href="$1" class="btn">$2</a>', $text); 
-		$text = preg_replace("(\[url\=([$urlsearchstring]*)\ type=button-primary](.+?)\[/url\])", '<a href="$1" class="btn btn-primary">$2</a>', $text); 	
+		$text = preg_replace("(\[url\=([$urlsearchstring]*)\ type=button](.+?)\[/url\])", '<a href="$1" class="btn">$2</a>', $text);
+		$text = preg_replace("(\[url\=([$urlsearchstring]*)\ type=button-primary](.+?)\[/url\])", '<a href="$1" class="btn btn-primary">$2</a>', $text);	
 
 		$text = preg_replace("/\[url\]([$urlsearchstring]*)\[\/url\]/", '<a href="$1">$1</a>', $text);
-		$text = preg_replace("(\[url\=([$urlsearchstring]*)\](.+?)\[/url\])", '<a href="$1">$2</a>', $text); 
+		$text = preg_replace("(\[url\=([$urlsearchstring]*)\](.+?)\[/url\])", '<a href="$1">$2</a>', $text);
 
 		$text = preg_replace("/\[urlnew\]([$urlsearchstring]*)\[\/urlnew\]/", '<a href="$1" target="_blank">$1</a>', $text);
-		$text = preg_replace("(\[urlnew\=([$urlsearchstring]*)\](.+?)\[/urlnew\])", '<a href="$1" target="_blank">$2</a>', $text); 
-		  
+		$text = preg_replace("(\[urlnew\=([$urlsearchstring]*)\](.+?)\[/urlnew\])", '<a href="$1" target="_blank">$2</a>', $text);
+
 		$text = preg_replace("(\[mail\]([$mailsearchstring]*)\[/mail\])", '<a href="mailto:$1">$1</a>', $text);
 		$text = preg_replace("/\[mail\=([$mailsearchstring]*)\](.+?)\[\/mail\]/", '<a href="mailto:$1">$2</a>', $text);
-		
+
 		$text = preg_replace("(\[h1\](.+?)\[\/h1])is", '<h1>$1</h1>',$text);
 		$text = preg_replace("(\[h2\](.+?)\[\/h2])is", '<h2>$1</h2>',$text);
 		$text = preg_replace("(\[h3\](.+?)\[\/h3])is", '<h3>$1</h3>',$text);
 		$text = preg_replace("(\[h4\](.+?)\[\/h4])is", '<h4>$1</h4>',$text);
 		$text = preg_replace("(\[h5\](.+?)\[\/h5])is", '<h5>$1</h5>',$text);
 		$text = preg_replace("(\[h6\](.+?)\[\/h6])is", '<h6>$1</h6>',$text);
+
+		$text = str_replace("[hr]", "<hr>", $text);
 
 		$text = preg_replace("(\[b\](.+?)\[\/b])is", '<span class="bold">$1</span>',$text);
 		$text = preg_replace("(\[i\](.+?)\[\/i\])is", '<span class="italics">$1</span>',$text);
@@ -77,14 +80,14 @@
 		$text = preg_replace("/\[list=I\](.+?)\[\/list\]/s", '<ul class="listupperroman">$1</ul>' ,$text);
 		$text = preg_replace("/\[list=a\](.+?)\[\/list\]/s", '<ul class="listloweralpha">$1</ul>' ,$text);
 		$text = preg_replace("/\[list=A\](.+?)\[\/list\]/s", '<ul class="listupperalpha">$1</ul>' ,$text);
-	
+
 		$text = str_replace("[*]", "<li>", $text);
 
 		$text = preg_replace("(\[font=(.+?)\](.+?)\[\/font\])", "<span style=\"font-family: $1;\">$2</span>",$text);
 
 		$codelayout = '<div class="bbcode"><div class="codebody">$1</div></div>';
 		$text = preg_replace("/\[code\](.+?)\[\/code\]/is","$codelayout", $text);
-			
+
 		$text = preg_replace("/\[php\](.+?)\[\/php\]/is",$codelayout, $text);
 
 		$quotelayout =  '<div class="bbcode"><div class="quotecodeheader">Quote:</div><div class="quotebody">$1</div></div>';
@@ -95,7 +98,7 @@
 		while(preg_match("/\[quote\](.+?)\[\/quote\]/is", $text)) {
 			$text = preg_replace("/\[quote\](.+?)\[\/quote\]/is","$quotelayout", $text);
 		}
-	 
+
 		$text = preg_replace("/\[img\](.+?)\[\/img\]/", '<img src="$1">', $text);
 		$text = preg_replace("/\[img\=([0-9]*)x([0-9]*)\](.+?)\[\/img\]/", '<img src="$3" height="$2" width="$1">', $text);
 			 		
