@@ -35,7 +35,7 @@
 						{
 							$NeptuneCore->fatal_error($NeptuneCore->var_get("locale","usernameempty"));
 						} else {
-							$sql = $NeptuneSQL->query("INSERT INTO `neptune_users` VALUES('$Username','$Displayname','$Password','$Email','0','1','" . date ("Y-m-d H:i:s") . "','" . date ("Y-m-d H:i:s") . "','')");
+							$sql = $NeptuneSQL->query("INSERT INTO `neptune_users` (username, displayname, password, email, email_public, permissions, joined, active) VALUES('$Username','$Displayname','$Password','$Email','0','1','" . date ("Y-m-d H:i:s") . "','" . date ("Y-m-d H:i:s") . "')");
 							setcookie("NeptuneUser", $Username, 2147483647, "/");
 							setcookie("NeptunePass", $Password, 2147483647, "/");
 
